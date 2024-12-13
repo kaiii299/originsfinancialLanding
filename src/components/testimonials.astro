@@ -1,0 +1,26 @@
+---
+import { testimonials } from "@/lib/constants";
+import { LuQuote } from "react-icons/lu";
+---
+
+<section class="py-16 px-4 sm:px-6 lg:px-20">
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold sm:text-4xl">Comapany Received 4.8/5 Stars in Over 10,000+ Reviews.</h2>
+      <p class="mt-4 text-gray-600">
+        The discovery was made by Richard McClintock, a professor of Latin at Hampden-Sydney College in Virginia, who faced the
+      </p>
+    </div>
+  
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-7xl mx-auto">
+      {testimonials.map((testimonial) => (
+        <div class="p-6 border flex flex-col rounded-lg bg-white shadow-sm hover:shadow-md transition">
+            <LuQuote className="text-yellow-500 text-5xl"/>
+          <p class="mt-4 text-gray-700 mb-2">{testimonial.quote}</p>
+          <div class="mt-auto">
+            <p class="text-lg font-medium text-gray-900">{testimonial.name}</p>
+            <p class="text-sm text-gray-600">{testimonial.role}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>

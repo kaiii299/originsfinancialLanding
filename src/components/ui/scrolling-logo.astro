@@ -1,0 +1,41 @@
+---
+import Image from "astro/components/Image.astro";
+
+// Manually import images
+import img1 from "@/assets/images/Visionex_files/1.png";
+import img2 from "@/assets/images/Visionex_files/2.png";
+import img3 from "@/assets/images/Visionex_files/3.png";
+import img4 from "@/assets/images/Visionex_files/4.png";
+import img5 from "@/assets/images/Visionex_files/5.png";
+import img6 from "@/assets/images/Visionex_files/6.png";
+import img7 from "@/assets/images/Visionex_files/7.png";
+import img8 from "@/assets/images/Visionex_files/8.png";
+
+// Store images in an array
+const images = [img1, img2, img3, img4, img5, img6, img7, img8];
+---
+
+<section class="bg-white py-6">
+  <div class="scroll-container overflow-hidden relative">
+    <div class="scroll-content flex items-center space-x-8">
+      <!-- Render Logos -->
+      {images.map((src, index) => (
+        <Image
+          src={src}
+          alt={`Logo ${index + 1}`}
+          class="h-10 w-auto grayscale hover:grayscale-0 transition duration-300 ease-in-out cursor-pointer"
+          loading="lazy"
+        />
+      ))}
+      <!-- Duplicate Logos for Seamless Scrolling -->
+      {images.map((src, index) => (
+        <Image
+          src={src}
+          alt={`Logo ${index + 1} Duplicate`}
+          class="h-10 w-auto grayscale hover:grayscale-0 transition duration-300 ease-in-out cursor-pointer"
+          loading="lazy"
+        />
+      ))}
+    </div>
+  </div>
+</section>

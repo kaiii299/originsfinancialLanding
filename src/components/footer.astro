@@ -1,0 +1,85 @@
+---
+import { navItems } from "@/lib/constants";
+import Image from "astro/components/Image.astro";
+import logo from "@/assets/logo.svg";
+const location = {
+  companyName: "ABC PRIVATE LIMITED",
+  registrationNumber: "202324677N",
+  addressLine1: "53 Hougang Ave 1",
+  addressLine2: "04-08B",
+  city: "Singapore 408636",
+  href: "https://www.google.com/maps?q=57+Ubi+Ave+1+Singapore+408136", // Link to Google Maps
+};
+
+const companyEmail = "admin@company.com";
+const companyName = "Company Name";
+---
+
+<footer class="px-3 pt-4 lg:px-9 bg-[#121926] text-white">
+  <div class="grid gap-10 row-gap-6 mb-8 sm:grid-cols-2 py-12 lg:grid-cols-4 max-w-7xl mx-auto">
+    <div class="sm:col-span-2">
+      <div class="flex justify-start items-center space-x-2">
+        <Image src={logo} alt="logo" class="h-8 w-8" draggable="false" />
+        <a href="/" class="text-xl font-bold">logo</a>
+      </div>
+      <div class="mt-6 lg:max-w-xl">
+        <p class="text-sm">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi felis
+          mi, faucibus dignissim lorem id, imperdiet interdum mauris. Vestibulum
+          ultrices sed libero non porta. Vivamus malesuada urna eu nibh
+        </p>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2 text-sm">
+      <p class="text-base font-bold tracking-wide md:mb-6">Sitemap</p>
+      {navItems.map((item) => <a href={item.href}>{item.name}</a>)}
+    </div>
+
+    <div>
+      <p class="text-base font-bold tracking-wide">Location</p>
+      <div class="mt-2 space-y-1">
+        <p class="text-sm font-bold">{location.companyName}</p>
+        <p class="text-sm">{location.registrationNumber}</p>
+        <p class="text-sm">{location.addressLine1}</p>
+        <p class="text-sm">{location.addressLine2}</p>
+        <p class="text-sm">{location.city}</p>
+        <a
+          href={location.href}
+          class="inline-block mt-2 text-blue-600 hover:text-blue-800 text-sm underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View on Google Maps
+        </a>
+      </div>
+      <p class="text-base mt-6 font-bold tracking-wide">Contacts</p>
+      <div class="flex">
+        <p class="mr-1">Email:</p>
+        <a href={`mailto:${companyEmail}`} title="send email">{companyEmail}</a>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="flex flex-col-reverse justify-between pt-5 pb-10 border-t lg:flex-row max-w-7xl mx-auto "
+  >
+    <p class="text-sm">
+      © Copyright 2023 {companyName}. All rights reserved.
+    </p>
+    <ul
+      class="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row"
+    >
+      <li>
+        <a href="#" class="text-sm transition-colors duration-300"
+          >Privacy &amp; Cookies Policy
+        </a>
+      </li>
+      <li>
+        <a href="#" class="text-sm transition-colors duration-300"
+          >Disclaimer
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>

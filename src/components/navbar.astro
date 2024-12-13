@@ -1,0 +1,84 @@
+---
+import { LuAlignRight, LuX } from "react-icons/lu"; // Import Lucide icons
+import { navItems } from "@/lib/constants";
+import Image from "astro/components/Image.astro";
+import logo from "@/assets/logo.svg";
+
+const bgColor = "bg-white";
+const bgColorMobile = "bg-whitesmoke";
+const textColor = "text-black";
+
+// To make the navbar come out from the left, change the class to "... -translate-x-full transition-transform duration-300 md:hidden"
+---
+<nav class={`${bgColor} ${textColor} sticky top-0 z-50`}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <div class="flex items-center justify-center space-x-2">
+        <Image src={logo} alt="logo" class="h-8 w-8" draggable="false"/>
+        <a href="/" class="text-xl font-bold">logo</a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:block">
+        <div class="ml-10 flex items-baseline space-x-4">
+          {navItems.map((item) => (
+            <a
+              href={item.href}
+              class={`hover:bg-yellow-300 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${textColor}`}
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Mobile Hamburger Menu -->
+      <div class="-mr-2 flex md:hidden">
+        <button
+          id="menu-button"
+          class={`inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:${textColor} focus:outline-none`}
+          aria-expanded="false"
+        >
+          <LuAlignRight className=`h-6 w-6 hover:text-black` />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Sliding Menu -->
+  <div
+    id="mobile-menu"
+    class={`fixed top-0 right-0 w-1/2 h-full ${bgColorMobile} ${textColor} transform translate-x-full transition-transform duration-300 md:hidden`}
+  >
+    <div class="flex justify-end items-center px-4 py-4 mt-1 mr-1">
+      <button id="close-menu" class="text-gray-400">
+        <LuX className=`h-6 w-6 hover:text-black` />
+      </button>
+    </div>
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class={`block hover:bg-primary hover:text-white px-3 py-2 rounded-md text-base font-medium ${textColor}`}
+        >
+          {item.name}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<script is:inline>
+  const menuButton = document.getElementById("menu-button");
+  const closeMenuButton = document.getElementById("close-menu");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  menuButton.addEventListener("click", () => {
+    mobileMenu.classList.remove("translate-x-full");
+  });
+
+  closeMenuButton.addEventListener("click", () => {
+    mobileMenu.classList.add("translate-x-full");
+  });
+</script>
