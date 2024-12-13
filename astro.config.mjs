@@ -15,6 +15,17 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
   ],
+  adapter: cloudflare({
+    imageService:'cloudflare',
+    platformProxy:{
+      enabled:true,
+      configPath:'wrangler.toml',
+    }
+  }),
   output: 'server',
-  adapter: cloudflare(),
+  vite: {
+    build: {
+      minify: false,
+    },
+  },
 })
