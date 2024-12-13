@@ -23,9 +23,4 @@ export default defineConfig({
     }
   }),
   output: 'server',
-  vite: {
-    build: {
-      minify: false,
-    },
-  },
 })

@@ -16,6 +16,6 @@ import Testimonials from "@/components/testimonials.astro";
   <Services /> 
   <Testimonials />
   <Pricing />
-  <Faq client:load />
+  <Faq client:only="react" />
   <Cta />
 </Layout>
