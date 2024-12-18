@@ -50,7 +50,8 @@ export default {
     				'4': 'hsl(var(--chart-4))',
     				'5': 'hsl(var(--chart-5))'
     			},
-    			whitesmoke: '#f5f5f5'
+    			whitesmoke: '#f5f5f5',
+				main: '#fedd00'
     		},
     		keyframes: {
     			'accordion-down': {

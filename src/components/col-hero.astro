@@ -11,16 +11,8 @@ import ScrollingLogo from "./ui/scrolling-logo.astro";
   >
     <!-- Left Content -->
     <div class="max-w-lg text-start lg:text-left">
-      <h1 class="font-bold text-3xl leading-tight text-gray-900">
-        Unlock The Power of <br />
-        <span class="relative">
-          Writing AI <span class="text-yellow-400">Create</span>
-          <!-- <div
-            class="absolute bottom-0 left-0 w-full h-2 bg-yellow-300 rounded-md"
-          >
-          </div> -->
-        </span>
-        Content Faster
+      <h1 class="font-bold text-3xl md:text-5xl leading-tight text-gray-900">
+        Unlock The Power of Writing AI create Content Faster
       </h1>
       <p class="mt-6 text-gray-600">
         Generate dynamic & compelling content effortlessly with our AI writing
@@ -28,14 +20,10 @@ import ScrollingLogo from "./ui/scrolling-logo.astro";
         descriptions.
       </p>
       <div class="mt-8 flex justify-start lg:justify-start space-x-4">
-        <Button
-          className="bg-yellow-400 text-black  hover:bg-yellow-500 transition"
-        >
+        <Button className="bg-yellow-400 text-black  hover:bg-main transition">
           Start For Free
         </Button>
-        <Button variant={'outline'}
-          className=" hover:bg-gray-100 transition"
-        >
+        <Button variant={"outline"} className=" hover:bg-gray-100 transition">
           Browse Feature
         </Button>
       </div>
@@ -45,6 +33,7 @@ import ScrollingLogo from "./ui/scrolling-logo.astro";
     <div class="mt-10 lg:mt-0 lg:w-full">
       <Image
         src={heroImage}
+        draggable="false"
         alt="AI Writing Tool Illustration"
         class="w-full"
       />
@@ -54,5 +43,4 @@ import ScrollingLogo from "./ui/scrolling-logo.astro";
   <div class="mt-10">
     <ScrollingLogo />
   </div>
-
 </section>

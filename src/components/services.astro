@@ -17,7 +17,7 @@ import Image from "astro/components/Image.astro";
   <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
     {
       services.map((service) => (
-        <div class="border rounded-lg p-6 shadow-sm bg-white group flex flex-col hover:border-yellow-500 transition-all duration-200 cursor-pointer">
+        <div class="border rounded-lg p-6 shadow-sm bg-white group flex flex-col hover:border-main transition-all duration-200 cursor-pointer">
           <Image
             src={service.image}
             alt={service.title}
@@ -27,7 +27,7 @@ import Image from "astro/components/Image.astro";
           <p class="text-gray-600 text-sm ">{service.description}</p>
           <a
             href={service.link}
-            class="mt-4 inline-block text-black group-hover:text-yellow-500 text-sm font-medium transition-all duration-200"
+            class="mt-4 inline-block text-black group-hover:text-main text-sm font-medium transition-all duration-200"
           >
             {service.linkText} →
           </a>
