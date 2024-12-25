@@ -1,0 +1,59 @@
+---
+import TitleComponent from "@/components/ui/title.astro";
+import { Button } from "@/components/ui/button"; // Import shadcn Button
+import Image from "astro/components/Image.astro";
+
+// Define the interface for the component props
+interface ILeftRight {
+  data: {
+    image: any;
+    title: string;
+    description: string;
+  }[];
+
+  title: string;
+  buttonText?: string;
+  buttonVisible?: boolean;
+  buttonLink?: string;
+}
+
+// Destructure props
+const { data, title, buttonText, buttonVisible , buttonLink } = Astro.props as ILeftRight;
+---
+
+<section>
+  <div>
+    <TitleComponent title={title} />
+  </div>
+  <div>
+    {data.map((item, index) => (
+      <div
+        class={`flex flex-col md:flex-row items-center gap-8 mb-12 ${index % 2 === 1 ? "md:flex-row-reverse" : ""}`}
+      >
+        
+        <div class="md:w-1/2">
+          <Image
+            src={item.image}
+            alt={`Image ${index + 1}`}
+            draggable={false}
+            class="w-[70%] h-auto rounded-lg"
+          />
+        </div>
+
+        <!-- Text Content -->
+        <div class="md:w-1/2">
+          <h2 class="text-xl md:text-3xl font-bold mb-4">{item.title}</h2>
+          <p class="text-gray-600">{item.description}</p>
+
+          {buttonVisible && buttonText && buttonLink && (
+            <a href={buttonLink}>
+              <Button className="mt-4">
+                {buttonText}
+              </Button>
+            </a>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

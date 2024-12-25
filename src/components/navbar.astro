@@ -8,14 +8,16 @@ const bgColor = "bg-white";
 const bgColorMobile = "bg-whitesmoke";
 const textColor = "text-black";
 
-// To make the navbar come out from the left, change the class to "... -translate-x-full transition-transform duration-300 md:hidden"
+// Get the current URL path
+const currentPath = Astro.url.pathname;
 ---
-<nav class={`${bgColor} ${textColor} sticky top-0 z-50`}>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+<nav class={`${bgColor} ${textColor} sticky top-0 z-50 max-w-7xl mx-auto`}>
+  <div class="px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <div class="flex items-center justify-center space-x-2">
-        <Image src={logo} alt="logo" class="h-8 w-8" draggable="false"/>
+        <Image src={logo} title={"logo"} alt="logo" class="h-8 w-8" draggable="false"/>
         <a href="/" class="text-xl font-bold">logo</a>
       </div>
 
@@ -25,7 +27,9 @@ const textColor = "text-black";
           {navItems.map((item) => (
             <a
               href={item.href}
-              class={`hover:bg-yellow-300 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${textColor}`}
+              class={`hover:bg-yellow-300 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                currentPath === item.href ? "bg-yellow-300" : ""
+              } ${textColor}`}
             >
               {item.name}
             </a>
@@ -60,7 +64,9 @@ const textColor = "text-black";
       {navItems.map((item) => (
         <a
           href={item.href}
-          class={`block hover:bg-primary hover:text-white px-3 py-2 rounded-md text-base font-medium ${textColor}`}
+          class={`block hover:bg-primary hover:text-white px-3 py-2 rounded-md text-base font-medium ${
+            currentPath === item.href ? "bg-primary text-white" : ""
+          } ${textColor}`}
         >
           {item.name}
         </a>

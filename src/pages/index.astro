@@ -1,7 +1,6 @@
 ---
 import ColHero from "@/components/col-hero.astro";
 import Layout from "../layouts/Layout.astro";
-import "@/styles/global.css";
 import Services from "@/components/services.astro";
 import Faq from "@/components/faq";
 import Cta from "@/components/cta.astro";
@@ -11,7 +10,7 @@ import Testimonials from "@/components/testimonials.astro";
 // Basic layout
 ---
 
-<Layout>
+<Layout title="Title" description="descritpion" canonicalUrl=canonicalUrl>
   <ColHero />
   <Services /> 
   <Testimonials />

@@ -22,6 +22,7 @@ const images = [img1, img2, img3, img4, img5, img6, img7, img8];
       {images.map((src, index) => (
         <Image
           src={src}
+          title={"Logo"}
           alt={`Logo ${index + 1}`}
           class="h-10 w-auto grayscale hover:grayscale-0 transition duration-300 ease-in-out cursor-pointer"
           loading="lazy"
@@ -31,6 +32,7 @@ const images = [img1, img2, img3, img4, img5, img6, img7, img8];
       {images.map((src, index) => (
         <Image
           src={src}
+          title={"Logo"}
           alt={`Logo ${index + 1} Duplicate`}
           class="h-10 w-auto grayscale hover:grayscale-0 transition duration-300 ease-in-out cursor-pointer"
           loading="lazy"

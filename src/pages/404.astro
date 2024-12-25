@@ -1,0 +1,22 @@
+---
+import { Button } from "@/components/ui/button";
+import "@/styles/global.css";
+---
+
+<section class="w-screen h-screen flex flex-col justify-center items-center">
+  <div class="flex flex-col gap-10 justify-center items-center">
+    <h2 class="md:text-6xl text-5xl font-bold">404 page not found</h2>
+    <Button id="goBackButton"> Go back </Button>
+  </div>
+</section>
+
+<script>
+  // Add event listener to the button
+  document.getElementById("goBackButton")?.addEventListener("click", () => {
+    if (window.history.length > 1) {
+      window.history.back(); 
+    } else {
+      window.location.href = "/"; 
+    }
+  });
+</script>

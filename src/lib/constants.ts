@@ -5,10 +5,12 @@ import img4 from "@/assets/images/Visionex_files/case_4.png";
 import img5 from "@/assets/images/Visionex_files/case_5.png";
 import img6 from "@/assets/images/Visionex_files/case_6.png";
 
+import heroImage1 from "@/assets/images/hero-img.png";
+
 
 export const navItems = [
   { name: "Home", href: "/" },
-  { name: "About us", href: "/about" },
+  { name: "About us", href: "/about-us" },
   { name: "Services", href: "/services" },
   { name: "Contact", href: "/contact" },
 ];
@@ -181,5 +183,26 @@ export const faqs = [
     question: "Can I sell themes that I made with Unwrapped?",
     answer:
       "Yes, you can sell themes made with Unwrapped. Ensure you comply with the licensing terms.",
+  },
+];
+
+export const aboutUs = [
+  {
+    image: heroImage1,
+    title: "Section 1 Title",
+    description:
+      "This is the content for section 1. It appears on the right side on desktop and below the image on mobile.",
+  },
+  {
+    image: heroImage1,
+    title: "Section 2 Title",
+    description:
+      "This is the content for section 2. It appears on the left side on desktop and below the image on mobile.",
+  },
+  {
+    image: heroImage1,
+    title: "Section 3 Title",
+    description:
+      "This is the content for section 3. It appears on the right side on desktop and below the image on mobile.",
   },
 ];
