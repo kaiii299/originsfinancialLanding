@@ -255,4 +255,51 @@ export const footerData = {
       href: "#",
     },
   ],
-} 
+}
+
+export const floatingContactButtonData = {
+  "phoneNumber": "+1234567890",
+  "email": "example@example.com",
+  "icons": ["LuPhone", "LuMail", "FaWhatsapp"],
+  "contactOptions": [
+    {
+      "type": "call",
+      "icon": "LuPhone",
+      "size": "22",
+      "backgroundColor": "red-500",
+      "position": {
+        "right": "20",
+        "left": "20",
+        "top": "0",
+        "bottom": "5"
+      },
+      "link": "tel:+1234567890"
+    },
+    {
+      "type": "email",
+      "icon": "LuMail",
+      "size": "22",
+      "backgroundColor": "yellow-500",
+      "position": {
+        "right": "20",
+        "left": "0",
+        "top": "20",
+        "bottom": "10"
+      },
+      "link": "#contact"
+    },
+    {
+      "type": "whatsapp",
+      "icon": "FaWhatsapp",
+      "size": "22",
+      "backgroundColor": "green-500",
+      "position": {
+        "right": "0",
+        "left": "10",
+        "top": "40",
+        "bottom": "14"
+      },
+      "link": "https://wa.me/+1234567890"
+    }
+  ]
+}
