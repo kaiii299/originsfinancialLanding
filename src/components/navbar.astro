@@ -1,8 +1,7 @@
 ---
 import { LuAlignRight, LuX } from "react-icons/lu"; // Import Lucide icons
-import { navItems } from "@/lib/constants";
+import { navItems, LogoImage } from "@/lib/constants";
 import Image from "astro/components/Image.astro";
-import logo from "@/assets/logo.svg";
 
 const bgColor = "bg-white";
 const bgColorMobile = "bg-whitesmoke";
@@ -12,12 +11,12 @@ const textColor = "text-black";
 const currentPath = Astro.url.pathname;
 ---
 
-<nav class={`${bgColor} ${textColor} sticky top-0 z-50 max-w-7xl mx-auto`}>
-  <div class="px-4 sm:px-6 lg:px-8">
+<nav class={`${bgColor} ${textColor} sticky top-0 z-50 max-w-7xl mx-auto shadow-sm  `}>
+  <div class="px-4 sm:px-6 lg:px-8 py-5 w-full">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <div class="flex items-center justify-center space-x-2">
-        <Image src={logo} title={"logo"} alt="logo" class="h-8 w-8" draggable="false"/>
+        <Image src={LogoImage} title={"logo"} alt="logo" class="h-8 w-8" draggable="false"/>
         <a href="/" class="text-xl font-bold">logo</a>
       </div>
 
@@ -28,7 +27,7 @@ const currentPath = Astro.url.pathname;
             <a
               href={item.href}
               class={`hover:bg-yellow-300 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
-                currentPath === item.href ? "bg-yellow-300" : ""
+                currentPath === item.href ? "bg-yellow-300 text-black" : ""
               } ${textColor}`}
             >
               {item.name}
@@ -65,7 +64,7 @@ const currentPath = Astro.url.pathname;
         <a
           href={item.href}
           class={`block hover:bg-primary hover:text-white px-3 py-2 rounded-md text-base font-medium ${
-            currentPath === item.href ? "bg-primary text-white" : ""
+            currentPath === item.href ? "bg-yellow-300 text-white" : ""
           } ${textColor}`}
         >
           {item.name}

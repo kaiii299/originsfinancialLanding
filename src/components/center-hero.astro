@@ -1,7 +1,36 @@
 ---
-
+import { heroSection, CenterHeaderImage } from "@/lib/constants";
+import { Button } from "./ui/button";
+import { Badge } from "./ui/badge";
+import { Image } from "astro:assets";
+import { LuArrowRight } from "react-icons/lu";
 ---
 
-<section>
-    <div>center Hero section</div>
+<section
+  class="w-screen md:my-36 my-10 flex flex-col justify-center items-center"
+>
+  <div class="flex flex-col gap-10 justify-center items-center">
+    <div class="text-center flex justify-center items-center flex-col gap-10">
+      <div class="space-y-5 flex justify-center items-center flex-col">
+        <Badge className="px-5 py-2 rounded-full" >We raised USD 60 million in the past 6 months</Badge>
+        <h1 class="md:text-6xl text-4xl font-bold">
+          {heroSection.title}
+        </h1>
+        <h2 class="md:w-1/2 w-full">{heroSection.subtitle}</h2>
+      </div>
+    </div>
+    <div class="space-x-3">
+      <Button id="goBackButton"
+        >Get started its free<LuArrowRight />
+        <Button id="goBackButton" variant={"secondary"}>Learn more</Button>
+      </Button>
+    </div>
+    <div class="md:mt-20 mt-5">
+      <Image
+        src={CenterHeaderImage}
+        alt={"landing image"}
+        title={" landing image"}
+      />
+    </div>
+  </div>
 </section>

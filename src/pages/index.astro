@@ -6,13 +6,15 @@ import Faq from "@/components/faq";
 import Cta from "@/components/cta.astro";
 import Pricing from "@/components/pricing.astro";
 import Testimonials from "@/components/testimonials.astro";
+import CenterHero from "@/components/center-hero.astro";
 
 // Basic layout
 ---
 
-<Layout title="Title" description="descritpion" canonicalUrl=canonicalUrl>
-  <ColHero />
-  <Services /> 
+<Layout title="Title" description="descritpion" canonicalUrl="canonicalUrl">
+  <!-- <ColHero /> -->
+  <CenterHero />
+  <Services />
   <Testimonials />
   <Pricing />
   <Faq client:only="react" />

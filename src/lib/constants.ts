@@ -4,9 +4,12 @@ import img3 from "@/assets/images/Visionex_files/case_3.png";
 import img4 from "@/assets/images/Visionex_files/case_4.png";
 import img5 from "@/assets/images/Visionex_files/case_5.png";
 import img6 from "@/assets/images/Visionex_files/case_6.png";
-
+import logo from "@/assets/logo.svg";
 import heroImage1 from "@/assets/images/hero-img.png";
+import centerHeaderImage from "@/assets/images/header.webp"
 
+export const LogoImage = logo;
+export const CenterHeaderImage = centerHeaderImage;
 
 export const navItems = [
   { name: "Home", href: "/" },
@@ -14,6 +17,12 @@ export const navItems = [
   { name: "Services", href: "/services" },
   { name: "Contact", href: "/contact" },
 ];
+
+export const heroSection = {
+  title: "Unlock The Power of Writing with AI",
+  subtitle: "Generate dynamic & compelling content effortlessly with our AI writing tool. Whether you need blog posts, social media captions, or product descriptions.",
+  image: heroImage1,
+}
 
 export const plans = [
   {
@@ -206,3 +215,44 @@ export const aboutUs = [
       "This is the content for section 3. It appears on the right side on desktop and below the image on mobile.",
   },
 ];
+
+export const footerData = {
+  logo: {
+    image: LogoImage,
+    alt: "logo",
+    title: "Logo",
+    text: "logo",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi felis mi, faucibus dignissim lorem id, imperdiet interdum mauris. Vestibulum ultrices sed libero non porta. Vivamus malesuada urna eu nibh",
+  },
+  sitemap: {
+    title: "Sitemap",
+  },
+  location: {
+    title: "Location",
+    companyName: "ABC PRIVATE LIMITED",
+    registrationNumber: "202324677N",
+    addressLine1: "53 Hougang Ave 1",
+    addressLine2: "04-08B",
+    city: "Singapore 408636",
+    googleMapsLink: "https://www.google.com/maps?q=57+Ubi+Ave+1+Singapore+408136",
+    googleMapsText: "View on Google Maps",
+  },
+  contacts: {
+    title: "Contacts",
+    email: "admin@company.com",
+    emailText: "send email",
+  },
+  copyright: {
+    text: "© Copyright 2023 Company Name. All rights reserved.",
+  },
+  policies: [
+    {
+      text: "Privacy & Cookies Policy",
+      href: "#",
+    },
+    {
+      text: "Disclaimer",
+      href: "#",
+    },
+  ],
+} 
