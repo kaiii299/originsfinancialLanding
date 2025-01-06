@@ -3,7 +3,7 @@ import { LuAlignRight, LuX } from "react-icons/lu"; // Import Lucide icons
 import { navItems, LogoImage } from "@/lib/constants";
 import Image from "astro/components/Image.astro";
 
-const bgColor = "bg-white";
+const bgColor = "bg-[#fbfcf5]";
 const bgColorMobile = "bg-whitesmoke";
 const textColor = "text-black";
 
@@ -11,13 +11,13 @@ const textColor = "text-black";
 const currentPath = Astro.url.pathname;
 ---
 
-<nav class={`${bgColor} ${textColor} sticky top-0 z-50 max-w-7xl mx-auto shadow-sm  `}>
+<nav class={`${bgColor} ${textColor} sticky top-0 z-50 max-w-7xl mx-auto `}>
   <div class="px-4 sm:px-6 lg:px-8 py-5 w-full">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <div class="flex items-center justify-center space-x-2">
-        <Image src={LogoImage} title={"logo"} alt="logo" class="h-8 w-8" draggable="false"/>
-        <a href="/" class="text-xl font-bold">logo</a>
+        <Image src={LogoImage} title={"logo"} alt="logo" class="h-full w-full" draggable="false"/>
+        <!-- <a href="/" class="text-xl font-bold">Origins Financial</a> -->
       </div>
 
       <!-- Desktop Navigation -->

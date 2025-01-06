@@ -9,7 +9,7 @@ import { faqs } from "@/lib/constants";
 const FAQAccordion = () => {
 
   return (
-    <section className="py-10 px-4 sm:px-6 lg:px-20">
+    <section className="py-10">
       <div className="text-center">
         <h2 className="text-2xl md:text-3xl font-bold sm:text-4xl">
           Frequently Asked Questions

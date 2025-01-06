@@ -1,5 +1,4 @@
 ---
-import FloatingButton from "@/components/floatingButton";
 import Footer from "@/components/footer.astro";
 import Navbar from "@/components/navbar.astro";
 import "@/styles/global.css";
@@ -15,9 +14,9 @@ export interface Props {
 const { title, description, canonicalUrl } = Astro.props;
 
 // Define default values (optional)
-const defaultTitle = "Default Title";
+const defaultTitle = "Title";
 const defaultDescription = "This is a default description.";
-const defaultCanonicalUrl = "";
+const defaultCanonicalUrl = "This is a canonical URL";
 
 // Use provided props or fallback to defaults
 const pageTitle = title || defaultTitle;
@@ -66,7 +65,6 @@ const imageUrl = `/assets/images/logo.svg`;
 
   <body>
     <Navbar />
-    <FloatingButton client:load/>
     <slot />
     <Footer />
   </body>

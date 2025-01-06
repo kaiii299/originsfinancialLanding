@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 251, 252, 245;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -60,15 +60,17 @@
 @layer base {
   * {
     @apply border-border;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
+  
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[#fbfcf5] text-foreground;
   }
 
   section{
     @apply mx-5;
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-7xl bg-[#fbfcf5] mx-auto px-4 sm:px-6 lg:px-8;
+    /* @apply my-12 px-4 sm:px-6 lg:px-20; */
   }
 }
 
