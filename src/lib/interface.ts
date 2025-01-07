@@ -6,7 +6,7 @@ export interface Ihero extends EntrySkeletonType {
   };
   fields: {
     title: EntryFieldTypes.Symbol;
-    subtitle: EntryFieldTypes.Symbol;
+    subTitle: EntryFieldTypes.Symbol;
     buttonText: EntryFieldTypes.Symbol;
   }
 }
@@ -44,5 +44,19 @@ export interface IService extends EntrySkeletonType {
     image: EntryFieldTypes.AssetLink;
     cardColor: EntryFieldTypes.Symbol;
     description: EntryFieldTypes.Text
+  };
+}
+
+export interface IWhyUs extends EntrySkeletonType {
+  sys: {
+    id: EntryFieldTypes.Symbol;
+  };
+  fields: {
+    description?: EntryFieldTypes.Text;
+    cardColor?: EntryFieldTypes.Symbol;
+    index?: EntryFieldTypes.Integer;
+    image?: EntryFieldTypes.AssetLink;
+    icon?:EntryFieldTypes.Symbol;
+    
   };
 }

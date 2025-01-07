@@ -16,7 +16,7 @@ const { image, visionTitle, visionText, missionTitle, missionText } =
   <div
     class="flex md:flex-row flex-col justify-between md:gap-24 gap-10 bg-[#a6b5c6] rounded-xl md:p-8 p-5"
   >
-    <div class="flex justify-center items-center">
+    <div class="flex justify-start items-center">
       <Image
         src={`${image?.fields.file?.url}`}
         alt={`${image?.fields.title}`}
@@ -29,15 +29,15 @@ const { image, visionTitle, visionText, missionTitle, missionText } =
     <div class="flex justify-center items-center flex-col text-white text-xl">
       <div class="space-y-10">
         <div class="space-y-3">
-          <h2 class="font-bold text-3xl">{visionTitle}</h2>
-          <p>{visionText}</p>
+          <h2 class="font-bold md:text-3xl text-xl">{visionTitle}</h2>
+          <p class="text-md">{visionText}</p>
         </div>
 
         <div class="space-y-3">
-          <h2 class="font-bold text-3xl">
+          <h2 class="font-bold md:text-3xl text-xl">
             {missionTitle}
           </h2>
-          <p>{missionText}</p>
+          <p class="text-md ">{missionText}</p>
         </div>
       </div>
     </div>
