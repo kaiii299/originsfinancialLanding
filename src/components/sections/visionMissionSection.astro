@@ -1,0 +1,45 @@
+---
+import { client } from "@/lib/contentful";
+import type { IVisionMission } from "@/lib/interface";
+import { Image } from "astro:assets";
+
+const missionVisionData =
+  await client.withoutUnresolvableLinks.getEntry<IVisionMission>(
+    "13uMxOnR17W4vKX3dH1ybr"
+  );
+
+const { image, visionTitle, visionText, missionTitle, missionText } =
+  missionVisionData.fields;
+---
+
+<section>
+  <div
+    class="flex md:flex-row flex-col justify-between md:gap-24 gap-10 bg-[#a6b5c6] rounded-xl md:p-8 p-5"
+  >
+    <div class="flex justify-center items-center">
+      <Image
+        src={`${image?.fields.file?.url}`}
+        alt={`${image?.fields.title}`}
+        title={image?.fields.title}
+        height={1200}
+        width={1200}
+      />
+    </div>
+
+    <div class="flex justify-center items-center flex-col text-white text-xl">
+      <div class="space-y-10">
+        <div class="space-y-3">
+          <h2 class="font-bold text-3xl">{visionTitle}</h2>
+          <p>{visionText}</p>
+        </div>
+
+        <div class="space-y-3">
+          <h2 class="font-bold text-3xl">
+            {missionTitle}
+          </h2>
+          <p>{missionText}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

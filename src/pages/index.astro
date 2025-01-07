@@ -1,23 +1,21 @@
 ---
-import ColHero from "@/components/col-hero.astro";
-import Layout from "../layouts/Layout.astro";
-import Services from "@/components/services.astro";
-import Faq from "@/components/faq";
-import Cta from "@/components/cta.astro";
-import Pricing from "@/components/pricing.astro";
-import Testimonials from "@/components/testimonials.astro";
-
-// Basic layout
+import ColHero from "@/components/sections/col-hero.astro";
+import Cta from "@/components/sections/cta.astro";
+import FaqSection from "@/components/sections/FaqSection.astro";
+import ServicesSection from "@/components/sections/servicesSection.astro";
+import VisionMissionSection from "@/components/sections/visionMissionSection.astro";
+import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout
   title="Origns Financial"
   description=" Your trusted partner in navigating the complex world of insurance and financial planning. "
-  canonicalUrl="canonicalUrl">
+  canonicalUrl="canonicalUrl"
+>
   <ColHero />
-  <Services />
-  <Testimonials />
-  <Pricing />
-  <Faq client:only="react" />
+  <VisionMissionSection />
+  <ServicesSection />
+  <!-- <Pricing /> -->
+  <FaqSection />
   <Cta />
 </Layout>

@@ -1,7 +1,7 @@
 ---
 import CTAImage from "@/assets/images/Visionex_files/CTA.svg";
-import Image from "astro/components/Image.astro";
-import {Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
+import { Image } from "astro:assets";
 ---
 
 <section class="py-10">
@@ -14,14 +14,22 @@ import {Button} from "@/components/ui/button";
         Ready to meet your personal AI writing assistant?
       </h2>
       <p class="mt-4 text-gray-800">
-        Take action now to make a difference! Whether it&apos;s supporting a cause you&apos;re passionate about.
+        Take action now to make a difference! Whether it&apos;s supporting a
+        cause you&apos;re passionate about.
       </p>
       <Button className="mt-6">Start Writing For Free</Button>
     </div>
 
     <!-- Right Illustration -->
-    <div class="flex justify-center w-full md:w-5/12 ">
-        <Image src={CTAImage} title={"CTA"} alt="Illustration of AI writing assistant" class="w-full max-w-sm lg:max-w-md" />
+    <div class="flex justify-center w-full md:w-5/12">
+      <Image
+        decoding="async"
+        loading="lazy"
+        src={CTAImage}
+        title={"CTA"}
+        alt="Illustration of AI writing assistant"
+        class="w-full max-w-sm lg:max-w-md"
+      />
     </div>
   </div>
 </section>

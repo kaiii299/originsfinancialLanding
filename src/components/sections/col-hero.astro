@@ -1,8 +1,8 @@
 ---
-import { Button } from "./ui/button";
-import HomeSvg from "./homeSvg";
 import { client } from "@/lib/contentful";
 import type { Ihero } from "@/lib/interface";
+import { Button } from "../ui/button";
+import HomeSvg from "../homeSvg";
 
 const heroSectionData =  await client.withoutUnresolvableLinks.getEntry<Ihero>('zWWGHSAY7wGsUfVDG5Rfh')
 
