@@ -44,7 +44,7 @@ const FAQAccordion = () => {
           <AccordionItem
             key={faq.sys.id}
             value={`item-${faq.sys.id}`}
-            className="border-gray-200 border-2 p-4 rounded-lg hover:border-yellow-200"
+            className="border-gray-200 border-2 p-4 rounded-lg hover:border-main"
           >
             <AccordionTrigger className="text-md md:text-md lg:text-xl font-bold text-gray-900">
               {faq.fields.question}

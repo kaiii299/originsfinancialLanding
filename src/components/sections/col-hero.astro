@@ -9,7 +9,7 @@ const heroSectionData =  await client.withoutUnresolvableLinks.getEntry<Ihero>('
 const {title, subTitle, buttonText} = heroSectionData.fields
 ---
 
-<section class=" md:py-10 ">
+<section class=" md:py-10 hero ">
   <div
     class="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row md:items-center justify-between md:gap-10"
   >
@@ -22,7 +22,7 @@ const {title, subTitle, buttonText} = heroSectionData.fields
         {subTitle}
       </p>
       <div class="mt-8 flex justify-start lg:justify-start space-x-4">
-        <Button className="bg-yellow-400 text-black  hover:bg-main transition">
+        <Button className="bg-main hover:bg-main transition">
           {`${buttonText}`}
         </Button>
       </div>

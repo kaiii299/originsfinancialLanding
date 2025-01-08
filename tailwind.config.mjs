@@ -51,7 +51,7 @@ export default {
     				'5': 'hsl(var(--chart-5))'
     			},
     			whitesmoke: '#f5f5f5',
-				main: '#fedd00'
+				main: '#8dabcd'
     		},
     		keyframes: {
     			'accordion-down': {

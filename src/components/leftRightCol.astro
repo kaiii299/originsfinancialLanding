@@ -3,6 +3,7 @@ import TitleComponent from "@/components/ui/title.astro";
 import { Button } from "@/components/ui/button"; // Import shadcn Button
 import { Image } from "astro:assets";
 
+
 // Define the interface for the component props
 interface ILeftRight {
   data: {
@@ -42,12 +43,12 @@ const { data, title, buttonText, buttonVisible , buttonLink } = Astro.props as I
 
         <!-- Text Content -->
         <div class="md:w-1/2">
-          <h2 class="text-xl md:text-3xl font-bold mb-4">{item.title}</h2>
+          <TitleComponent title={item.title} />
           <p class="text-gray-600">{item.description}</p>
 
           {buttonVisible && buttonText && buttonLink && (
             <a href={buttonLink}>
-              <Button className="mt-4">
+              <Button className="mt-4 bg-main">
                 {buttonText}
               </Button>
             </a>

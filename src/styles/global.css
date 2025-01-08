@@ -70,7 +70,10 @@
   section{
     @apply mx-5;
     @apply max-w-7xl bg-[#fbfcf5] mx-auto px-4 sm:px-6 lg:px-8;
-    @apply my-12;
+  }
+
+  section:not(.hero, .main-section) {
+    @apply my-48;
   }
 }
 

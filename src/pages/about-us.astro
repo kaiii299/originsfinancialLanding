@@ -1,9 +1,13 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import LeftRightCol from "@/components/leftRightCol.astro";
-import { aboutUs } from "@/lib/constants";
+import TitleComponent from "@/components/ui/title.astro";
+
 ---
 
 <Layout canonicalUrl="" description="" title="">
-    <LeftRightCol data={aboutUs} title={"About us"} buttonText="Learn more" buttonLink="/" buttonVisible/>
+    <section class="first-section">
+        <div>
+            <TitleComponent title={"About us"}/>
+        </div>
+    </section>
 </Layout>

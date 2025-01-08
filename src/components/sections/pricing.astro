@@ -1,12 +1,13 @@
 ---
 import { plans } from "@/lib/constants";
-import { CustomIcon } from "./customIcon";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
+import { CustomIcon } from "../customIcon";
+import TitleComponent from "@/components/ui/title.astro";
 ---
 
 <section class="py-16">
   <div class="text-center max-w-3xl mx-auto">
-    <h2 class="text-3xl font-bold sm:text-4xl">Affordable Pricing Plan</h2>
+    <TitleComponent title={"Affordable pricing plan"} />
     <p class="mt-4 text-gray-600 text-md">
       Create multiple pricing tiers with varying levels of features or benefits.
       This allows you to cater to different customer needs and budgets.

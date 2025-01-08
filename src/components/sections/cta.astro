@@ -2,18 +2,17 @@
 import CTAImage from "@/assets/images/Visionex_files/CTA.svg";
 import { Button } from "@/components/ui/button";
 import { Image } from "astro:assets";
+import TitleComponent from "@/components/ui/title.astro";
 ---
 
-<section class="py-10">
+<section>
   <div
-    class="bg-[#fedd00] rounded-lg p-10 flex flex-col lg:flex-row items-center justify-between gap-10"
+    class="bg-main rounded-lg p-10 flex flex-col lg:flex-row items-center justify-between gap-10"
   >
     <!-- Left Text Content -->
     <div class="text-center lg:text-left">
-      <h2 class="text-2xl md:text-4xl w-full font-bold">
-        Ready to meet your personal AI writing assistant?
-      </h2>
-      <p class="mt-4 text-gray-800">
+      <TitleComponent className={"text-white"} title={"Ready to meet your personal AI writing assistant?"} />
+      <p class="mt-4 text-white">
         Take action now to make a difference! Whether it&apos;s supporting a
         cause you&apos;re passionate about.
       </p>
@@ -28,7 +27,7 @@ import { Image } from "astro:assets";
         src={CTAImage}
         title={"CTA"}
         alt="Illustration of AI writing assistant"
-        class="w-full max-w-sm lg:max-w-md"
+        class="w-full invert max-w-sm lg:max-w-md"
       />
     </div>
   </div>

@@ -60,3 +60,17 @@ export interface IWhyUs extends EntrySkeletonType {
     
   };
 }
+
+export interface ICareer extends EntrySkeletonType {
+  sys: {
+    id: EntryFieldTypes.Symbol;
+  };
+  fields: {
+    title: EntryFieldTypes.Symbol;
+    description: EntryFieldTypes.RichText;
+    buttonText:EntryFieldTypes.Symbol;
+    shortDescription: EntryFieldTypes.Text;
+    images: EntryFieldTypes.AssetLink[];
+  };
+}
+
