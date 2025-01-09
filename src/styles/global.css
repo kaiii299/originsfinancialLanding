@@ -61,6 +61,8 @@
   * {
     @apply border-border;
     font-family: 'Montserrat', sans-serif;
+    scroll-behavior: smooth;
+    scroll-margin-top: 140px;
   }
   
   body {
@@ -73,7 +75,7 @@
   }
 
   section:not(.hero, .main-section) {
-    @apply my-48;
+    @apply md:my-32 my-28; 
   }
 }
 

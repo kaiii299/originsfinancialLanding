@@ -1,4 +1,4 @@
-import type { EntryFieldTypes, EntrySkeletonType } from "contentful";
+import type { Entry, EntryFieldTypes, EntrySkeletonType } from "contentful";
 
 export interface Ihero extends EntrySkeletonType {
   sys: {
@@ -71,6 +71,34 @@ export interface ICareer extends EntrySkeletonType {
     buttonText:EntryFieldTypes.Symbol;
     shortDescription: EntryFieldTypes.Text;
     images: EntryFieldTypes.AssetLink[];
+  };
+}
+
+export interface ITestimonials extends EntrySkeletonType {
+  fields: {
+    title: EntryFieldTypes.Text;
+    description: EntryFieldTypes.Text;
+    name: EntryFieldTypes.Text;
+    role: EntryFieldTypes.Text;
+    testimonialFor: EntryFieldTypes.Symbol; // Reference to another entry
+  };
+}
+
+
+export interface IOurTeam extends EntrySkeletonType {
+  sys: {
+    id: EntryFieldTypes.Symbol;
+  };
+  fields: {
+    name: EntryFieldTypes.Text;
+    role: EntryFieldTypes.Text;
+    group: EntryFieldTypes.Text;
+    description: EntryFieldTypes.Text;
+    profileImage: EntryFieldTypes.AssetLink;
+    testimonials: EntryFieldTypes.Symbol;
+    certifications: EntryFieldTypes.Text;
+    awards: EntryFieldTypes.Text;
+    otherSpecialization: EntryFieldTypes.Text;
   };
 }
 

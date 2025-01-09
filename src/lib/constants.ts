@@ -15,8 +15,10 @@ export const navItems = [
   { name: "Home", href: "/" },
   { name: "Products", href: "/products" },
   { name: "Career", href: "/career" },
-  { name: "Our-team", href: "/our-team" },
-  { name: "Contact", href: "/contact" },
+  { name: "Our Team", href: "/our-team" },
+  { name: "Blogs", href: "/blogs" },
+  { name: "Events", href: "/events" },
+  { name: "Contact Us", href: "/contact" },
 ];
 
 export const heroSection = {

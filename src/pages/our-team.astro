@@ -1,0 +1,33 @@
+---
+import OurTeamComponent from "@/components/ourTeamMemberComponent";
+import OurTeamSheetComponent from "@/components/ourTeamSheetComponent";
+import TitleComponent from "@/components/ui/title.astro";
+import Layout from "@/layouts/Layout.astro";
+import { client } from "@/lib/contentful";
+import type { IOurTeam } from "@/lib/interface";
+
+
+// Fetching team data from Contentful
+const ourTeamData = await client.withoutUnresolvableLinks.getEntries<IOurTeam>({
+  content_type: "ourTeam",
+});
+---
+
+<Layout canonicalUrl="" description="" title="">
+  <section class="main-section mb-32">
+    <div>
+      <TitleComponent title="Our team" />
+    </div>
+
+    <div class="grid md:grid-cols-3 grid-cols-2 gap-8 ">
+      <!-- Mapping the data directly in Astro -->
+      {ourTeamData.items.map((member) => (
+        <div class="team-member">
+          <OurTeamSheetComponent client:only="React" ourTeamMemberData={member}>
+            <OurTeamComponent memberData={member}/>
+          </OurTeamSheetComponent>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>
