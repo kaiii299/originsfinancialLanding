@@ -36,22 +36,4 @@ const images = (careerData.fields.images || []) as { fields: AssetFields }[];
     <ImageCarousel images={images} client:only="React"/>
   </div>
 
-  <!-- <div class="my-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-    {images.map((image, index) => {
-      const imageUrl = image.fields.file.url;
-      const imageTitle = image.fields.title || `Image ${index + 1}`;
-      const imageAlt = image.fields.description || imageTitle;
-
-      return (
-        <div >
-          <img
-            src={imageUrl}
-            alt={imageAlt}
-            title={imageTitle}
-            class="rounded-lg object-cover w-full h-full min-h-[300px] "
-          />
-        </div>
-      );
-    })}
-  </div> -->
-</section>
+  </section>
