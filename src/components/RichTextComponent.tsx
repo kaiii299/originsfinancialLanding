@@ -83,7 +83,7 @@ const RichTextComponent = ({ RichTextData }: Props) => {
 
                 return <div>
                     <br />
-                    <img src={assetUrl} alt={altText} key={currentIndex} className="h-full w-full rounded-lg md:min-w-[800px]  max-w-[950px]" />
+                    <img src={assetUrl} alt={altText} key={currentIndex} className="h-full w-full rounded-lg md:min-w-[600px]  max-w-[750px]" />
                     <br />
                     <br />
                 </div>
