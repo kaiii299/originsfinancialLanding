@@ -13,5 +13,6 @@ export const slugify = (text: string) => {
   export const unslugify = (slug: string) => {
     return slug
       .replace(/-/g, ' ') // Replace dashes with spaces
-      .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize the first letter of each word
+      .replace(/\b\w/g, (char) => char.toUpperCase()) // Capitalize the first letter of each word
+      .replace(/\bAnd\b/g, 'and'); // Replace "And" with "and"
   };
