@@ -2,13 +2,14 @@
 import Layout from "@/layouts/Layout.astro";
 import TitleComponent from "@/components/ui/title.astro";
 import { client } from "@/lib/contentful"; // Import your Contentful client
-import type { IBlogs } from "@/lib/interface";
+import type { IBlogs, iBreadCrumbItems } from "@/lib/interface";
 import RichTextComponent from "@/components/RichTextComponent";
 import type { EntryCollection } from "contentful";
 import { Image } from "astro:assets";
 import { Badge } from "@/components/ui/badge";
 import { date } from "astro:schema";
 import { format } from "date-fns";
+import BreadCrumbComponent from "@/components/breadCrumbComponent";
 
 export async function getStaticPaths() {
   const blogData: EntryCollection<
@@ -54,6 +55,13 @@ try {
 } catch (error) {
   return Astro.redirect("/404");
 }
+
+const breadCrumbItem: iBreadCrumbItems[] = [
+    { name: "Home", href: "/", current: false },
+    { name: "Blogs", href: "/blogs", current: false },
+    { name: post?.title, href: "", current: true },
+  ];
+  
 ---
 
 <Layout
@@ -63,7 +71,7 @@ try {
 >
   <section class="main-section md:my-10">
     <div class="space-y-5">
-
+      <BreadCrumbComponent breadCrumbsItems={breadCrumbItem}/>
       <div class="space-y-3">
         <h2 class={`text-3xl font-bold sm:text-4xl`}>
           {post?.title}

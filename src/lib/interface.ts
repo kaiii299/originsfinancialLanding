@@ -1,5 +1,11 @@
 import type { Entry, EntryFieldTypes, EntrySkeletonType } from "contentful";
 
+export interface iBreadCrumbItems {
+  name: string, 
+  href: string,
+  current: boolean,
+}
+
 export interface Ihero extends EntrySkeletonType {
   sys: {
     id: EntryFieldTypes.Symbol;
