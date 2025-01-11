@@ -1,0 +1,49 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import TitleComponent from "@/components/ui/title.astro";
+import SearchBar from "@/components/searchBar";
+import { client } from "@/lib/contentful";
+import type { IProducts } from "@/lib/interface";
+import { ProductTabsComponent } from "@/components/productTabsComponent";
+import ProductAccordian from "@/components/productAccordian";
+
+const productData = await client.withoutUnresolvableLinks.getEntries<IProducts>(
+  {
+    content_type: "products",
+    // order:"fields" as any
+  }
+);
+
+// Extract categories
+const categories = [
+  "All",
+  ...productData.items
+    .flatMap((item) => item.fields.category)
+    .filter((category, index, self) => self.indexOf(category) === index),
+];
+
+
+// Extract Type
+const type = productData.items
+  .flatMap((item) => item.fields.type)
+  .filter((category, index, self) => self.indexOf(category) === index);
+
+---
+
+<Layout canonicalUrl="" description="" title="">
+  <section class="first-section">
+    <div>
+      <TitleComponent title={"Our products"} />
+    </div>
+
+    <div>
+      <SearchBar placeholder="Search for a product" client:only="React" />
+    </div>
+
+    <div class="my-12 main-section">
+      <ProductTabsComponent categoryData={categories} client:only="React" >
+        <ProductAccordian productData={productData.items} client:only="React"/>
+      </ProductTabsComponent>
+    </div>
+  </section>
+</Layout>

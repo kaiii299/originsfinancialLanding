@@ -16,7 +16,7 @@ const currentPath = Astro.url.pathname;
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <div class="flex items-center justify-center space-x-2">
-        <Image src={LogoImage} title={"logo"} alt="logo" class="h-full w-full" draggable="false"/>
+        <Image src={LogoImage} title={"logo"} alt="logo" class="h-full w-full" loading={"eager"} draggable="false"/>
         <!-- <a href="/" class="text-xl font-bold">Origins Financial</a> -->
       </div>
 

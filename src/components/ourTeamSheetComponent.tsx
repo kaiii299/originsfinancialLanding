@@ -9,6 +9,7 @@ import {
 } from "./ui/sheet";
 import type { ReactNode } from "react";
 import type { Entry } from "contentful";
+import { slugify } from "@/lib/slugify";
 
 type Props = {
   children: ReactNode;
@@ -16,16 +17,16 @@ type Props = {
 };
 
 const OurTeamSheetComponent = ({ ourTeamMemberData,children }: Props) => {
-  const handleSheetOpen = (id: string | undefined) => {
+  const handleSheetOpen = (name: string | undefined) => {
     // Update the URL with the ID as a query parameter
     const url = new URL(window.location.href);
-    url.searchParams.set("id", id!);
+    url.searchParams.set("name", name!);
     window.history.pushState({}, "", url.toString());
   };
   return (
     <Sheet>
       {/* Profile cards */}
-      <SheetTrigger onClick={() => handleSheetOpen(ourTeamMemberData.sys.id)}>
+      <SheetTrigger onClick={() => handleSheetOpen(slugify(ourTeamMemberData.fields.name))}>
         {children}
       </SheetTrigger>
 

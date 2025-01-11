@@ -1,7 +1,7 @@
 ---
 import ImageCarousel from "@/components/imageCarousel";
 import RichTextComponent from "@/components/RichTextComponent";
-import LearnButton from "@/components/ui/learnButton";
+import { Button } from "@/components/ui/button";
 import TitleComponent from "@/components/ui/title.astro";
 import Layout from "@/layouts/Layout.astro";
 import { client } from "@/lib/contentful";
@@ -15,18 +15,19 @@ const { title, description, buttonText, images } = careerData.fields;
 ---
 
 <Layout canonicalUrl="" description="" title="">
-  <section class="main-section">
+  <section class="first-section">
     <div class="mb-32 space-y-10">
       <div class="space-y-10">
         <TitleComponent title={title} />
         <RichTextComponent RichTextData={description} />
-        <LearnButton text={buttonText} />
+        <a href="/contact">
+          <Button className="bg-main">{buttonText}</Button>
+        </a>
       </div>
       <div>
         <TitleComponent title={"Our Advenures"} />
         <ImageCarousel images={images} client:only="React" />
       </div>
-      <div></div>
     </div>
   </section>
 </Layout>

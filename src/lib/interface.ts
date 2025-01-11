@@ -122,3 +122,18 @@ export interface IBlogs extends EntrySkeletonType {
     content: EntryFieldTypes.RichText;
   };
 }
+
+export interface IProducts extends EntrySkeletonType {
+  sys: {
+    id: EntryFieldTypes.Symbol;
+  };
+  fields: {
+    slug: EntryFieldTypes.Symbol; 
+    title: EntryFieldTypes.Symbol;
+    image: EntryFieldTypes.AssetLink;
+    description: EntryFieldTypes.Text; 
+    category: EntryFieldTypes.Symbol; 
+    type: EntryFieldTypes.Text; 
+    productDescription: EntryFieldTypes.RichText;
+  };
+}

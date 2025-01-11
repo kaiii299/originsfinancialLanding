@@ -69,12 +69,12 @@
     @apply bg-[#fbfcf5] text-foreground;
   }
 
-  section{
+  section:not(.main-section){
     @apply mx-5;
     @apply max-w-7xl bg-[#fbfcf5] mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  section:not(.hero, .main-section) {
+  section:not(.hero, .first-section) {
     @apply md:my-32 my-28; 
   }
 }
