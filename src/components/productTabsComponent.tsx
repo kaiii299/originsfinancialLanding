@@ -32,7 +32,7 @@ export function ProductTabsComponent({ categoryData, defaultValue, children }: P
   }, [categoryData, defaultValue]);
 
   return (
-    <Tabs defaultValue={currentCategory} onValueChange={handleTabChange} className="overflow-hidden">
+    <Tabs defaultValue="All" onValueChange={handleTabChange} className="overflow-hidden">
       {/* Render Tabs List */}
       <TabsList defaultValue={"all"} className="flex w-full bg-slate-300 text-black overflow-x-auto scrollbar-hide md:grid grid-cols-3 md:grid-cols-6">
         {categoryData.map((category) => (

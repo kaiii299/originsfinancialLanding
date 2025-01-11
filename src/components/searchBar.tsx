@@ -9,7 +9,7 @@ interface SearchBarProps {
 
 const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = "Search...",
-  queryParam = "q",
+  queryParam = "search",
 }) => {
   const [searchValue, setSearchValue] = useState<string>("");
 
