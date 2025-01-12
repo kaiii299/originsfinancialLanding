@@ -36,13 +36,9 @@ const type = productData.items
       <TitleComponent title={"Our products"} />
     </div>
 
-    <div>
-      <SearchBar placeholder="Search for a product" client:only="React" />
-    </div>
-
     <div class="my-12 main-section">
       <ProductTabsComponent categoryData={categories} client:only="React" >
-        <ProductAccordian productData={productData.items} client:only="React"/>
+        <ProductAccordian  productData={productData.items} client:only="React"/>
       </ProductTabsComponent>
     </div>
   </section>

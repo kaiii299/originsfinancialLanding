@@ -31,13 +31,22 @@ export function ProductTabsComponent({ categoryData, defaultValue, children }: P
     }
   }, [categoryData, defaultValue]);
 
+  // Ensure "All" is always first, followed by alphabetically sorted categories
+  const sortedCategoryData = [
+    "All", // Add "All" first
+    ...[...categoryData.filter((category) => category !== "All")].sort((a, b) => a.localeCompare(b)), // Sort and exclude "All"
+  ];
+
   return (
-    <Tabs defaultValue="All" onValueChange={handleTabChange} className="overflow-hidden">
+    <Tabs defaultValue={"All"} onValueChange={handleTabChange} className="overflow-hidden">
       {/* Render Tabs List */}
-      <TabsList defaultValue={"all"} className="flex w-full bg-slate-300 text-black overflow-x-auto scrollbar-hide md:grid grid-cols-3 md:grid-cols-6">
-        {categoryData.map((category) => (
+      <TabsList
+        className="flex w-full bg-slate-300 text-black overflow-x-auto whitespace-nowrap scroll-smooth scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200"
+        style={{ WebkitOverflowScrolling: "touch" }}
+      >
+        {sortedCategoryData.map((category) => (
           <TabsTrigger
-            className="capitalize whitespace-nowrap px-4 py-2"
+            className="flex-1 basis-0 text-center capitalize px-4 py-2"
             key={category}
             value={category}
           >
@@ -47,7 +56,7 @@ export function ProductTabsComponent({ categoryData, defaultValue, children }: P
       </TabsList>
 
       {/* Render Tabs Content */}
-      {categoryData.map((category) => (
+      {sortedCategoryData.map((category) => (
         <TabsContent key={category} value={category}>
           {children}
         </TabsContent>
