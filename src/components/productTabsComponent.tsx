@@ -38,10 +38,10 @@ export function ProductTabsComponent({ categoryData, defaultValue, children }: P
   ];
 
   return (
-    <Tabs defaultValue={"All"} onValueChange={handleTabChange} className="overflow-hidden">
+    <Tabs defaultValue={"All"} onValueChange={handleTabChange} className="w-full">
       {/* Render Tabs List */}
       <TabsList
-        className="flex w-full bg-slate-300 text-black overflow-x-auto whitespace-nowrap scroll-smooth scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200"
+        className="flex w-full bg-slate-300 text-black overflow-auto sticky top-28 whitespace-nowrap scroll-smooth scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200"
         style={{ WebkitOverflowScrolling: "touch" }}
       >
         {sortedCategoryData.map((category) => (

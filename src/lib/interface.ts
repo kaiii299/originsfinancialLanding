@@ -130,10 +130,9 @@ export interface IProducts extends EntrySkeletonType {
   fields: {
     slug: EntryFieldTypes.Symbol; 
     title: EntryFieldTypes.Symbol;
-    image: EntryFieldTypes.AssetLink;
     description: EntryFieldTypes.Text; 
     category: EntryFieldTypes.Symbol; 
-    type: EntryFieldTypes.Text; 
+    type: EntryFieldTypes.Array<EntryFieldTypes.Symbol>; 
     productDescription: EntryFieldTypes.RichText;
   };
 }

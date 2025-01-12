@@ -10,7 +10,7 @@ import ProductAccordian from "@/components/productAccordian";
 const productData = await client.withoutUnresolvableLinks.getEntries<IProducts>(
   {
     content_type: "products",
-    // order:"fields" as any
+    order:"fields.title" as any
   }
 );
 
@@ -24,9 +24,9 @@ const categories = [
 
 
 // Extract Type
-const type = productData.items
-  .flatMap((item) => item.fields.type)
-  .filter((category, index, self) => self.indexOf(category) === index);
+// const type = productData.items
+//   .flatMap((item) => item.fields.productType)
+//   .filter((category, index, self) => self.indexOf(category) === index);
 
 ---
 
