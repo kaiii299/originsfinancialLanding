@@ -131,7 +131,7 @@ export interface IProducts extends EntrySkeletonType {
     slug: EntryFieldTypes.Symbol; 
     title: EntryFieldTypes.Symbol;
     description: EntryFieldTypes.Text; 
-    category: EntryFieldTypes.Symbol; 
+    category: EntryFieldTypes.Array<EntryFieldTypes.Symbol>; 
     type: EntryFieldTypes.Array<EntryFieldTypes.Symbol>; 
     productDescription: EntryFieldTypes.RichText;
   };

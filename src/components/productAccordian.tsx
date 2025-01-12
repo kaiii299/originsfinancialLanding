@@ -1,10 +1,4 @@
-import React, { useEffect, useState } from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "./ui/accordion";
+import { useEffect, useState } from "react";
 import type { Entry } from "contentful";
 import type { IProducts } from "@/lib/interface";
 import { unslugify } from "@/lib/slugify";
@@ -19,58 +13,71 @@ type Props = {
 
 const ProductAccordion = ({ productData }: Props) => {
   const [filteredProducts, setFilteredProducts] = useState<
+    Entry<IProducts, "WITHOUT_UNRESOLVABLE_LINKS", string>[]
+  >([]);
+  const [groupedProducts, setGroupedProducts] = useState<
     Record<string, Entry<IProducts, "WITHOUT_UNRESOLVABLE_LINKS", string>[]>
   >({});
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
-    // Get the category from query parameters
     const queryCategory = new URLSearchParams(window.location.search).get(
       "category"
     );
+    const readableCategory = queryCategory ? unslugify(queryCategory) : null;
 
-    // Group products by category
-    const groupProducts = (
-      products: Entry<IProducts, "WITHOUT_UNRESOLVABLE_LINKS", string>[]
-    ) =>
-      products.reduce((acc, product) => {
-        const category = product.fields.category || "Uncategorized";
-        if (!acc[category]) {
-          acc[category] = [];
-        }
-        acc[category].push(product);
-        return acc;
-      }, {} as Record<string, Entry<IProducts, "WITHOUT_UNRESOLVABLE_LINKS", string>[]>);
+    let filtered = productData;
 
-    let filtered;
-
-    if (queryCategory && queryCategory.toLowerCase() !== "all") {
-      const readableCategory = unslugify(queryCategory);
-      filtered = productData.filter((product) =>
-        product.fields.category?.includes(readableCategory)
-      );
-    } else {
-      filtered = productData;
+    if (readableCategory && readableCategory.toLowerCase() !== "all") {
+      filtered = productData.filter((product) => {
+        const categories = product.fields.category || [];
+        return categories.some(
+          (category) =>
+            category.toLowerCase() === readableCategory.toLowerCase()
+        );
+      });
     }
 
-    // Apply search query filter
     if (searchQuery) {
       filtered = filtered.filter((product) =>
         product.fields.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
-    setFilteredProducts(groupProducts(filtered));
+    if (readableCategory?.toLowerCase() === "all") {
+      const grouped: Record<
+        string,
+        Entry<IProducts, "WITHOUT_UNRESOLVABLE_LINKS", string>[]
+      > = {};
+
+      const displayedProducts = new Set<string>();
+
+      filtered.forEach((product) => {
+        const categories = product.fields.category || ["Uncategorized"];
+        const primaryCategory = categories[0];
+
+        if (!grouped[primaryCategory]) {
+          grouped[primaryCategory] = [];
+        }
+
+        if (!displayedProducts.has(product.sys.id)) {
+          grouped[primaryCategory].push(product);
+          displayedProducts.add(product.sys.id);
+        }
+      });
+
+      setGroupedProducts(grouped);
+    } else {
+      setGroupedProducts({});
+    }
+
+    setFilteredProducts(filtered);
   }, [productData, searchQuery]);
 
-  // Check if no products are found
-  const isEmpty =
-    Object.keys(filteredProducts).length === 0 ||
-    Object.values(filteredProducts).every((products) => products.length === 0);
+  const isEmpty = filteredProducts.length === 0;
 
   return (
     <div className="mt-8">
-      {/* Search Bar */}
       <div className="mb-6 mx-1">
         <Input
           type="text"
@@ -81,51 +88,58 @@ const ProductAccordion = ({ productData }: Props) => {
         />
       </div>
 
-      {/* Render "No Products Found" if the results are empty */}
       {isEmpty ? (
         <div className="text-center text-gray-600 text-xl font-semibold mt-10">
           No products found.
         </div>
-      ) : (
-        // Render Accordion
-        Object.entries(filteredProducts).map(([category, products]) => (
+      ) : Object.keys(groupedProducts).length > 0 ? (
+        Object.entries(groupedProducts).map(([category, products]) => (
           <div key={category} className="my-10">
             <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 mb-4">
               {category}
             </h2>
+
             <div className="flex flex-col gap-8">
               {products.map((product) => (
-                <a href={`product/${product.fields.slug}`}>
+                <a href={`product/${product.fields.slug}`} key={product.sys.id}>
                   <Card className="group hover:shadow-md cursor-pointer duration-200 transition-all">
                     <CardHeader>
-                      <div className="space-y-2">
-                        <div>
-                          {product.fields.type &&
-                            product.fields.type.map((type) => {
-                              return (
-                                <Badge variant={"secondary"} key={type}>
-                                  {type}
-                                </Badge>
-                              );
-                            })}
-                        </div>
+                      <div className="flex flex-col space-y-4">
                         <div className="font-bold text-xl">
                           {product.fields.title}
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <div className="line-clamp-2">
-                        {product.fields.description}
+                      <div className="flex flex-col space-y-4">
+                        <div className="flex items-center ">
+                          {product.fields.category.map((category) => (
+                            <Badge variant="default" key={category}>
+                              {category}
+                            </Badge>
+                          ))}
+                          {product.fields.type &&
+                            product.fields.type.length > 0 && (
+                              <>
+                                <span>|</span>
+                                {product.fields.type.map((type) => (
+                                  <Badge variant="secondary" key={type}>
+                                    {type}
+                                  </Badge>
+                                ))}
+                              </>
+                            )}
+                        </div>
+                        <div className="line-clamp-2">
+                          {product.fields.description}
+                        </div>
                       </div>
                     </CardContent>
                     <CardFooter>
-                      <div>
-                        <LearnButton
-                          text="Learn more"
-                          href={`product/${product.fields.slug}`}
-                        />
-                      </div>
+                      <LearnButton
+                        text="Learn more"
+                        href={`product/${product.fields.slug}`}
+                      />
                     </CardFooter>
                   </Card>
                 </a>
@@ -133,6 +147,53 @@ const ProductAccordion = ({ productData }: Props) => {
             </div>
           </div>
         ))
+      ) : (
+        <div className="my-10 flex flex-col gap-8">
+          {filteredProducts.map((product) => (
+            <a href={`product/${product.fields.slug}`} key={product.sys.id}>
+              <Card className="group hover:shadow-md cursor-pointer duration-200 transition-all">
+                <CardHeader>
+                  <div className="flex flex-col space-y-4">
+                    <div className="font-bold text-xl">
+                      {product.fields.title}
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-col space-y-4">
+                    <div className="flex items-center ">
+                      {product.fields.category.map((category) => (
+                        <Badge variant="default" key={category}>
+                          {category}
+                        </Badge>
+                      ))}
+                      {product.fields.type &&
+                        product.fields.type.length > 0 && (
+                          <>
+                            <span>|</span>
+                            {product.fields.type.map((type) => (
+                              <Badge variant="secondary" key={type}>
+                                {type}
+                              </Badge>
+                            ))}
+                          </>
+                        )}
+                    </div>
+                    <div className="line-clamp-2">
+                      {product.fields.description}
+                    </div>
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <LearnButton
+                    text="Learn more"
+                    href={`product/${product.fields.slug}`}
+                  />
+                </CardFooter>
+              </Card>
+            </a>
+          ))}
+        </div>
       )}
     </div>
   );
