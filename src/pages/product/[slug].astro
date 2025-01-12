@@ -1,0 +1,102 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { client } from "@/lib/contentful"; // Import your Contentful client
+import type { iBreadCrumbItems, IProducts } from "@/lib/interface";
+import RichTextComponent from "@/components/RichTextComponent";
+import type { EntryCollection } from "contentful";
+import BreadCrumbComponent from "@/components/breadCrumbComponent";
+import TitleComponent from "@/components/ui/title.astro";
+import LearnButton from "@/components/ui/learnButton";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+export async function getStaticPaths() {
+  const productData: EntryCollection<
+    IProducts,
+    "WITHOUT_UNRESOLVABLE_LINKS",
+    string
+  > = await client.withoutUnresolvableLinks.getEntries<IProducts>({
+    content_type: "products",
+  });
+
+  return productData.items.map((item) => ({
+    // Generate path based on slug
+    params: { slug: item.fields.slug },
+  }));
+}
+
+let products;
+
+const { slug } = Astro.params;
+
+try {
+  const data: EntryCollection<IProducts, "WITHOUT_UNRESOLVABLE_LINKS", string> =
+    await client.withoutUnresolvableLinks.getEntries<IProducts>({
+      content_type: "products",
+      "fields.slug": slug,
+    });
+
+  if (!data.items.length) {
+    throw new Error(`products with slug "${slug}" not found.`);
+  }
+
+  const { title, productDescription, description, type, category } = data.items[0].fields;
+
+  products = {
+    title: title,
+    content: productDescription,
+    description: description,
+    category: category,
+    type: type,
+    createdAt: data.items[0].sys.createdAt,
+  };
+} catch (error) {
+  return Astro.redirect("/404");
+}
+
+const breadCrumbItem: iBreadCrumbItems[] = [
+  { name: "Home", href: "/", current: false },
+  { name: "Products", href: "/products", current: false },
+  { name: products.category, href: `/products?category=${products?.category}`, current: false },
+  { name: products?.title, href: "", current: true },
+];
+---
+
+<Layout canonicalUrl="" description="" title="">
+  <section class="first-section my-10">
+    <div >
+      <div class="my-10">
+        <div class="space-y-3">
+          <div>
+            <BreadCrumbComponent breadCrumbsItems={breadCrumbItem} />
+          </div>
+          <div>
+            <h2 class="text-3xl font-bold my-4 sm:text-4xl">
+              {products?.title}
+            </h2>
+            <div class="my-3">
+              {
+                products?.type &&
+                  products?.type.map((type) => {
+                    return (
+                      <Badge variant={"secondary"}>
+                        {type}
+                      </Badge>
+                    );
+                  })
+              }
+            </div>
+          </div>
+        </div>
+        <div>
+          {products.description}
+        </div>
+      </div>
+    </div>
+    <div>
+      <RichTextComponent RichTextData={products.content} />
+    </div>
+    <div>
+      <Button className="bg-main">Contact us</Button>
+    </div>
+  </section>
+</Layout>
