@@ -56,7 +56,7 @@ try {
 const breadCrumbItem: iBreadCrumbItems[] = [
   { name: "Home", href: "/", current: false },
   { name: "Products", href: "/products", current: false },
-  { name: products.category, href: `/products?category=${products?.category}`, current: false },
+  { name: products?.category[0], href: `/products?category=${products?.category[0]}`, current: false },
   { name: products?.title, href: "", current: true },
 ];
 ---

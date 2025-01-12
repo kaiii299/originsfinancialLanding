@@ -15,9 +15,9 @@ export const navItems = [
   { name: "Home", href: "/" },
   { name: "Products", href: "/products" },
   { name: "Career", href: "/career" },
+  { name: "Testimonials", href: "/testimonials" },
   { name: "Our Team", href: "/our-team" },
   { name: "Blogs", href: "/blogs" },
-  // { name: "Events", href: "/events" },
   { name: "Contact Us", href: "/contact" },
 ];
 
