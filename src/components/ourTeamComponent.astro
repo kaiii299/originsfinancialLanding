@@ -1,0 +1,72 @@
+---
+import type { Entry } from "contentful";
+import type { IOurTeam } from "@/lib/interface";
+import { Image } from "astro:assets";
+import MarkdownComponent from "./markDownComponents";
+import TitleComponent from "@/components/ui/title.astro";
+import { Badge } from "./ui/badge";
+
+type Props = {
+  membersData: Entry<IOurTeam, "WITHOUT_UNRESOLVABLE_LINKS", string>;
+  className? : string;
+};
+
+const { membersData, className } = Astro.props;
+
+const { profileImage, name, description, featured, role } = membersData.fields;
+---
+
+<div class="space-y-8">
+  <!-- Featured Member Section -->
+  {
+    featured && (
+      <div class="grid md:grid-cols-2 gap-5 justify-center items-center text-start">
+        <div class="space-y-4">
+          <Image
+            src={profileImage?.fields.file?.url as string}
+            alt={profileImage?.fields.title || "Featured Member"}
+            title={profileImage?.fields.title || "Featured Member"}
+            width={500}
+            height={500}
+            class="md:w-[430px] md:h-[500px] h-[420px] rounded-lg object-cover"
+            format="webp"
+            draggable={false}
+          />
+        </div>
+        <div class="space-y-5">
+          <div class="space-y-2">
+            <h2 class="font-bold text-2xl">{name}</h2>
+            <span class="text-sm">{role}</span>
+          </div>
+          <MarkdownComponent markdown={description} />
+        </div>
+      </div>
+    )
+  }
+
+  <!-- Other Team Members Section -->
+  <div>
+    {
+      !featured && (
+        <div>
+          <div>
+            <Image
+              src={profileImage?.fields.file?.url as string}
+              alt={profileImage?.fields.title || "Featured Member"}
+              title={profileImage?.fields.title || "Featured Member"}
+              width={400}
+              height={500}
+              class={`${className? className : "md:h-[500px] h-[200px]" } rounded-lg object-cover`}
+              format="webp"
+              draggable={false}
+            />
+          </div>
+          <div class="flex justify-start items-start flex-col my-3 space-y-1">
+            <h2 class="font-bold text-2xl text-start">{name}</h2>
+            <span class="text-sm text-start">{role}</span>
+          </div>
+        </div>
+      )
+    }
+  </div>
+</div>

@@ -105,6 +105,7 @@ export interface IOurTeam extends EntrySkeletonType {
     certifications: EntryFieldTypes.Text;
     awards: EntryFieldTypes.Text;
     otherSpecialization: EntryFieldTypes.Text;
+    featured: EntryFieldTypes.Boolean;
   };
 }
 

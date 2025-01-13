@@ -15,10 +15,11 @@ const currentPath = Astro.url.pathname;
   <div class="px-4 sm:px-6 lg:px-8 py-5 w-full max-w-7xl mx-auto">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
-      <div class="flex items-center justify-center space-x-2">
+      <a class="flex items-center justify-center space-x-2 cursor-pointer" href="/">
+        
         <Image src={LogoImage} title={"logo"} alt="logo" class="h-full w-full" loading={"eager"} draggable="false"/>
         <!-- <a href="/" class="text-xl font-bold">Origins Financial</a> -->
-      </div>
+      </a>
 
       <!-- Desktop Navigation -->
       <div class="hidden md:block">
