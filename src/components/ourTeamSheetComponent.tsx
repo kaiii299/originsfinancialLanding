@@ -12,6 +12,7 @@ import type { Entry } from "contentful";
 import { slugify } from "@/lib/slugify";
 import { useState, useEffect } from "react";
 import MarkdownComponent from "./markDownComponents";
+import TestimonialForm from "./testimonialForm";
 
 type Props = {
   children: ReactNode;
@@ -80,7 +81,9 @@ const OurTeamSheetComponent = ({ ourTeamMemberData, children }: Props) => {
                 <div>
                   <div className="flex md:flex-row flex-col gap-2 text-sm  items-start justify-start">
                     <span>{role}</span>
-                    {group && <span className="text-gray-400 hidden md:flex">|</span>}
+                    {group && (
+                      <span className="text-gray-400 hidden md:flex">|</span>
+                    )}
                     {group && (
                       <div className="text-sm">
                         <span>{group}</span>
@@ -120,7 +123,10 @@ const OurTeamSheetComponent = ({ ourTeamMemberData, children }: Props) => {
             </div>
           </div>
           {/* Form */}
-          <div></div>
+          <div>
+            <h2 className="font-bold text-2xl capitalize mt-10">Say something about {name}</h2>
+            <TestimonialForm />
+          </div>
         </SheetHeader>
       </SheetContent>
     </Sheet>

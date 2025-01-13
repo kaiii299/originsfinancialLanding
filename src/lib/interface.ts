@@ -1,7 +1,7 @@
-import type { Entry, EntryFieldTypes, EntrySkeletonType } from "contentful";
+import type { EntryFieldTypes, EntrySkeletonType } from "contentful";
 
 export interface iBreadCrumbItems {
-  name: string, 
+  name: string,
   href: string,
   current: boolean,
 }
@@ -62,8 +62,8 @@ export interface IWhyUs extends EntrySkeletonType {
     cardColor?: EntryFieldTypes.Symbol;
     index?: EntryFieldTypes.Integer;
     image?: EntryFieldTypes.AssetLink;
-    icon?:EntryFieldTypes.Symbol;
-    
+    icon?: EntryFieldTypes.Symbol;
+
   };
 }
 
@@ -74,19 +74,9 @@ export interface ICareer extends EntrySkeletonType {
   fields: {
     title: EntryFieldTypes.Symbol;
     description: EntryFieldTypes.RichText;
-    buttonText:EntryFieldTypes.Symbol;
+    buttonText: EntryFieldTypes.Symbol;
     shortDescription: EntryFieldTypes.Text;
     images: EntryFieldTypes.AssetLink[];
-  };
-}
-
-export interface ITestimonials extends EntrySkeletonType {
-  fields: {
-    title: EntryFieldTypes.Text;
-    description: EntryFieldTypes.Text;
-    name: EntryFieldTypes.Text;
-    role: EntryFieldTypes.Text;
-    testimonialFor: EntryFieldTypes.Symbol; // Reference to another entry
   };
 }
 
@@ -129,11 +119,24 @@ export interface IProducts extends EntrySkeletonType {
     id: EntryFieldTypes.Symbol;
   };
   fields: {
-    slug: EntryFieldTypes.Symbol; 
+    slug: EntryFieldTypes.Symbol;
     title: EntryFieldTypes.Symbol;
-    description: EntryFieldTypes.Text; 
-    category: EntryFieldTypes.Array<EntryFieldTypes.Symbol>; 
-    type: EntryFieldTypes.Array<EntryFieldTypes.Symbol>; 
+    description: EntryFieldTypes.Text;
+    category: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
+    type: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
     productDescription: EntryFieldTypes.RichText;
   };
+}
+
+export interface ITestimonials extends EntrySkeletonType {
+  sys: {
+    id: EntryFieldTypes.Symbol;
+  };
+  fields: {
+    title: EntryFieldTypes.Symbol;
+    description: EntryFieldTypes.Text;
+    name: EntryFieldTypes.Symbol;
+    role: EntryFieldTypes.Symbol;
+    testimonialFor: EntryFieldTypes.EntryResourceLink<IOurTeam>;
+  } 
 }
