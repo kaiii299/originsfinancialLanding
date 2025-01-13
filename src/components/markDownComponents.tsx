@@ -5,13 +5,15 @@ interface MarkdownComponentProps {
   className?: string; // Optional CSS class
 }
 
-const MarkdownComponent: React.FC<MarkdownComponentProps> = ({ markdown, className }) => {
-
+const MarkdownComponent: React.FC<MarkdownComponentProps> = ({
+  markdown,
+  className,
+}) => {
   return (
-    <p
+    <div
       className={`${className} whitespace-pre-wrap`}
       dangerouslySetInnerHTML={{ __html: markdown }}
-    ></p>
+    />
   );
 };
 

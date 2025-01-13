@@ -70,17 +70,16 @@ const SheetContent = React.forwardRef<
       {children}
       <SheetPrimitive.Close
         title="Close"
-        className="fixed z-50 top-4 right-8 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary"
+        className="fixed z-50 top-5 right-8 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary"
       >
-        {/* <Button
+        <div
           title="Close"
-          variant='none'
-          className="w-14 h-14 flex shadow-none rounded-full justify-center items-center"
+          className="w-10 h-10 bg-main flex shadow-none rounded-full justify-center items-center"
         >
-          <LuX size={50} />
+          <LuX size={25} title="Close" />
 
-        </Button> */}
-        <span >Close</span>
+        </div>
+        {/* <Button  className="sr-only">Close</Button> */}
       </SheetPrimitive.Close>
     </SheetPrimitive.Content>
   </SheetPortal>
@@ -133,7 +132,7 @@ const SheetDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Description
     ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
+    className={cn(" ", className)}
     {...props}
   />
 ));

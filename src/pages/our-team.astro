@@ -86,7 +86,7 @@ const pluralizeTitle = (singular: string, plural: string, count: number) => (cou
         {teamMembers.map((member) => (
           <div class="team-member">
             <OurTeamSheetComponent client:only="React" ourTeamMemberData={member}>
-              <OurTeamComponent membersData={member} className="md:h-[280px] md:w-[250px] object-cover" />
+              <OurTeamComponent membersData={member} className="md:h-[280px] h-[190px] md:w-[250px] object-cover" />
             </OurTeamSheetComponent>
           </div>
         ))}
