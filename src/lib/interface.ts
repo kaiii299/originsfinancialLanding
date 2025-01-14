@@ -133,9 +133,9 @@ export interface ITestimonials extends EntrySkeletonType {
     id: EntryFieldTypes.Symbol;
   };
   fields: {
-    title: EntryFieldTypes.Symbol;
     description: EntryFieldTypes.Text;
     name: EntryFieldTypes.Symbol;
+    ratings: EntryFieldTypes.Number;
     role: EntryFieldTypes.Symbol;
     testimonialFor: EntryFieldTypes.EntryResourceLink<IOurTeam>;
   } 

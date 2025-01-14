@@ -80,7 +80,7 @@ const TestimonialForm = () => {
                   <SelectLabel>Select Role</SelectLabel>
                   <SelectItem value="Client">Client</SelectItem>
                   <SelectItem value="Partner">Partner</SelectItem>
-                  <SelectItem value="Team Member">Team Member</SelectItem>
+                  <SelectItem value="Business Partner">Business Partner</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
