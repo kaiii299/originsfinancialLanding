@@ -122,8 +122,9 @@ const OurTeamSheetComponent = ({ ourTeamMemberData, children }: Props) => {
               <MarkdownComponent markdown={otherSpecialization} />
             </div>
           </div>
+
           {/* Form */}
-          <div>
+          <div className="text-start">
             <h2 className="font-bold text-2xl capitalize mt-10">Say something about {name}</h2>
             <TestimonialForm />
           </div>
