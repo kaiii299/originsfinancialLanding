@@ -1,6 +1,6 @@
 ---
 import Footer from "@/components/sections/footer.astro";
-import Navbar from "@/components/sections/navbar.astro";
+import Navbar from "@/components/sections/navbar";
 import { Toaster } from "@/components/ui/toaster";
 import { client } from "@/lib/contentful";
 import type { IMisc } from "@/lib/interface";
@@ -76,7 +76,7 @@ const imageUrl = `/assets/images/logo.svg`;
   </head>
 
   <body>
-    <Navbar />
+    <Navbar client:only="React"/>
     <slot />
     <Toaster client:only="React" />
     <Footer title={title} description={miscData.fields.longDescription} />

@@ -42,16 +42,16 @@ const getMemberTestimonials = (name: string) => {
 
 <Layout canonicalUrl="" description="" title="">
   <section class="first-section mb-32">
-    <div>
+    <!-- <div>
       {featuredMembers.length > 0 && (
         <TitleComponent
           title={pluralizeTitle("Featured Member", "Featured Members", featuredMembers.length)}
         />
       )}
-    </div>
+    </div> -->
 
     <!-- Featured Members Section -->
-    {featuredMembers.length > 0 && (
+    <!-- {featuredMembers.length > 0 && (
       <div class="space-y-8 mb-12">
         {featuredMembers.map((member) => (
           <div class="featured-member">
@@ -61,7 +61,7 @@ const getMemberTestimonials = (name: string) => {
           </div>
         ))}
       </div>
-    )}
+    )} -->
 
     <div>
       {leaders.length > 0 && (
@@ -73,11 +73,11 @@ const getMemberTestimonials = (name: string) => {
 
     <!-- Leaders Section -->
     {leaders.length > 0 ? (
-      <div class="grid md:grid-cols-3 grid-cols-2 gap-8">
+      <div class="grid md:grid-cols-4 grid-cols-2 gap-8">
         {leaders.map((member) => (
           <div class="team-member">
             <OurTeamSheetComponent client:only="React" ourTeamMemberData={member} testimonialData={testimonialData}>
-              <OurTeamComponent membersData={member} />
+              <OurTeamComponent membersData={member} className="md:h-[380px] h-[190px] md:w-[450px] object-cover"  />
             </OurTeamSheetComponent>
           </div>
         ))}
