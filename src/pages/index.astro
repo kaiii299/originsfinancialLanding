@@ -7,7 +7,13 @@ import ServicesSection from "@/components/sections/servicesSection.astro";
 import VisionMissionSection from "@/components/sections/visionMissionSection.astro";
 import WhyUs from "@/components/sections/whyUs.astro";
 import Layout from "@/layouts/Layout.astro";
-import { miscData } from "@/lib/contentful";
+import { client } from "@/lib/contentful";
+import type { IMisc } from "@/lib/interface";
+
+const miscData = await client.withoutUnresolvableLinks.getEntry<IMisc>(
+  "4EGtKjQZn22kzgtVW3hlpl"
+);
+
 
 const {title, description} = miscData.fields
 ---

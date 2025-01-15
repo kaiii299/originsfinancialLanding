@@ -15,6 +15,3 @@ export const managementClient = contentfulManagement.createClient(
   }
 )
 
-export const miscData = await client.withoutUnresolvableLinks.getEntry<IMisc>(
-  "4EGtKjQZn22kzgtVW3hlpl"
-);

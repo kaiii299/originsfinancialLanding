@@ -10,24 +10,7 @@ import LearnButton from "@/components/ui/learnButton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-
-
-export const prerender = true;
-
-export async function getStaticPaths() {
-  const productData: EntryCollection<
-    IProducts,
-    "WITHOUT_UNRESOLVABLE_LINKS",
-    string
-  > = await client.withoutUnresolvableLinks.getEntries<IProducts>({
-    content_type: "products",
-  });
-
-  return productData.items.map((item) => ({
-    // Generate path based on slug
-    params: { slug: item.fields.slug },
-  }));
-}
+export const prerender = false;
 
 let products;
 

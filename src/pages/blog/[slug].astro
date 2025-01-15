@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { client } from "@/lib/contentful"; // Import your Contentful client
+import { client } from "@/lib/contentful"; 
 import type { IBlogs, iBreadCrumbItems } from "@/lib/interface";
 import RichTextComponent from "@/components/RichTextComponent";
 import type { EntryCollection } from "contentful";
@@ -9,23 +9,7 @@ import { format } from "date-fns";
 import BreadCrumbComponent from "@/components/breadCrumbComponent";
 
 
-export const prerender = true;
-
-export async function getStaticPaths() {
-  const blogData: EntryCollection<
-    IBlogs,
-    "WITHOUT_UNRESOLVABLE_LINKS",
-    string
-  > = await client.withoutUnresolvableLinks.getEntries<IBlogs>({
-    content_type: "blogs",
-  });
-
-  return blogData.items.map((item) => ({
-    // Generate path based on slug
-    params: { slug: item.fields.slug },
-  }));
-}
-
+export const prerender = false;
 
 let post;
 
