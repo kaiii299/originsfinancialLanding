@@ -13,7 +13,7 @@ export default defineConfig({
   vite: {
     build: {
       rollupOptions: {
-        external: ["@contentful"], // Exclude unnecessary libraries
+        external: ["@contentful"], 
       },
     },
   },
