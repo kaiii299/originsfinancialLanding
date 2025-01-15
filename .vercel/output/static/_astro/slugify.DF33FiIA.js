@@ -1,1 +1,0 @@
-const a=e=>e.toString().toLowerCase().trim().replace(/\s+/g,"-").replace(/[^\w\-]+/g,"").replace(/\-\-+/g,"-"),s=e=>e.replace(/-/g," ").replace(/\b\w/g,r=>r.toUpperCase()).replace(/\bAnd\b/g,"and");export{a as s,s as u};

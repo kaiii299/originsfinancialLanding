@@ -18,6 +18,7 @@ export const navItems = [
   { name: "Testimonials", href: "/testimonials" },
   { name: "Our Team", href: "/our-team" },
   { name: "Blogs", href: "/blogs" },
+  { name: "Events", href: "/events" },
   { name: "Contact Us", href: "/contact" },
 ];
 

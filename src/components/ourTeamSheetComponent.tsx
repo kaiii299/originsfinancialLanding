@@ -126,14 +126,14 @@ const OurTeamSheetComponent = ({
             </div>
 
             <div className="space-y-2">
-              <h2 className="font-bold text-lg capitalize">Awards</h2>
+              {awards && <h2 className="font-bold text-lg capitalize">Awards</h2>}
               <MarkdownComponent markdown={awards} />
             </div>
 
             <div className="space-y-2">
-              <h2 className="font-bold text-lg capitalize">
+              {otherSpecialization && <h2 className="font-bold text-lg capitalize">
                 Other Specialization
-              </h2>
+              </h2>}
               <MarkdownComponent markdown={otherSpecialization} />
             </div>
           </div>
