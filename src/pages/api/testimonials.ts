@@ -22,6 +22,7 @@ export const POST: APIRoute = async ({ request }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "X-Contentful-Content-Type": "testimonials", 
       },
       body: JSON.stringify(validatedData), // Forward the validated data
     });
