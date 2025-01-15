@@ -140,3 +140,25 @@ export interface ITestimonials extends EntrySkeletonType {
     testimonialFor: EntryFieldTypes.Symbol;
   } 
 }
+
+export interface ICTA extends EntrySkeletonType {
+  sys: {
+    id: EntryFieldTypes.Symbol;
+  };
+  fields: {
+    title: EntryFieldTypes.Symbol;
+    description: EntryFieldTypes.Text;
+    buttonText: EntryFieldTypes.Symbol;
+  };
+}
+
+export interface IMisc extends EntrySkeletonType {
+  sys: {
+    id: EntryFieldTypes.Symbol;
+  };
+  fields: {
+    title: EntryFieldTypes.Symbol;
+    description: EntryFieldTypes.Text;
+    longDescription: EntryFieldTypes.Text;
+  };
+}

@@ -1,26 +1,35 @@
 ---
-import CTAImage from "@/assets/images/Visionex_files/CTA.svg";
 import { Button } from "@/components/ui/button";
-import { Image } from "astro:assets";
 import TitleComponent from "@/components/ui/title.astro";
+import { client } from "@/lib/contentful";
+import type { ICTA } from "@/lib/interface";
+
+const ctaData = await client.withoutUnresolvableLinks.getEntry<ICTA>(
+  "4EGtKjQZn22kzgtVW3hlpl"
+);
 ---
 
-<section>
+<section >
   <div
-    class="bg-main rounded-lg p-10 flex flex-col lg:flex-row items-center justify-between gap-10"
+    class="bg-main/90 rounded-lg p-10 flex flex-col lg:flex-row items-center justify-between gap-10"
   >
     <!-- Left Text Content -->
-    <div class="text-center lg:text-left">
-      <TitleComponent className={"text-white"} title={"Ready to meet your personal AI writing assistant?"} />
+    <div class="text-center lg:text-left space-y-7">
+      <h2 class={`text-white text-3xl capitalize font-bold sm:text-4xl`}>
+        {ctaData.fields.title}
+      </h2>
       <p class="mt-4 text-white">
-        Take action now to make a difference! Whether it&apos;s supporting a
-        cause you&apos;re passionate about.
+        {ctaData.fields.description}
       </p>
-      <Button className="mt-6">Start Writing For Free</Button>
+      <Button className="mt-6 bg-main">
+        <a href="/contact">
+        {ctaData.fields.buttonText}
+        </a>
+      </Button>
     </div>
 
     <!-- Right Illustration -->
-    <div class="flex justify-center w-full md:w-5/12">
+    <!-- <div class="flex justify-center w-full md:w-5/12">
       <Image
         decoding="async"
         loading="lazy"
@@ -29,6 +38,6 @@ import TitleComponent from "@/components/ui/title.astro";
         alt="Illustration of AI writing assistant"
         class="w-full invert max-w-sm lg:max-w-md"
       />
-    </div>
+    </div> -->
   </div>
 </section>

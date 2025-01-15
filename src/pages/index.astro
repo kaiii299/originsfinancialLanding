@@ -7,13 +7,20 @@ import ServicesSection from "@/components/sections/servicesSection.astro";
 import VisionMissionSection from "@/components/sections/visionMissionSection.astro";
 import WhyUs from "@/components/sections/whyUs.astro";
 import Layout from "@/layouts/Layout.astro";
+import { client } from "@/lib/contentful";
+import type { IMisc } from "@/lib/interface";
 
+
+const miscData = await client.withoutUnresolvableLinks.getEntry<IMisc>(
+  "4EGtKjQZn22kzgtVW3hlpl"
+);
+
+const {title, description} = miscData.fields
 ---
 
 <Layout
-  title="Origns Financial"
-  description=" Your trusted partner in navigating the complex world of insurance and financial planning. "
-  canonicalUrl="canonicalUrl"
+  title={title}
+  description={description}
 >
   <ColHero />
   <VisionMissionSection />

@@ -2,6 +2,8 @@
 import Footer from "@/components/sections/footer.astro";
 import Navbar from "@/components/sections/navbar.astro";
 import { Toaster } from "@/components/ui/toaster";
+import { client } from "@/lib/contentful";
+import type { IMisc } from "@/lib/interface";
 import "@/styles/global.css";
 import { ClientRouter } from "astro:transitions";
 
@@ -9,13 +11,15 @@ import { ClientRouter } from "astro:transitions";
 export interface Props {
   title: string;
   description: string;
-  canonicalUrl: string;
+  canonicalUrl?: string;
 }
 
 // Destructure props
 const { title, description, canonicalUrl } = Astro.props;
 
 // Define default values (optional)
+const canonicalUrll = new URL(Astro.url);
+
 const defaultTitle = "Title";
 const defaultDescription = "This is a default description.";
 const defaultCanonicalUrl = "This is a canonical URL";
@@ -27,6 +31,11 @@ const pageCanonicalUrl = canonicalUrl || defaultCanonicalUrl;
 
 // OG image URL
 const imageUrl = `/assets/images/logo.svg`;
+
+const miscData = await client.withoutUnresolvableLinks.getEntry<IMisc>(
+  "3HSHULa0QqUHlLnHSfcGlA"
+);
+
 ---
 
 <!doctype html>
@@ -39,30 +48,30 @@ const imageUrl = `/assets/images/logo.svg`;
 
     <!-- Primary Meta Tags -->
     <title>{pageTitle}</title>
-    <meta name="title" content={pageTitle} />
-    <meta name="description" content={pageDescription} />
+    <meta name="title" content={miscData.fields.title || pageTitle} />
+    <meta name="description" content={miscData.fields.description || pageDescription} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={pageCanonicalUrl} />
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalUrll} />
+    <meta property="og:title" content={miscData.fields.title || pageTitle}/>
+    <meta property="og:description" content={miscData.fields.description || pageDescription}  />
     <meta property="og:image" content={imageUrl} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={pageCanonicalUrl} />
-    <meta property="twitter:title" content={pageTitle} />
-    <meta property="twitter:description" content={pageDescription} />
+    <meta property="twitter:url" content={canonicalUrll} />
+    <meta property="twitter:title" content={miscData.fields.title || pageTitle} />
+    <meta property="twitter:description" content={miscData.fields.description || pageDescription}  />
     <meta property="twitter:image" content={imageUrl} />
 
     <!-- Canonical URL -->
-    <link rel="canonical" href={pageCanonicalUrl} />
+    <link rel="canonical" href={canonicalUrll} />
 
     <!-- Additional SEO Tags -->
     <meta name="robots" content="index, follow" />
-    <meta name="keywords" content="your, keywords, here" />
-    <meta name="author" content="Your Name" />
+    <meta name="author" content="CodeNest.sg" />
+
     <ClientRouter/>
   </head>
 
@@ -70,6 +79,6 @@ const imageUrl = `/assets/images/logo.svg`;
     <Navbar />
     <slot />
     <Toaster client:only="React" />
-    <Footer />
+    <Footer title={title} description={miscData.fields.longDescription} />
   </body>
 </html>

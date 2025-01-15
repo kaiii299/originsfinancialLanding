@@ -1,6 +1,10 @@
 ---
 import { footerData, navItems } from "@/lib/constants";
 import { Image } from "astro:assets";
+
+const {description} = Astro.props
+
+const currentYear = new Date().getFullYear();
 ---
 
 <footer class="px-3 pt-4 lg:px-9 bg-[#121926] text-white">
@@ -11,7 +15,7 @@ import { Image } from "astro:assets";
         <Image src={footerData.logo.image} title={footerData.logo.title} alt={footerData.logo.alt} class="w-1/4 invert" draggable="false" />
       </div>
       <div class="mt-6 lg:max-w-xl">
-        <p class="text-sm">{footerData.logo.description}</p>
+        <p class="text-sm">{description}</p>
       </div>
     </div>
 
@@ -51,13 +55,13 @@ import { Image } from "astro:assets";
 
   <!-- Copyright and Policies -->
   <div class="flex flex-col-reverse justify-between pt-5 pb-10 border-t lg:flex-row max-w-7xl mx-auto">
-    <p class="text-sm">{footerData.copyright.text}</p>
-    <ul class="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
+    <p class="text-sm">{`© Copyright ${currentYear} Origins Financial. All rights reserved.`}</p>
+    <!-- <ul class="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row">
       {footerData.policies.map((policy) => (
         <li>
           <a href={policy.href} class="text-sm transition-colors duration-300">{policy.text}</a>
         </li>
       ))}
-    </ul>
+    </ul> -->
   </div>
 </footer>
