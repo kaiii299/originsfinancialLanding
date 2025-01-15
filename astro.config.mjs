@@ -9,7 +9,6 @@ import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   output: "server",
-  // adapter: cloudflare(),
   adapter: vercel(),
   integrations: [react(), tailwind()],
   vite: {
