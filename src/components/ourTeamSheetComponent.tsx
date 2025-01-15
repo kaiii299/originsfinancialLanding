@@ -63,7 +63,10 @@ const OurTeamSheetComponent = ({ ourTeamMemberData, children }: Props) => {
         {children}
       </SheetTrigger>
 
-      <SheetContent className="bg-whitesmoke md:p-8 p-5 overflow-auto ">
+      <SheetContent
+        onInteractOutside={(event) => event.preventDefault()}
+        className="bg-whitesmoke md:p-8 p-5 overflow-auto "
+      >
         <SheetHeader>
           <SheetTitle className="space-y-3 mb-2">
             <div className="flex flex-col justify-start items-start  gap-5">
@@ -125,8 +128,10 @@ const OurTeamSheetComponent = ({ ourTeamMemberData, children }: Props) => {
 
           {/* Form */}
           <div className="text-start">
-            <h2 className="font-bold text-2xl capitalize mt-10">Say something about {name}</h2>
-            <TestimonialForm testimonialFor={name.toLowerCase()}/>
+            <h2 className="font-bold text-2xl capitalize mt-10">
+              Say something about {name}
+            </h2>
+            <TestimonialForm testimonialFor={name.toLowerCase()} />
           </div>
         </SheetHeader>
       </SheetContent>

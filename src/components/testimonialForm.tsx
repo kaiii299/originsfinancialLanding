@@ -169,7 +169,7 @@ const TestimonialForm = ({ testimonialFor }: Props) => {
 
         {/* Description */}
         <div>
-          <Label htmlFor="description">Additional feedback</Label>
+          <Label htmlFor="description">Feedback</Label>
           <Textarea
             id="description"
             rows={6}

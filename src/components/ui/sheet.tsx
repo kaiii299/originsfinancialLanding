@@ -72,14 +72,14 @@ const SheetContent = React.forwardRef<
         title="Close"
         className="fixed z-50 top-5 right-8 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary"
       >
-        <div
+        {/* <div
           title="Close"
           className="w-10 h-10 bg-main flex shadow-none rounded-full justify-center items-center"
         >
           <LuX size={25} title="Close" />
 
-        </div>
-        {/* <Button  className="sr-only">Close</Button> */}
+        </div> */}
+        <div  className="bg-main rounded-lg p-0.5 px-2 text-white">Close</div>
       </SheetPrimitive.Close>
     </SheetPrimitive.Content>
   </SheetPortal>
