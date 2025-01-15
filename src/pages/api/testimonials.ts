@@ -12,14 +12,14 @@ export const POST: APIRoute = async ({ request }) => {
       name: z.string().min(1, "Name is required"),
       role: z.string().min(1, "Role is required"),
       ratings: z.number().min(1, "Rating is required"),
-    //   testimonialFor: z.string().min(1, "Testimonial For is required"),
+      testimonialFor: z.string().min(1, "Testimonial For is required"),
     });
 
     const body = await request.json();
     const validatedData = testimonialSchema.parse(body);
 
     // Extract the validated fields
-    const { description, name, role, ratings } = validatedData;
+    const { description, name, role, ratings, testimonialFor } = validatedData;
 
     // Post the data to Contentful
     const space = await managementClient.getSpace(import.meta.env.PUBLIC_CONTENTFUL_SPACE_ID || '');
@@ -38,9 +38,9 @@ export const POST: APIRoute = async ({ request }) => {
         ratings: {
           "en-US": ratings,
         },
-        // testimonialFor: {
-        //   "en-US": testimonialFor,
-        // },
+        testimonialFor: {
+          "en-US": testimonialFor,
+        },
       },
     });
 

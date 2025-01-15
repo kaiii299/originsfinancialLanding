@@ -126,7 +126,7 @@ const OurTeamSheetComponent = ({ ourTeamMemberData, children }: Props) => {
           {/* Form */}
           <div className="text-start">
             <h2 className="font-bold text-2xl capitalize mt-10">Say something about {name}</h2>
-            <TestimonialForm />
+            <TestimonialForm testimonialFor={name.toLowerCase()}/>
           </div>
         </SheetHeader>
       </SheetContent>
