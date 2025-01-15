@@ -1,11 +1,10 @@
 import { z } from "zod";
-import { createClient } from "contentful-management";
 
 export default {
   async fetch(request: Request, env: any): Promise<Response> {
-    const managementClient = createClient({
-      accessToken: env.PUBLIC_CONTENTFUL_CMA_TOKEN, // Use environment variable
-    });
+    const CONTENTFUL_SPACE_ID = env.PUBLIC_CONTENTFUL_SPACE_ID;
+    const CONTENTFUL_ENVIRONMENT_ID = env.PUBLIC_CONTENTFUL_ENVIRONMENT_ID;
+    const CONTENTFUL_CMA_TOKEN = env.PUBLIC_CONTENTFUL_CMA_TOKEN;
 
     try {
       // Parse and validate the incoming data using Zod
@@ -23,34 +22,40 @@ export default {
       // Extract the validated fields
       const { description, name, role, ratings, testimonialFor } = validatedData;
 
-      // Post the data to Contentful
-      const space = await managementClient.getSpace(env.PUBLIC_CONTENTFUL_SPACE_ID);
-      const environment = await space.getEnvironment(env.PUBLIC_CONTENTFUL_ENVIRONMENT_ID);
-      const entry = await environment.createEntry("testimonials", {
-        fields: {
-          description: {
-            "en-US": description,
+      // Make the request to the Contentful API
+      const response = await fetch(
+        `https://api.contentful.com/spaces/${CONTENTFUL_SPACE_ID}/environments/${CONTENTFUL_ENVIRONMENT_ID}/entries`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${CONTENTFUL_CMA_TOKEN}`,
+            "Content-Type": "application/vnd.contentful.management.v1+json",
+            "X-Contentful-Content-Type": "testimonials", // Specify the content type
           },
-          name: {
-            "en-US": name,
-          },
-          role: {
-            "en-US": role,
-          },
-          ratings: {
-            "en-US": ratings,
-          },
-          testimonialFor: {
-            "en-US": testimonialFor,
-          },
-        },
-      });
+          body: JSON.stringify({
+            fields: {
+              description: { "en-US": description },
+              name: { "en-US": name },
+              role: { "en-US": role },
+              ratings: { "en-US": ratings },
+              testimonialFor: { "en-US": testimonialFor },
+            },
+          }),
+        }
+      );
+
+      // Check for errors in the response
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Contentful API error: ${response.statusText} - ${errorText}`);
+      }
+
+      const data = await response.json();
 
       // Return the created entry
       return new Response(
         JSON.stringify({
           message: "Testimonial created successfully",
-          entry: entry.sys,
         }),
         { status: 201, headers: { "Content-Type": "application/json" } }
       );
