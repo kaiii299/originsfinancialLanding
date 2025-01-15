@@ -18,10 +18,18 @@ import TestimonialComponent from "@/components/sections/testimonialComponent";
 type Props = {
   children: ReactNode;
   ourTeamMemberData: Entry<IOurTeam, "WITHOUT_UNRESOLVABLE_LINKS", string>;
-  testimonialData: EntryCollection<ITestimonials, "WITHOUT_UNRESOLVABLE_LINKS", string>;
+  testimonialData: EntryCollection<
+    ITestimonials,
+    "WITHOUT_UNRESOLVABLE_LINKS",
+    string
+  >;
 };
 
-const OurTeamSheetComponent = ({ ourTeamMemberData, children, testimonialData }: Props) => {
+const OurTeamSheetComponent = ({
+  ourTeamMemberData,
+  children,
+  testimonialData,
+}: Props) => {
   const {
     name,
     profileImage,
@@ -34,6 +42,9 @@ const OurTeamSheetComponent = ({ ourTeamMemberData, children, testimonialData }:
   } = ourTeamMemberData.fields;
 
   const [isOpen, setIsOpen] = useState(false);
+
+  // State to force re-render
+  const [key, setKey] = useState(0);
 
   useEffect(() => {
     // Parse the query parameter 'name' from the URL
@@ -54,6 +65,7 @@ const OurTeamSheetComponent = ({ ourTeamMemberData, children, testimonialData }:
 
     // Open the sheet
     setIsOpen(true);
+    setKey((prevKey) => prevKey + 1);
   };
 
   return (
@@ -67,7 +79,7 @@ const OurTeamSheetComponent = ({ ourTeamMemberData, children, testimonialData }:
         onInteractOutside={(event) => event.preventDefault()}
         className="bg-whitesmoke md:p-8 p-5 overflow-auto "
       >
-        <SheetHeader>
+        <SheetHeader >
           <SheetTitle className="space-y-3 mb-2">
             <div className="flex md:flex-row  md:items-center flex-col justify-start items-start  gap-5">
               <div>
@@ -141,7 +153,9 @@ const OurTeamSheetComponent = ({ ourTeamMemberData, children, testimonialData }:
                 What others say about {name}
               </h2>
             </div>
-            <div> <TestimonialComponent testimonialsData={testimonialData}/> </div>
+            <div>
+              <TestimonialComponent  testimonialsData={testimonialData} />
+            </div>
           </div>
         </SheetHeader>
       </SheetContent>

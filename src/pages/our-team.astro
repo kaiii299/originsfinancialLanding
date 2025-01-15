@@ -13,14 +13,8 @@ const ourTeamData = await client.withoutUnresolvableLinks.getEntries<IOurTeam>({
   content_type: "ourTeam",
 });
 
-const name = Astro.url.searchParams.get('name') || '';
-
-console.log(name);
-
-
 const testimonialData = await client.withoutUnresolvableLinks.getEntries<ITestimonials>({
-  content_type: "testimonials",
-  "fields.testimonialFor[match]": `${unslugify(name)}` ,
+  content_type: "testimonials", 
 });
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -11,7 +11,7 @@ import type { ITestimonials } from "@/lib/interface";
 import type { EntryCollection } from "contentful";
 import { slugify } from "@/lib/slugify";
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 8;
 
 type TestimonialsProps = {
   testimonialsData: EntryCollection<
@@ -22,6 +22,9 @@ type TestimonialsProps = {
 };
 
 const Testimonials = ({ testimonialsData }: TestimonialsProps) => {
+  const [filteredTestimonials, setFilteredTestimonials] = useState(
+    testimonialsData.items
+  );
   const [displayedTestimonials, setDisplayedTestimonials] = useState(
     testimonialsData.items.slice(0, PAGE_SIZE)
   );
@@ -30,22 +33,41 @@ const Testimonials = ({ testimonialsData }: TestimonialsProps) => {
     testimonialsData.items.length <= PAGE_SIZE
   );
 
+  useEffect(() => {
+    // Extract search parameter from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get("name");
+
+    if (name) {
+      // Filter testimonials matching the name
+      const filtered = testimonialsData.items.filter(
+        (testimonial) =>
+          slugify(testimonial.fields.testimonialFor) === slugify(name)
+      );
+      setFilteredTestimonials(filtered);
+      setDisplayedTestimonials(filtered.slice(0, PAGE_SIZE));
+      setAllTestimonialsLoaded(filtered.length <= PAGE_SIZE);
+    } else {
+      // If no search parameter, show all testimonials
+      setFilteredTestimonials(testimonialsData.items);
+      setDisplayedTestimonials(testimonialsData.items.slice(0, PAGE_SIZE));
+      setAllTestimonialsLoaded(testimonialsData.items.length <= PAGE_SIZE);
+    }
+  }, [testimonialsData]);
+
   const loadMore = () => {
     const nextPage = currentPage + 1;
-    const newTestimonials = testimonialsData.items.slice(
-      0,
-      nextPage * PAGE_SIZE
-    );
+    const newTestimonials = filteredTestimonials.slice(0, nextPage * PAGE_SIZE);
 
     setDisplayedTestimonials(newTestimonials);
     setCurrentPage(nextPage);
 
-    if (newTestimonials.length === testimonialsData.items.length) {
+    if (newTestimonials.length === filteredTestimonials.length) {
       setAllTestimonialsLoaded(true);
     }
   };
 
-  if (testimonialsData.items.length === 0) {
+  if (filteredTestimonials.length === 0) {
     return <p className="text-center text-gray-500">No testimonials found.</p>;
   }
 
