@@ -1,87 +1,54 @@
+import { z } from "zod";
 import type { APIRoute } from "astro";
+import { managementClient } from "@/lib/contentful";
 
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Parse and validate the incoming data using Zod
+    const testimonialSchema = z.object({
+      description: z.string().min(1, "Description is required"),
+      name: z.string().min(1, "Name is required"),
+      role: z.string().min(1, "Role is required"),
+      ratings: z.number().min(1, "Rating is required"),
+      testimonialFor: z.string().min(1, "Testimonial For is required"),
+    });
+
     const body = await request.json();
+    const validatedData = testimonialSchema.parse(body);
 
-    // Manual validation of incoming data
-    if (
-      !body.description ||
-      typeof body.description !== "string" ||
-      body.description.trim().length === 0
-    ) {
-      throw new Error("Description is required and must be a non-empty string.");
-    }
+    // Extract the validated fields
+    const { description, name, role, ratings, testimonialFor } = validatedData;
 
-    if (
-      !body.name ||
-      typeof body.name !== "string" ||
-      body.name.trim().length === 0
-    ) {
-      throw new Error("Name is required and must be a non-empty string.");
-    }
-
-    if (
-      !body.role ||
-      typeof body.role !== "string" ||
-      body.role.trim().length === 0
-    ) {
-      throw new Error("Role is required and must be a non-empty string.");
-    }
-
-    if (
-      typeof body.ratings !== "number" ||
-      body.ratings < 1 ||
-      body.ratings > 5
-    ) {
-      throw new Error("Ratings must be a number between 1 and 5.");
-    }
-
-    if (
-      !body.testimonialFor ||
-      typeof body.testimonialFor !== "string" ||
-      body.testimonialFor.trim().length === 0
-    ) {
-      throw new Error(
-        "Testimonial For is required and must be a non-empty string."
-      );
-    }
-
-    // Forward the request to your Worker endpoint
-    const response = await fetch(
-      "https://testimonials-api.nihao-codenest.workers.dev",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Contentful-Content-Type": "testimonials",
+    // Post the data to Contentful
+    const space = await managementClient.getSpace(import.meta.env.PUBLIC_CONTENTFUL_SPACE_ID || '');
+    const environment = await space.getEnvironment(import.meta.env.PUBLIC_CONTENTFUL_ENVIRONMENT_ID || '');
+    const entry = await environment.createEntry("testimonials", {
+      fields: {
+        description: {
+          "en-US": description,
         },
-        body: JSON.stringify({
-          description: body.description.trim(),
-          name: body.name.trim(),
-          role: body.role.trim(),
-          ratings: body.ratings,
-          testimonialFor: body.testimonialFor.trim(),
-        }),
-      }
-    );
+        name: {
+          "en-US": name,
+        },
+        role: {
+          "en-US": role,
+        },
+        ratings: {
+          "en-US": ratings,
+        },
+        testimonialFor: {
+          "en-US": testimonialFor,
+        },
+      },
+    });
 
-    if (!response.ok) {
-      const errorResponse = await response.json();
-      throw new Error(
-        errorResponse.message || "Failed to forward the request."
-      );
-    }
-
-    const data = await response.json();
-
-    // Return the response from the Worker
+    // Return the created entry
     return new Response(
       JSON.stringify({
         message: "Testimonial created successfully",
-        entry: data.entry,
+        entry: entry.sys,
       }),
       { status: 201, headers: { "Content-Type": "application/json" } }
     );
