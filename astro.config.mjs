@@ -2,18 +2,22 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 
-import cloudflare from '@astrojs/cloudflare';
+// import cloudflare from '@astrojs/cloudflare';
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 
 export default defineConfig({
-  adapter: cloudflare(),
   output: "server",
-  integrations: [react(), tailwind],
+  // adapter: cloudflare(),
+  adapter: vercel(),
+  integrations: [react(), tailwind()],
   vite: {
-    build: {
-      rollupOptions: {
-        external: ["@contentful"], 
+    resolve: {
+      // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
+      // Without this, MessageChannel from node:worker_threads needs to be polyfilled.
+      alias: import.meta.env.PROD && {
+        "react-dom/server": "react-dom/server.edge",
       },
     },
   },
