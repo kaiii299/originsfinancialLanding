@@ -16,6 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { LuStar } from "react-icons/lu";
 import { useState } from "react";
+import { toast } from "@/hooks/use-toast";
 
 // Zod Schema for validation
 const testimonialSchema = z.object({
@@ -49,6 +50,7 @@ const TestimonialForm = ({ testimonialFor }: Props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
   const [starState, setStarState] = useState<number>();
+  const [selectedRole, setSelectedRole] = useState<string | null>(null); // Keep track of role
 
   const onSubmit: SubmitHandler<TestimonialFormInputs> = async (data) => {
     console.log(data);
@@ -65,10 +67,17 @@ const TestimonialForm = ({ testimonialFor }: Props) => {
         body: JSON.stringify(data),
       });
 
+      // Success
       if (response.ok) {
         setResponseMessage("Testimonial submitted successfully!");
-        reset(); 
-        setStarState(undefined); 
+        reset(); // Reset all fields
+        setStarState(undefined); // Reset star ratings
+        setSelectedRole(null); // Reset role selection
+        toast({
+          title: "Success!",
+          description:
+            "Your testimonial has been submitted and is under review. We appreciate your input!",
+        });
       } else {
         const errorResponse = await response.json();
         setResponseMessage(
@@ -77,6 +86,8 @@ const TestimonialForm = ({ testimonialFor }: Props) => {
           }`
         );
       }
+
+      // Failure
     } catch (error) {
       setResponseMessage("An error occurred while submitting the testimonial.");
       console.error(error);
@@ -87,8 +98,8 @@ const TestimonialForm = ({ testimonialFor }: Props) => {
 
   function handleStarClick(e: React.MouseEvent<SVGElement>): void {
     const index = parseInt(e.currentTarget.dataset.index || "0", 10);
-    if (index + 1 == starState) return;
-    setValue("ratings", (index + 1)); 
+    if (index + 1 === starState) return;
+    setValue("ratings", index + 1);
     setStarState(index + 1);
   }
 
@@ -113,7 +124,13 @@ const TestimonialForm = ({ testimonialFor }: Props) => {
           {/* Role */}
           <div>
             <Label htmlFor="role">Your Role</Label>
-            <Select onValueChange={(value) => setValue("role", value)}>
+            <Select
+              onValueChange={(value) => {
+                setValue("role", value); // Set value in react-hook-form
+                setSelectedRole(value); // Update local state
+              }}
+              value={selectedRole || undefined} // Bind the role to local state
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Your Role" />
               </SelectTrigger>
@@ -129,7 +146,7 @@ const TestimonialForm = ({ testimonialFor }: Props) => {
               </SelectContent>
             </Select>
             {errors.role && (
-              <p className="text-red-500 text-sm mt-2">{errors.role.message}</p>
+              <p className="text-red-500 text-sm mt-2">Role is required</p>
             )}
           </div>
         </div>
@@ -145,13 +162,13 @@ const TestimonialForm = ({ testimonialFor }: Props) => {
                 }`}
                 key={index}
                 onClick={(e) => {
-                  handleStarClick(e); 
-                  setValue("ratings", index  ); 
+                  handleStarClick(e);
+                  setValue("ratings", index + 1);
                 }}
                 data-index={index}
                 style={{
-                  fill: starState && index < starState ? "#8dabcd" : "none", 
-                  stroke: "#8dabcd", 
+                  fill: starState && index < starState ? "#8dabcd" : "none",
+                  stroke: "#8dabcd",
                 }}
               />
             ))}
@@ -161,9 +178,7 @@ const TestimonialForm = ({ testimonialFor }: Props) => {
             {...register("ratings", { required: "Rating is required" })}
           />
           {errors.ratings && (
-            <p className="text-red-500 text-sm mt-2">
-              {errors.ratings.message}
-            </p>
+            <p className="text-red-500 text-sm mt-2">Ratings is required</p>
           )}
         </div>
 
@@ -184,7 +199,7 @@ const TestimonialForm = ({ testimonialFor }: Props) => {
         </div>
 
         {/* Submit Button */}
-        <Button type="submit" className="w-max bg-main">
+        <Button type="submit" className="w-max bg-main mt-5">
           Submit Testimonial
         </Button>
       </form>

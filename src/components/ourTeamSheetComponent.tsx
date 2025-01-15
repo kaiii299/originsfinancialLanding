@@ -1,4 +1,4 @@
-import type { IOurTeam } from "@/lib/interface";
+import type { IOurTeam, ITestimonials } from "@/lib/interface";
 import {
   Sheet,
   SheetContent,
@@ -8,29 +8,29 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import type { ReactNode } from "react";
-import type { Entry } from "contentful";
+import type { Entry, EntryCollection } from "contentful";
 import { slugify } from "@/lib/slugify";
 import { useState, useEffect } from "react";
 import MarkdownComponent from "./markDownComponents";
 import TestimonialForm from "./testimonialForm";
+import TestimonialComponent from "@/components/sections/testimonialComponent";
 
 type Props = {
   children: ReactNode;
   ourTeamMemberData: Entry<IOurTeam, "WITHOUT_UNRESOLVABLE_LINKS", string>;
+  testimonialData: EntryCollection<ITestimonials, "WITHOUT_UNRESOLVABLE_LINKS", string>;
 };
 
-const OurTeamSheetComponent = ({ ourTeamMemberData, children }: Props) => {
+const OurTeamSheetComponent = ({ ourTeamMemberData, children, testimonialData }: Props) => {
   const {
     name,
     profileImage,
     awards,
     certifications,
     description,
-    featured,
     group,
     otherSpecialization,
     role,
-    testimonials,
   } = ourTeamMemberData.fields;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -69,7 +69,7 @@ const OurTeamSheetComponent = ({ ourTeamMemberData, children }: Props) => {
       >
         <SheetHeader>
           <SheetTitle className="space-y-3 mb-2">
-            <div className="flex flex-col justify-start items-start  gap-5">
+            <div className="flex md:flex-row  md:items-center flex-col justify-start items-start  gap-5">
               <div>
                 <img
                   className="w-28 h-28 object-cover rounded-full"
@@ -129,9 +129,19 @@ const OurTeamSheetComponent = ({ ourTeamMemberData, children }: Props) => {
           {/* Form */}
           <div className="text-start">
             <h2 className="font-bold text-2xl capitalize mt-10">
-              Say something about {name}
+              Say something nice about {name}
             </h2>
-            <TestimonialForm testimonialFor={name.toLowerCase()} />
+            <div>
+              <TestimonialForm testimonialFor={name.toLowerCase()} />
+            </div>
+
+            {/* Testimonials */}
+            <div className="md:my-10">
+              <h2 className="font-bold text-2xl capitalize mt-10">
+                What others say about {name}
+              </h2>
+            </div>
+            <div> <TestimonialComponent testimonialsData={testimonialData}/> </div>
           </div>
         </SheetHeader>
       </SheetContent>

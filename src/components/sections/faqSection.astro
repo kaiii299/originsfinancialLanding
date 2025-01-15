@@ -1,11 +1,18 @@
 ---
+import { client } from "@/lib/contentful";
 import FAQAccordion from "../ui/faqAccordion";
 import TitleComponent from "@/components/ui/title.astro";
+import type { IFaq } from "@/lib/interface";
+
+const faqData = await client.withoutUnresolvableLinks.getEntries<IFaq>({
+  content_type:'faq',
+  order: "sys.createdAt" as any
+})
 ---
 
 <section>
   <div class="text-start">
     <TitleComponent title={"Frequently asked questions"} />
-    <FAQAccordion client:load />
+    <FAQAccordion faqData={faqData.items} client:only="React"/>
   </div>
 </section>

@@ -5,12 +5,24 @@ import OurTeamSheetComponent from "@/components/ourTeamSheetComponent";
 import TitleComponent from "@/components/ui/title.astro";
 import Layout from "@/layouts/Layout.astro";
 import { client } from "@/lib/contentful";
-import type { IOurTeam } from "@/lib/interface";
+import type { IOurTeam, ITestimonials } from "@/lib/interface";
+import { slugify, unslugify } from "@/lib/slugify";
 
 // Fetching team data from Contentful
 const ourTeamData = await client.withoutUnresolvableLinks.getEntries<IOurTeam>({
   content_type: "ourTeam",
 });
+
+const name = Astro.url.searchParams.get('name') || '';
+
+console.log(name);
+
+
+const testimonialData = await client.withoutUnresolvableLinks.getEntries<ITestimonials>({
+  content_type: "testimonials",
+  "fields.testimonialFor[match]": `${unslugify(name)}` ,
+});
+
 
 // Separate featured and non-featured members
 const featuredMembers = ourTeamData.items.filter((member) => member.fields.featured);
@@ -23,6 +35,14 @@ const teamMembers = nonFeaturedMembers.filter((member) => member.fields.group !=
 
 // Utility function for pluralizing titles
 const pluralizeTitle = (singular: string, plural: string, count: number) => (count === 1 ? singular : plural);
+
+// Function to get testimonials for a specific member
+const getMemberTestimonials = (name: string) => {
+  return testimonialData.items.filter(
+    (testimonial) =>
+      testimonial.fields.testimonialFor.toLowerCase() === name.toLowerCase()
+  );
+};
 
 ---
 
@@ -41,7 +61,7 @@ const pluralizeTitle = (singular: string, plural: string, count: number) => (cou
       <div class="space-y-8 mb-12">
         {featuredMembers.map((member) => (
           <div class="featured-member">
-            <OurTeamSheetComponent client:only="React" ourTeamMemberData={member}>
+            <OurTeamSheetComponent client:only="React" ourTeamMemberData={member} testimonialData={testimonialData}>
               <OurTeamComponent membersData={member} />
             </OurTeamSheetComponent>
           </div>
@@ -62,7 +82,7 @@ const pluralizeTitle = (singular: string, plural: string, count: number) => (cou
       <div class="grid md:grid-cols-3 grid-cols-2 gap-8">
         {leaders.map((member) => (
           <div class="team-member">
-            <OurTeamSheetComponent client:only="React" ourTeamMemberData={member}>
+            <OurTeamSheetComponent client:only="React" ourTeamMemberData={member} testimonialData={testimonialData}>
               <OurTeamComponent membersData={member} />
             </OurTeamSheetComponent>
           </div>
@@ -85,7 +105,7 @@ const pluralizeTitle = (singular: string, plural: string, count: number) => (cou
       <div class="grid md:grid-cols-4 grid-cols-2 gap-8">
         {teamMembers.map((member) => (
           <div class="team-member">
-            <OurTeamSheetComponent client:only="React" ourTeamMemberData={member}>
+            <OurTeamSheetComponent client:only="React" ourTeamMemberData={member} testimonialData={testimonialData}>
               <OurTeamComponent membersData={member} className="md:h-[280px] h-[190px] md:w-[250px] object-cover" />
             </OurTeamSheetComponent>
           </div>

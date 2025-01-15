@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionItem,
@@ -6,36 +5,14 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import type { IFaq } from "@/lib/interface";
-import { client } from "@/lib/contentful";
 import type { Entry } from "contentful";
 
 
-const FAQAccordion = () => {
-  const [faqData, setFaqData] = useState<Entry<IFaq, undefined, string>[]>([]);
-  const [loading, setLoading] = useState(true);
+type Props = {
+  faqData: Entry<IFaq, "WITHOUT_UNRESOLVABLE_LINKS", string>[];
+}
 
-  useEffect(() => {
-    const fetchFAQs = async () => {
-      try {
-
-        const data = await client.getEntries<IFaq>({ content_type: "faq" }); 
-
-        setFaqData(data.items);
-
-      } catch (error) {
-        console.error("Error fetching FAQs:", error);
-
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFAQs();
-  }, []);
-
-  if (loading) {
-    return <p className="my-10">Loading FAQs...</p>;
-  }
+const FAQAccordion = ({faqData}: Props) => {
 
   return (
     <div className="mt-8">
