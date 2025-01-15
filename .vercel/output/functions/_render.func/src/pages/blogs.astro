@@ -1,0 +1,19 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import BlogsComponent from "@/components/blogsComponent.astro";
+import { client } from "@/lib/contentful";
+import type { IBlogs } from "@/lib/interface";
+
+const blogData = await client.withoutUnresolvableLinks.getEntries<IBlogs>({
+    content_type: "blogs",
+    order: "sys.createdAt" as any
+})
+
+---
+
+<Layout canonicalUrl="" description="Our blog" title="Origins Financial Blogs">
+  <section class="first-section mb-32">
+      <BlogsComponent blogData={blogData}/>
+  </section>
+
+</Layout>

@@ -1,0 +1,33 @@
+---
+import ImageCarousel from "@/components/imageCarousel";
+import RichTextComponent from "@/components/RichTextComponent";
+import { Button } from "@/components/ui/button";
+import TitleComponent from "@/components/ui/title.astro";
+import Layout from "@/layouts/Layout.astro";
+import { client } from "@/lib/contentful";
+import type { ICareer } from "@/lib/interface";
+
+const careerData = await client.withoutUnresolvableLinks.getEntry<ICareer>(
+  "1d9TUEQGK5lJ4QajdGSfHQ"
+);
+
+const { title, description, buttonText, images } = careerData.fields;
+---
+
+<Layout canonicalUrl="" description="" title="">
+  <section class="first-section">
+    <div class="mb-32 space-y-10">
+      <div class="space-y-10">
+        <TitleComponent title={title} />
+        <RichTextComponent RichTextData={description} />
+        <a href="/contact">
+          <Button className="bg-main">{buttonText}</Button>
+        </a>
+      </div>
+      <div>
+        <TitleComponent title={"Our Advenures"} />
+        <ImageCarousel images={images} client:only="React" />
+      </div>
+    </div>
+  </section>
+</Layout>

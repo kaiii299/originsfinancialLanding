@@ -1,0 +1,30 @@
+---
+import TestimonialComponent from "@/components/sections/testimonialComponent";
+import Layout from "@/layouts/Layout.astro";
+import { client } from "@/lib/contentful";
+import type { ITestimonials } from "@/lib/interface";
+import TitleComponent from "@/components/ui/title.astro";
+
+const testimonialData =
+  await client.withoutUnresolvableLinks.getEntries<ITestimonials>({
+    content_type: "testimonials",
+  });
+---
+
+<Layout
+  canonicalUrl=""
+  description="Testimonials"
+  title="Origins Financial Testimonials"
+>
+  <section class="first-section md:mb-32">
+    <div>
+      <TitleComponent title={"What people say"}  />
+    </div>
+    <div>
+      <TestimonialComponent
+        testimonialsData={testimonialData}
+        client:only="React"
+      />
+    </div>
+  </section>
+</Layout>
