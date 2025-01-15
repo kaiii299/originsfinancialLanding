@@ -9,6 +9,11 @@ import TitleComponent from "@/components/ui/title.astro";
 import LearnButton from "@/components/ui/learnButton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+
+
+
+export const prerender = true;
+
 export async function getStaticPaths() {
   const productData: EntryCollection<
     IProducts,
@@ -59,6 +64,8 @@ const breadCrumbItem: iBreadCrumbItems[] = [
   { name: products?.category[0], href: `/products?category=${products?.category[0]}`, current: false },
   { name: products?.title, href: "", current: true },
 ];
+
+
 ---
 
 <Layout canonicalUrl="" description="" title="">

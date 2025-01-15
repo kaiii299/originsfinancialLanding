@@ -8,6 +8,9 @@ import { Image } from "astro:assets";
 import { format } from "date-fns";
 import BreadCrumbComponent from "@/components/breadCrumbComponent";
 
+
+export const prerender = true;
+
 export async function getStaticPaths() {
   const blogData: EntryCollection<
     IBlogs,
@@ -22,6 +25,7 @@ export async function getStaticPaths() {
     params: { slug: item.fields.slug },
   }));
 }
+
 
 let post;
 
