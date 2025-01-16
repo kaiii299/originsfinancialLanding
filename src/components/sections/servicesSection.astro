@@ -15,7 +15,7 @@ const serviceData = await client.withoutUnresolvableLinks.getEntries<IService>({
     <TitleComponent title={"How can we help"} />
   </div>
 
-  <div class="mt-10 gap-10 flex flex-col">
+  <div class="mt-10 gap-6 flex flex-col">
     {
       serviceData.items.map((service) => (
         <div

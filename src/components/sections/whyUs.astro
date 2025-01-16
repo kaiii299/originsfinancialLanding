@@ -16,19 +16,24 @@ const whyUsData = await client.withoutUnresolvableLinks.getEntries<IWhyUs>({
     <TitleComponent title={"Why us"} />
   </div>
 
-  <div class="grid md:grid-cols-3 grid-cols-1 gap-10 md:gap-6">
+  <div class="grid md:grid-cols-3 grid-cols-1 gap-6">
     {
       whyUsData.items.map((data) =>
-        data.fields.description != "Image" ?  (
+        data.fields.title != "Image" && "image" || data.fields.description != "Image" && "image" ? (
           <div
             style={{ backgroundColor: data.fields.cardColor }}
             class="h-full w-full rounded-lg flex flex-col justify-between p-5 md:gap-0 gap-10"
           >
             <div>
-              <CustomIcon iconName={data.fields.icon} size="35" classname="md:scale-150 scale-100" />
+              <CustomIcon
+                iconName={data.fields.icon}
+                size="35"
+                classname="md:scale-[110%] scale-90"
+              />
             </div>
-            <div>
-              <p class="text-2xl">{data.fields.description}</p>
+            <div class="space-y-3">
+              <h2 class="font-bold text-xl">{data.fields.title}</h2>
+              <p>{data.fields.description}</p>
             </div>
           </div>
         ) : (

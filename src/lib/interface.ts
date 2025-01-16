@@ -58,6 +58,7 @@ export interface IWhyUs extends EntrySkeletonType {
     id: EntryFieldTypes.Symbol;
   };
   fields: {
+    title: EntryFieldTypes.Symbol;
     description?: EntryFieldTypes.Text;
     cardColor?: EntryFieldTypes.Symbol;
     index?: EntryFieldTypes.Integer;
