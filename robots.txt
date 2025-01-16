@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /private/
+Disallow: /api/testimonials
+Allow: /
+
+Sitemap: https://yourdomain.com/sitemap.xml

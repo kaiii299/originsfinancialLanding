@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { LuAlignRight, LuX } from "react-icons/lu"; // Import Lucide icons
-import {  navItems } from "@/lib/constants";
+import {  footerData ,navItems } from "@/lib/constants";
 
 const bgColor = "bg-[#fbfcf5]";
 const bgColorMobile = "bg-whitesmoke";
@@ -19,7 +19,7 @@ const Navbar = () => {
           {/* Logo */}
           <a className="flex items-center justify-center space-x-2 cursor-pointer" href="/">
             <img
-              src={'src/assets/logo.svg'}
+              src={footerData.logo.image.src}
               title={"logo"}
               alt="logo"
               className="h-full w-full"
