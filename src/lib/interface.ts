@@ -114,6 +114,24 @@ export interface IBlogs extends EntrySkeletonType {
   };
 }
 
+export interface IEvents extends EntrySkeletonType {
+  sys: {
+    id: EntryFieldTypes.Symbol;
+  };
+  fields: {
+    slug: EntryFieldTypes.Symbol;
+    title: EntryFieldTypes.Symbol;
+    image: EntryFieldTypes.AssetLink;
+    images: EntryFieldTypes.AssetLink[];
+    location: EntryFieldTypes.Symbol; 
+    when: EntryFieldTypes.Date;
+    tags: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
+    featured: EntryFieldTypes.Boolean;
+    shortdescription: EntryFieldTypes.Text;
+    description: EntryFieldTypes.RichText;
+  };
+}
+
 export interface IProducts extends EntrySkeletonType {
   sys: {
     id: EntryFieldTypes.Symbol;

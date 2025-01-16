@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import type { ITestimonials } from "@/lib/interface";
 import type { EntryCollection } from "contentful";
 import { slugify } from "@/lib/slugify";
+import { format } from "date-fns";
 
 const PAGE_SIZE = 8;
 
@@ -83,6 +84,7 @@ const Testimonials = ({ testimonialsData }: TestimonialsProps) => {
               href={`our-team?name=${slugify(
                 testimonial.fields.testimonialFor
               )}`}
+              className="flex flex-1 flex-col"
             >
               <CardHeader>
                 <CardTitle className="text-lg font-bold">
@@ -97,13 +99,18 @@ const Testimonials = ({ testimonialsData }: TestimonialsProps) => {
                   </div>
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="my-auto">
                 <p>{testimonial.fields.description}</p>
               </CardContent>
-              <CardFooter className="mt-auto">
+              <CardFooter className="mt-auto flex flex-col justify-start items-start">
                 <div className="flex flex-col">
                   <h2 className="text-2xl">{testimonial.fields.name}</h2>
                   <span className="text-sm">{testimonial.fields.role}</span>
+                  {testimonial.sys.createdAt && (
+                    <span className="text-sm text-slate-400">
+                      {format(testimonial.sys.createdAt, "dd MMM yy")}
+                    </span>
+                  )}
                 </div>
               </CardFooter>
             </a>

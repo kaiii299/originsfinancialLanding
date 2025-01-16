@@ -1,13 +1,21 @@
 ---
+import EventsComponent from "@/components/eventsComponent.astro";
 import Layout from "@/layouts/Layout.astro";
-import TitleComponent from "@/components/ui/title.astro";
+import { client } from "@/lib/contentful";
+import type { IEvents } from "@/lib/interface";
 
+const eventData = await client.withoutUnresolvableLinks.getEntries<IEvents>({
+    content_type: "events",
+    order: "sys.createdAt" as any
+})
+
+
+const canonicalUrll = new URL(Astro.url);
 ---
 
-<Layout canonicalUrl="" description={"Our events"} title="Origins Financial Events">
-    <section class="first-section">
-        <div>
-            <TitleComponent title={"Our Events"}/>
-        </div>
-    </section>
+<Layout canonicalUrl={`${canonicalUrll}`} description="Our Events" title="Origins Financial Event">
+  <section class="first-section mb-32">
+      <EventsComponent eventData={eventData}/>
+  </section>
+
 </Layout>

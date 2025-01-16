@@ -1,0 +1,118 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { client } from "@/lib/contentful";
+import type { IEvents, iBreadCrumbItems } from "@/lib/interface";
+import RichTextComponent from "@/components/RichTextComponent";
+import type { EntryCollection } from "contentful";
+import { Image } from "astro:assets";
+import { format } from "date-fns";
+import BreadCrumbComponent from "@/components/breadCrumbComponent";
+import ImageCarousel from "@/components/imageCarousel";
+
+export const prerender = false;
+
+let post;
+
+const { slug } = Astro.params;
+
+try {
+  const data: EntryCollection<IEvents, "WITHOUT_UNRESOLVABLE_LINKS", string> =
+    await client.withoutUnresolvableLinks.getEntries<IEvents>({
+      content_type: "events",
+      "fields.slug": slug,
+    });
+
+  const {
+    tags,
+    title,
+    image,
+    images,
+    description,
+    when,
+    location,
+    shortdescription,
+  } = data.items[0].fields;
+
+  post = {
+    title: title,
+    content: description,
+    description: shortdescription,
+    shortDescription: shortdescription,
+    image: image,
+    images: images,
+    tags: tags,
+    createdAt: data.items[0].sys.createdAt,
+    time: when,
+    location: location,
+  };
+} catch (error) {
+  return Astro.redirect("/404");
+}
+
+const breadCrumbItem: iBreadCrumbItems[] = [
+  { name: "Home", href: "/", current: false },
+  { name: "Events", href: "/events", current: false },
+  { name: post?.title, href: "", current: true },
+];
+---
+
+<Layout
+  canonicalUrl={`/event/${slug}`}
+  description={post?.shortDescription}
+  title={post?.title}
+>
+  <section class="first-section md:my-10 md:mb-24">
+    <div class="space-y-5 mb-12">
+      <BreadCrumbComponent breadCrumbsItems={breadCrumbItem} />
+      <div class="space-y-3">
+        <h2 class={"text-3xl font-bold sm:text-4xl"}>
+          {post?.title}
+        </h2>
+
+        <div>
+          {
+            post?.tags &&
+              post?.tags.map((tag: string) => {
+                return (
+                  <div class=" inline-flex bg-slate-200 rounded-md px-1 py-0.5 mr-3">
+                    <span>{tag}</span>
+                  </div>
+                );
+              })
+          }
+          {
+            post?.time && (
+              <span>
+                {post?.tags && <span class="mr-2">|</span>}
+                {format(post?.time, "dd MMM yy")}
+              </span>
+            )
+          }
+          {
+            post?.location && (
+              <span class="ml-2">
+                {post?.location && <span class="mr-2">|</span>}
+                <span class="md:mt-0 mt-1">{post?.location}</span>
+              </span>
+            )
+          }
+        </div>
+      </div>
+
+      <Image
+        src={`${post?.image?.fields.file?.url}`}
+        alt={`${post?.image?.fields.title}`}
+        title={`${post?.image?.fields.title}`}
+        loading={"lazy"}
+        height={500}
+        width={500}
+        class="rounded-lg mb-10 md:w-3/4 w-full h-full md:max-h-[750px] object-cover"
+      />
+      <RichTextComponent RichTextData={post?.content} />
+    </div>
+    <h2 class={"text-3xl font-bold sm:text-4xl "}>Event images</h2>
+    <div class="my-10">
+      <ImageCarousel images={post?.images} client:only="React" />
+    </div>
+  </section>
+</Layout>

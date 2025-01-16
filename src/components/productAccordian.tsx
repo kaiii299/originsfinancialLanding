@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react"; 
-import type { Entry } from "contentful"; 
+import { useEffect, useState } from "react";
+import type { Entry } from "contentful";
 import type { IProducts } from "@/lib/interface";
-import { unslugify } from "@/lib/slugify"; 
-import { Input } from "./ui/input"; 
-import { Badge } from "./ui/badge"; 
-import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"; 
-import LearnButton from "./ui/learnButton"; 
+import { unslugify } from "@/lib/slugify";
+import { Input } from "./ui/input";
+import { Badge } from "./ui/badge";
+import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
+import LearnButton from "./ui/learnButton";
+import { format } from "date-fns";
 
 type Props = {
-    productData: Entry<IProducts, "WITHOUT_UNRESOLVABLE_LINKS", string>[];
+  productData: Entry<IProducts, "WITHOUT_UNRESOLVABLE_LINKS", string>[];
 };
 
 const ProductAccordion = ({ productData }: Props) => {
@@ -16,12 +17,12 @@ const ProductAccordion = ({ productData }: Props) => {
   const [filteredProducts, setFilteredProducts] = useState<
     Entry<IProducts, "WITHOUT_UNRESOLVABLE_LINKS", string>[]
   >([]);
-  
+
   // State for grouped products (used for "All" category)
   const [groupedProducts, setGroupedProducts] = useState<
     Record<string, Entry<IProducts, "WITHOUT_UNRESOLVABLE_LINKS", string>[]>
   >({});
-  
+
   // State for search query
   const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -30,7 +31,7 @@ const ProductAccordion = ({ productData }: Props) => {
     const queryCategory = new URLSearchParams(window.location.search).get(
       "category"
     );
-    
+
     // Convert slugified category name to readable format
     const readableCategory = queryCategory ? unslugify(queryCategory) : null;
 
@@ -49,8 +50,9 @@ const ProductAccordion = ({ productData }: Props) => {
 
     // Apply search query filter
     if (searchQuery) {
-      filtered = filtered.filter((product) =>
-        product.fields.title.toLowerCase().includes(searchQuery.toLowerCase()) // Check if product title matches query
+      filtered = filtered.filter(
+        (product) =>
+          product.fields.title.toLowerCase().includes(searchQuery.toLowerCase()) // Check if product title matches query
       );
     }
 
@@ -130,7 +132,7 @@ const ProductAccordion = ({ productData }: Props) => {
                     </CardHeader>
                     <CardContent>
                       <div className="flex flex-col space-y-4">
-                        <div className="flex items-center ">
+                        <div className="md:flex-row flex items-start flex-col md:gap-0 gap-2 md:items-center">
                           {/* Render product categories */}
                           {product.fields.category.map((category) => (
                             <Badge variant="default" key={category}>
@@ -141,7 +143,8 @@ const ProductAccordion = ({ productData }: Props) => {
                           {product.fields.type &&
                             product.fields.type.length > 0 && (
                               <>
-                                <span className="mr-2">|</span> {/* Separator */}
+                                <span className="mr-2 hidden md:block">|</span>{" "}
+                                {/* Separator */}
                                 {product.fields.type.map((type) => (
                                   <Badge variant="secondary" key={type}>
                                     {type}
@@ -149,9 +152,18 @@ const ProductAccordion = ({ productData }: Props) => {
                                 ))}
                               </>
                             )}
+                          {/* {product.sys.createdAt && (
+                            <>
+                              <span className="mr-2 hidden md:flex">|</span>{" "}
+                              <Badge variant={"outline"}>
+                                {format(product.sys.createdAt, "dd MMM yy ")}
+                              </Badge>
+                            </>
+                          )} */}
                         </div>
                         <div className="line-clamp-2">
-                          {product.fields.description} {/* Product description */}
+                          {product.fields.description}{" "}
+                          {/* Product description */}
                         </div>
                       </div>
                     </CardContent>
@@ -182,7 +194,7 @@ const ProductAccordion = ({ productData }: Props) => {
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-col space-y-4">
-                    <div className="flex items-center ">
+                    <div className="md:flex-row flex items-start flex-col md:gap-0 gap-2 md:items-center ">
                       {/* Render product categories */}
                       {product.fields.category.map((category) => (
                         <Badge variant="default" key={category}>
@@ -201,6 +213,14 @@ const ProductAccordion = ({ productData }: Props) => {
                             ))}
                           </>
                         )}
+                      {/* {product.sys.createdAt && (
+                        <>
+                          <span className="mr-2 hidden md:flex">|</span>{" "}
+                          <Badge variant={"outline"}>
+                            {format(product.sys.createdAt, "dd MMM yy ")}
+                          </Badge>
+                        </>
+                      )} */}
                     </div>
                     <div className="line-clamp-2">
                       {product.fields.description} {/* Product description */}

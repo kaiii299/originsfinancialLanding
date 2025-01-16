@@ -1,0 +1,136 @@
+---
+import type { IEvents } from "@/lib/interface";
+import { slugify } from "@/lib/slugify";
+import TitleComponent from "@/components/ui/title.astro";
+import { format } from "date-fns";
+
+// Destructure the props to get `eventData`
+const { eventData } = Astro.props;
+
+// Provide fallback for undefined or empty `eventData`
+const featuredEvents =
+  eventData?.items?.filter((event: any) => event.fields.featured) || [];
+const unfeaturedEvents =
+  eventData?.items?.filter((event: any) => !event.fields.featured) || [];
+---
+
+<div>
+  <!-- Featured Events Section -->
+  <div>
+    <TitleComponent
+      title={`Featured ${featuredEvents.length === 1 ? "Event" : "Events"}`}
+    />
+
+    {
+      featuredEvents.length > 0 ? (
+        featuredEvents.map((event: any) => (
+          <a
+            href={`/events/${slugify(event.fields.slug)}`}
+            class="md:grid-cols-2 my-10 grid-cols-1 grid justify-center items-center gap-5"
+          >
+            <div>
+              <img
+                src={event.fields.image?.fields.file?.url || ""}
+                alt={event.fields.image?.fields.title || "Event Image"}
+                title={event.fields.image?.fields.title || "Event"}
+                loading="lazy"
+                height="400"
+                width="500"
+                class="rounded-lg"
+              />
+            </div>
+            <div class="space-y-3">
+              <div>
+                <div>
+                  {event.fields.tags?.map((tag: any) => (
+                    <span class="bg-gray-200 text-sm rounded px-2 py-1 mr-2">
+                      {tag}
+                    </span>
+                  ))}
+                  {event.fields.when && (
+                    <span class="text-gray-600 text-sm">
+                      {event.fields.tags && <span class="mr-2">|</span>}
+                      {format(new Date(event.fields.when), "dd MMM yy")}
+                    </span>
+                  )}
+                  {event.fields.location && (
+                    <span class="text-gray-600 text-sm ml-2">
+                      {event.fields.location && <span class="mr-2">|</span>}
+                      {event.fields.location}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <h2 class="capitalize font-bold text-2xl">
+                {event.fields.title}
+              </h2>
+              <p>{event.fields.shortDescription}</p>
+            </div>
+          </a>
+        ))
+      ) : (
+        <p>No featured events available.</p>
+      )
+    }
+  </div>
+
+  <!-- Unfeatured Events Section -->
+  <div>
+    <TitleComponent
+      title={`Our ${unfeaturedEvents.length === 1 ? "Event" : "Events"}`}
+    />
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    {
+      unfeaturedEvents.length > 0 ? (
+        unfeaturedEvents.map((event: any) => (
+          <a
+            href={`/events/${slugify(event.fields.slug)}`}
+            class="flex flex-col justify-start items-start gap-5"
+          >
+            <div>
+              <img
+                src={event.fields.image?.fields.file?.url || ""}
+                alt={event.fields.image?.fields.title || "Event Image"}
+                title={event.fields.image?.fields.title || "Event"}
+                loading="lazy"
+                height="400"
+                width="500"
+                class="rounded-lg md:h-[250px] object-cover"
+              />
+            </div>
+            <div class="space-y-3">
+              <div>
+                <div>
+                  {event.fields.tags?.map((tag: any) => (
+                    <span class="bg-gray-200 text-sm rounded px-2 py-1 mr-2">
+                      {tag}
+                    </span>
+                  ))}
+                  {event.fields.when && (
+                    <span class="text-gray-600 text-sm ml-2">
+                      {format(new Date(event.fields.when), "dd MMM yy")}
+                    </span>
+                  )}
+                  {event.fields.location && (
+                    <span class="text-gray-600 text-sm ml-2">
+                      {event.fields.location && <span class="mr-2">|</span>}
+                      {event.fields.location}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <h2 class="capitalize font-bold text-2xl">
+                {event.fields.title}
+              </h2>
+              <p>{event.fields.shortDescription}</p>
+            </div>
+          </a>
+        ))
+      ) : (
+        <p>No events available.</p>
+      )
+    }
+  </div>
+</div>

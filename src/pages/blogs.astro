@@ -9,9 +9,10 @@ const blogData = await client.withoutUnresolvableLinks.getEntries<IBlogs>({
     order: "sys.createdAt" as any
 })
 
+const canonicalUrll = new URL(Astro.url);
 ---
 
-<Layout canonicalUrl="" description="Our blog" title="Origins Financial Blogs">
+<Layout canonicalUrl={`${canonicalUrll}`} description="Our blog" title="Origins Financial Blogs">
   <section class="first-section mb-32">
       <BlogsComponent blogData={blogData}/>
   </section>
