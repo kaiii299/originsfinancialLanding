@@ -23,7 +23,6 @@ try {
     });
 
   const {
-    tags,
     title,
     image,
     images,
@@ -40,7 +39,6 @@ try {
     shortDescription: shortdescription,
     image: image,
     images: images,
-    tags: tags,
     createdAt: data.items[0].sys.createdAt,
     time: when,
     location: location,
@@ -70,7 +68,7 @@ const breadCrumbItem: iBreadCrumbItems[] = [
         </h2>
 
         <div>
-          {
+          <!-- {
             post?.tags &&
               post?.tags.map((tag: string) => {
                 return (
@@ -79,11 +77,10 @@ const breadCrumbItem: iBreadCrumbItems[] = [
                   </div>
                 );
               })
-          }
+          } -->
           {
             post?.time && (
               <span>
-                {post?.tags && <span class="mr-2">|</span>}
                 {format(post?.time, "dd MMM yy")}
               </span>
             )

@@ -46,7 +46,7 @@ const ImageCarousel = ({ images }: Props) => {
           const imageAlt = image?.fields?.description || imageTitle;
 
           return (
-            <CarouselItem key={index} className="md:basis-[570px]">
+            <CarouselItem key={index} className="basis-[470px]">
               <div className="p-1 md:p-0">
                 <motion.div
                   style={{ x }}
@@ -60,7 +60,6 @@ const ImageCarousel = ({ images }: Props) => {
                       alt={imageAlt}
                       width={500}
                       height={500}
-                      loading="lazy"
                       className="rounded-md w-full object-cover h-[450px]"
                     />
                   )}

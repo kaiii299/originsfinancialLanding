@@ -125,7 +125,6 @@ export interface IEvents extends EntrySkeletonType {
     images: EntryFieldTypes.AssetLink[];
     location: EntryFieldTypes.Symbol; 
     when: EntryFieldTypes.Date;
-    tags: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
     featured: EntryFieldTypes.Boolean;
     shortdescription: EntryFieldTypes.Text;
     description: EntryFieldTypes.RichText;
