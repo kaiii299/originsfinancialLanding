@@ -35,7 +35,7 @@ const { profileImage, name, description, featured, role } = membersData.fields;
         </div>
         <div class="space-y-5">
           <div class="space-y-2">
-            <h2 class="font-bold text-2xl">{name}</h2>
+            <h2 class="font-bold text-xl">{name}</h2>
             <span class="text-sm">{role}</span>
           </div>
           <MarkdownComponent markdown={description} />
@@ -61,9 +61,9 @@ const { profileImage, name, description, featured, role } = membersData.fields;
               draggable={false}
             />
           </div>
-          <div class="flex justify-start items-start flex-col my-3 space-y-1">
-            <h2 class="font-bold text-2xl text-start">{name}</h2>
-            <span class="text-sm text-start">{role}</span>
+          <div class="flex justify-start items-start flex-col my-3 space-y-1 flex-1">
+            <h2 class="font-bold text-xl text-start">{name}</h2>
+            <span class="text-sm text-start mt-auto">{role}</span>
           </div>
         </div>
       )

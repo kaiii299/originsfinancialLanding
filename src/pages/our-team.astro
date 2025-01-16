@@ -100,7 +100,7 @@ const getMemberTestimonials = (name: string) => {
         {teamMembers.map((member) => (
           <div class="team-member">
             <OurTeamSheetComponent client:only="React" ourTeamMemberData={member} testimonialData={testimonialData}>
-              <OurTeamComponent membersData={member} className="md:h-[280px] h-[190px] md:w-[250px] object-cover" />
+              <OurTeamComponent membersData={member} className="md:h-[400px] h-[190px] md:w-[300px] object-cover" />
             </OurTeamSheetComponent>
           </div>
         ))}
