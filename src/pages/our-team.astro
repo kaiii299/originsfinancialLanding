@@ -38,9 +38,10 @@ const getMemberTestimonials = (name: string) => {
   );
 };
 
+const canonicalUrll = new URL(Astro.url);
 ---
 
-<Layout canonicalUrl="" description="" title="">
+<Layout canonicalUrl={`${canonicalUrll}`} description="Origins Financial Team" title="Our Team - Origins Financial">
   <section class="first-section mb-32">
     <!-- <div>
       {featuredMembers.length > 0 && (
