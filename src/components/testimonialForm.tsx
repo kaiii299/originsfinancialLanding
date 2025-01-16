@@ -111,7 +111,6 @@ const TestimonialForm = ({ testimonialFor }: Props) => {
           <div>
             <Label htmlFor="name">Your Name</Label>
             <Input
-              autoFocus={false}
               id="name"
               type="text"
               {...register("name")}

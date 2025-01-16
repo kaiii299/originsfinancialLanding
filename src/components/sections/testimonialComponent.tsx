@@ -73,7 +73,7 @@ const Testimonials = ({ testimonialsData }: TestimonialsProps) => {
   }
 
   return (
-    <div className="first-section md:mb-32 ">
+    <div className="first-section md:mb-32 mb-20 ">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {displayedTestimonials.map((testimonial, index) => (
           <Card

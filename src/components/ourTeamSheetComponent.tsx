@@ -76,6 +76,7 @@ const OurTeamSheetComponent = ({
       </SheetTrigger>
 
       <SheetContent
+        onOpenAutoFocus={(e) => e.preventDefault()}
         onInteractOutside={(event) => event.preventDefault()}
         className="bg-whitesmoke md:p-8 p-5 overflow-auto "
       >
