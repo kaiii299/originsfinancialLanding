@@ -29,7 +29,7 @@ const ImageCarousel = ({ images }: Props) => {
     target: targetRef,
   });
 
-  const x = useTransform(scrollYProgress, [0, 2], ["-95%", "-10%"]);
+  const x = useTransform(scrollYProgress, [0, 2], ["-90%", "-10%"]);
   
   return (
     <Carousel
@@ -46,7 +46,7 @@ const ImageCarousel = ({ images }: Props) => {
           const imageAlt = image?.fields?.description || imageTitle;
 
           return (
-            <CarouselItem key={index} className="basis-[470px]">
+            <CarouselItem key={index} className="basis-[670px]">
               <div className="p-1 md:p-0">
                 <motion.div
                   style={{ x }}
