@@ -98,7 +98,7 @@ const ProductAccordion = ({ productData }: Props) => {
       <div className="mb-6 mx-1">
         <Input
           type="text"
-          placeholder="Search products..." // Placeholder text for the search input
+          placeholder="Search solutions..." // Placeholder text for the search input
           value={searchQuery} // Bind input value to searchQuery state
           onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery on input change
           className="w-full h-12 md:w-1/3" // Styling for the input
@@ -121,7 +121,7 @@ const ProductAccordion = ({ productData }: Props) => {
             <div className="flex flex-col gap-8">
               {/* Render each product in the category */}
               {products.map((product) => (
-                <a href={`product/${product.fields.slug}`} key={product.sys.id}>
+                <a href={`solution/${product.fields.slug}`} key={product.sys.id}>
                   <Card className="group hover:shadow-md cursor-pointer duration-200 transition-all">
                     <CardHeader>
                       <div className="flex flex-col space-y-4">
