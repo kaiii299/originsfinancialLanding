@@ -52,10 +52,12 @@ const breadCrumbItem: iBreadCrumbItems[] = [
   { name: "Events", href: "/events", current: false },
   { name: post?.title, href: "", current: true },
 ];
+
+const canonicalUrll = new URL(Astro.url);
 ---
 
 <Layout
-  canonicalUrl={`/event/${slug}`}
+  canonicalUrl={`${canonicalUrll}`}
   description={post?.shortDescription}
   title={post?.title}
 >

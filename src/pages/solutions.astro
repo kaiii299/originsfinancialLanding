@@ -27,9 +27,10 @@ const categories = [
 //   .flatMap((item) => item.fields.productType)
 //   .filter((category, index, self) => self.indexOf(category) === index);
 
+const canonicalUrll = new URL(Astro.url);
 ---
 
-<Layout canonicalUrl="" description="Origins Financial Product Page" title="Our products">
+<Layout canonicalUrl={`${canonicalUrll}`} description="Origins Financial Solutions " title="Our Solutions">
   <section class="first-section">
     <div>
       <TitleComponent title={"Our Solutions"} />

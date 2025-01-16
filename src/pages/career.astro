@@ -12,9 +12,11 @@ const careerData = await client.withoutUnresolvableLinks.getEntry<ICareer>(
 );
 
 const { title, description, buttonText, images } = careerData.fields;
+
+const canonicalUrll = new URL(Astro.url);
 ---
 
-<Layout canonicalUrl="" description="" title="">
+<Layout canonicalUrl={`${canonicalUrll}`} description="Career at Origins Financail" title="Career with us">
   <section class="first-section">
     <div class="mb-32 space-y-10">
       <div class="space-y-10">

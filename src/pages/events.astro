@@ -13,7 +13,7 @@ const eventData = await client.withoutUnresolvableLinks.getEntries<IEvents>({
 const canonicalUrll = new URL(Astro.url);
 ---
 
-<Layout canonicalUrl={`${canonicalUrll}`} description="Our Events" title="Origins Financial Event">
+<Layout canonicalUrl={`${canonicalUrll}`} description="Our Events" title="Our Events">
   <section class="first-section mb-32">
       <EventsComponent eventData={eventData}/>
   </section>

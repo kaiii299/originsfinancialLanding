@@ -46,10 +46,10 @@ const breadCrumbItem: iBreadCrumbItems[] = [
   { name: products?.title, href: "", current: true },
 ];
 
-
+const canonicalUrll = new URL(Astro.url);
 ---
 
-<Layout canonicalUrl="" description="" title="">
+<Layout canonicalUrl={`${canonicalUrll}`} description={products.description} title={products.title}>
   <section class="first-section my-10">
     <div >
       <div class="my-10">

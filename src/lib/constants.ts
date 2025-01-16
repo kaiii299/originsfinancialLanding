@@ -13,7 +13,7 @@ export const CenterHeaderImage = centerHeaderImage;
 
 export const navItems = [
   { name: "Home", href: "/" },
-  { name: "Products", href: "/products" },
+  { name: "Solutions", href: "/solutions" },
   { name: "Career", href: "/career" },
   { name: "Testimonials", href: "/testimonials" },
   { name: "Our Team", href: "/our-team" },
