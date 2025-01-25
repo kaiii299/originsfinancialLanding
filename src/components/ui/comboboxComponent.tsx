@@ -70,7 +70,7 @@ export function ComboboxComponent({ data }: Props) {
           variant="none"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] rounded-lg text-black bg-transparent border border-slate-500 justify-between"
+          className="w-[200px] rounded-lg text-gray-500 hover:none bg-transparent h-12 shadow-lg border-slate-300 border justify-between"
         >
           {value ? capitalize(value) : "Select advisior..."}
           <LuChevronsUpDown className="opacity-50" />
@@ -78,7 +78,7 @@ export function ComboboxComponent({ data }: Props) {
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search advisior..." className="h-9" />
+          <CommandInput autoFocus={false} placeholder="Search advisior..." className="h-9" />
           <CommandList>
             <CommandEmpty>No options found.</CommandEmpty>
             <CommandGroup>
