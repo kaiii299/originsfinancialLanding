@@ -78,7 +78,7 @@ const canonicalUrll = new URL(Astro.url);
         {leaders.map((member) => (
           <div class="team-member">
             <OurTeamSheetComponent client:only="React" ourTeamMemberData={member} testimonialData={testimonialData}>
-              <OurTeamComponent membersData={member} className="md:h-[380px] h-[190px] md:w-[450px] object-cover"  />
+              <OurTeamComponent membersData={member} className="lg:h-[230] md:h-[230px] h-[230px] md:w-[200px] object-cover"  />
             </OurTeamSheetComponent>
           </div>
         ))}
@@ -101,7 +101,7 @@ const canonicalUrll = new URL(Astro.url);
         {teamMembers.map((member) => (
           <div class="team-member">
             <OurTeamSheetComponent client:only="React" ourTeamMemberData={member} testimonialData={testimonialData}>
-              <OurTeamComponent membersData={member} className="md:h-[400px] h-[190px] md:w-[300px] object-cover" />
+              <OurTeamComponent membersData={member} className="lg:h-[250] md:h-[250px] h-[220px] md:w-[200px] object-cover" />
             </OurTeamSheetComponent>
           </div>
         ))}

@@ -8,7 +8,7 @@ import { Badge } from "./ui/badge";
 
 type Props = {
   membersData: Entry<IOurTeam, "WITHOUT_UNRESOLVABLE_LINKS", string>;
-  className? : string;
+  className?: string;
 };
 
 const { membersData, className } = Astro.props;
@@ -30,6 +30,7 @@ const { profileImage, name, description, featured, role } = membersData.fields;
             height={500}
             class="md:w-[430px] md:h-[500px] h-[420px] rounded-lg object-cover"
             format="webp"
+            loading={"lazy"}
             draggable={false}
           />
         </div>
@@ -56,8 +57,9 @@ const { profileImage, name, description, featured, role } = membersData.fields;
               title={profileImage?.fields.title || "Featured Member"}
               width={400}
               height={500}
-              class={`${className? className : "md:h-[500px] h-[190px]" } rounded-lg object-cover`}
+              class={`${className ? className : "md:h-[500px] h-[190px]"} rounded-lg object-cover`}
               format="webp"
+              loading={"lazy"}
               draggable={false}
             />
           </div>

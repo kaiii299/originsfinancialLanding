@@ -1,8 +1,8 @@
 ---
-import type { IEvents } from "@/lib/interface";
 import { slugify } from "@/lib/slugify";
 import TitleComponent from "@/components/ui/title.astro";
 import { format } from "date-fns";
+import brokenImage from '@/assets/images/broken image.jpg'
 
 // Destructure the props to get `eventData`
 const { eventData } = Astro.props;
@@ -30,7 +30,7 @@ const unfeaturedEvents =
           >
             <div>
               <img
-                src={event.fields.image?.fields.file?.url || ""}
+                src={event.fields.image?.fields.file?.url || brokenImage}
                 alt={event.fields.image?.fields.title || "Event Image"}
                 title={event.fields.image?.fields.title || "Event"}
                 loading="lazy"
@@ -90,7 +90,7 @@ const unfeaturedEvents =
           >
             <div>
               <img
-                src={event.fields.image?.fields.file?.url || ""}
+                src={event.fields.image?.fields.file?.url || brokenImage}
                 alt={event.fields.image?.fields.title || "Event Image"}
                 title={event.fields.image?.fields.title || "Event"}
                 loading="lazy"

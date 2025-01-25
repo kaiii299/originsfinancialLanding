@@ -28,7 +28,7 @@ const canonicalUrll = new URL(Astro.url);
       </div>
       <div>
         <TitleComponent title={"Our Adventures"} />
-        <ImageCarousel images={images} client:only="React" />
+        <ImageCarousel images={images} client:only="React" noDisplace />
       </div>
     </div>
   </section>

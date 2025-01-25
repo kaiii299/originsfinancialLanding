@@ -4,11 +4,13 @@ import Layout from "@/layouts/Layout.astro";
 import { client } from "@/lib/contentful";
 import type { ITestimonials } from "@/lib/interface";
 import TitleComponent from "@/components/ui/title.astro";
+import SearchBar from "@/components/searchBar";
 
 const testimonialData =
   await client.withoutUnresolvableLinks.getEntries<ITestimonials>({
     content_type: "testimonials",
   });
+  
 ---
 
 <Layout
@@ -19,6 +21,9 @@ const testimonialData =
   <section class="first-section md:mb-32">
     <div>
       <TitleComponent title={"What people say"}  />
+    </div>
+    <div class="my-7">
+      <SearchBar/>
     </div>
     <div>
       <TestimonialComponent

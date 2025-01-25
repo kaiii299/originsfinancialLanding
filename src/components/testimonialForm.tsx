@@ -23,7 +23,7 @@ const testimonialSchema = z.object({
   description: z.string().min(1, "Description is required"),
   name: z.string().min(1, "Name is required"),
   role: z.string().min(1, "Role is required"),
-  ratings: z.number().min(1, "Rating is required"),
+  // ratings: z.number().min(1, "Rating is required"),
   testimonialFor: z.string().min(1, "Testimonial For is required"),
 });
 
@@ -96,12 +96,12 @@ const TestimonialForm = ({ testimonialFor }: Props) => {
     }
   };
 
-  function handleStarClick(e: React.MouseEvent<SVGElement>): void {
-    const index = parseInt(e.currentTarget.dataset.index || "0", 10);
-    if (index + 1 === starState) return;
-    setValue("ratings", index + 1);
-    setStarState(index + 1);
-  }
+  // function handleStarClick(e: React.MouseEvent<SVGElement>): void {
+  //   const index = parseInt(e.currentTarget.dataset.index || "0", 10);
+  //   if (index + 1 === starState) return;
+  //   setValue("ratings", index + 1);
+  //   setStarState(index + 1);
+  // }
 
   return (
     <div className="my-5 ">
@@ -152,7 +152,7 @@ const TestimonialForm = ({ testimonialFor }: Props) => {
         </div>
 
         {/* Rating */}
-        <div>
+        {/* <div>
           <Label htmlFor="ratings">Ratings</Label>
           <div className="flex gap-2 text-3xl text-gray-300">
             {[...new Array(5)].map((_, index) => (
@@ -180,7 +180,7 @@ const TestimonialForm = ({ testimonialFor }: Props) => {
           {errors.ratings && (
             <p className="text-red-500 text-sm mt-2">Ratings is required</p>
           )}
-        </div>
+        </div> */}
 
         {/* Description */}
         <div>

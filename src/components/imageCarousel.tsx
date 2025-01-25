@@ -20,16 +20,17 @@ type Asset = {
 
 type Props = {
   images: Asset[];
+  noDisplace? :boolean;
 };
 
-const ImageCarousel = ({ images }: Props) => {
+const ImageCarousel = ({ images, noDisplace }: Props) => {
   const targetRef = useRef<HTMLDivElement>(null);
   // Get scrollYprogress
   const { scrollYProgress } = useScroll({
     target: targetRef,
   });
 
-  const x = useTransform(scrollYProgress, [0, 2], ["-90%", "-10%"]);
+  const x = noDisplace? 0 : useTransform(scrollYProgress, [0, 2], ["-90%", "-10%"]);
   
   return (
     <Carousel

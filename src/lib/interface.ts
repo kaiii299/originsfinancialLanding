@@ -153,7 +153,7 @@ export interface ITestimonials extends EntrySkeletonType {
   fields: {
     description: EntryFieldTypes.Text;
     name: EntryFieldTypes.Symbol;
-    ratings: EntryFieldTypes.Number;
+    // ratings: EntryFieldTypes.Number;
     role: EntryFieldTypes.Symbol;
     testimonialFor: EntryFieldTypes.Symbol;
   } 

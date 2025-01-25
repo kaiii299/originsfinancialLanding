@@ -87,7 +87,7 @@ const Testimonials = ({ testimonialsData }: TestimonialsProps) => {
               className="flex flex-1 flex-col"
             >
               <CardHeader>
-                <CardTitle className="text-lg font-bold">
+                {/* <CardTitle className="text-lg font-bold">
                   <div className="flex items-center gap-1">
                     {Array.from({ length: testimonial.fields.ratings }).map(
                       (_, i) => (
@@ -97,7 +97,7 @@ const Testimonials = ({ testimonialsData }: TestimonialsProps) => {
                       )
                     )}
                   </div>
-                </CardTitle>
+                </CardTitle> */}
               </CardHeader>
               <CardContent className="my-auto">
                 <p>{testimonial.fields.description}</p>

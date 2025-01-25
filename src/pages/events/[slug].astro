@@ -8,6 +8,7 @@ import { Image } from "astro:assets";
 import { format } from "date-fns";
 import BreadCrumbComponent from "@/components/breadCrumbComponent";
 import ImageCarousel from "@/components/imageCarousel";
+import brokenImage from '@/assets/images/broken image.jpg'
 
 export const prerender = false;
 
@@ -99,7 +100,7 @@ const canonicalUrll = new URL(Astro.url);
       </div>
 
       <Image
-        src={`${post?.image?.fields.file?.url}`}
+        src={`${post?.image?.fields.file?.url}` || `${brokenImage}`}
         alt={`${post?.image?.fields.title}`}
         title={`${post?.image?.fields.title}`}
         loading={"lazy"}
@@ -111,7 +112,7 @@ const canonicalUrll = new URL(Astro.url);
     </div>
     <h2 class={"text-3xl font-bold sm:text-4xl "}>Event images</h2>
     <div class="my-10">
-      <ImageCarousel images={post?.images} client:only="React" />
+      <ImageCarousel images={post?.images} client:only="React" noDisplace />
     </div>
   </section>
 </Layout>
