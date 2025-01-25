@@ -4,7 +4,7 @@ import Layout from "@/layouts/Layout.astro";
 import { client } from "@/lib/contentful";
 import type { ITestimonials } from "@/lib/interface";
 import TitleComponent from "@/components/ui/title.astro";
-import SearchBar from "@/components/searchBar";
+import { ComboboxComponent } from "@/components/ui/comboboxComponent";
 
 const testimonialData =
   await client.withoutUnresolvableLinks.getEntries<ITestimonials>({
@@ -23,7 +23,7 @@ const testimonialData =
       <TitleComponent title={"What people say"}  />
     </div>
     <div class="my-7">
-      <SearchBar/>
+      <ComboboxComponent client:only="React" data={testimonialData.items}/>
     </div>
     <div>
       <TestimonialComponent

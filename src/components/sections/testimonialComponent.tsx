@@ -39,7 +39,7 @@ const Testimonials = ({ testimonialsData }: TestimonialsProps) => {
     const urlParams = new URLSearchParams(window.location.search);
     const name = urlParams.get("name");
 
-    if (name) {
+    if (name && name !=="all") {
       // Filter testimonials matching the name
       const filtered = testimonialsData.items.filter(
         (testimonial) =>
