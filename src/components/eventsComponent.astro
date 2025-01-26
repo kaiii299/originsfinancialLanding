@@ -2,7 +2,8 @@
 import { slugify } from "@/lib/slugify";
 import TitleComponent from "@/components/ui/title.astro";
 import { format } from "date-fns";
-import brokenImage from '@/assets/images/broken image.jpg'
+import brokenImage from "@/assets/images/broken image.jpg";
+import { Badge } from "./ui/badge";
 
 // Destructure the props to get `eventData`
 const { eventData } = Astro.props;
@@ -36,7 +37,7 @@ const unfeaturedEvents =
                 loading="lazy"
                 height="400"
                 width="500"
-                class="rounded-lg"
+                class="rounded-lg hover:scale-105 transition-all duration-200 "
               />
             </div>
             <div class="space-y-3">
@@ -47,15 +48,15 @@ const unfeaturedEvents =
                       {tag}
                     </span>
                   ))} */}
+                  {event.fields.location && (
+                    <Badge variant={"secondary"} >
+                      {event.fields.location}
+                    </Badge>
+                  )}
                   {event.fields.when && (
                     <span class="text-gray-600 text-sm">
+                      {event.fields.location && <span class="mx-2">|</span>}
                       {format(new Date(event.fields.when), "dd MMM yy")}
-                    </span>
-                  )}
-                  {event.fields.location && (
-                    <span class="text-gray-600 text-sm ml-2">
-                      {event.fields.location && <span class="mr-2">|</span>}
-                      {event.fields.location}
                     </span>
                   )}
                 </div>
@@ -96,7 +97,7 @@ const unfeaturedEvents =
                 loading="lazy"
                 height="400"
                 width="500"
-                class="rounded-lg h-[250px] object-cover"
+                class="rounded-lg h-[250px] object-cover hover:scale-105 transition-all duration-200 "
               />
             </div>
             <div class="space-y-3">
@@ -107,15 +108,15 @@ const unfeaturedEvents =
                       {tag}
                     </span>
                   ))} */}
-                  {event.fields.when && (
-                    <span class="text-gray-600 text-sm ml-2">
-                      {format(new Date(event.fields.when), "dd MMM yy")}
-                    </span>
-                  )}
                   {event.fields.location && (
-                    <span class="text-gray-600 text-sm ml-2">
+                    <Badge variant={"secondary"}>
                       {event.fields.location && <span class="mr-2">|</span>}
                       {event.fields.location}
+                    </Badge>
+                  )}
+                  {event.fields.when && (
+                    <span class="text-gray-600 text-sm mx-2">
+                      {format(new Date(event.fields.when), "dd MMM yy")}
                     </span>
                   )}
                 </div>

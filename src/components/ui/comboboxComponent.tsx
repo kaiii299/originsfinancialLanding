@@ -46,7 +46,7 @@ export function ComboboxComponent({ data }: Props) {
         .flatMap((entry) => entry.fields.testimonialFor)
         .map((item) => [item, item])
     ).values()
-  );
+  ).sort();
 
   testimonialFor.unshift('all');
 
