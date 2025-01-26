@@ -44,7 +44,7 @@ export function ComboboxComponent({ data }: Props) {
     new Map(
       data
         .flatMap((entry) => entry.fields.testimonialFor)
-        .map((item) => [item, item]) // Use Map to remove duplicates based on 'name'
+        .map((item) => [item, item])
     ).values()
   );
 
@@ -63,6 +63,9 @@ export function ComboboxComponent({ data }: Props) {
     window.location.reload();
   };
 
+    const params = new URLSearchParams(window.location.search);
+    const params_data = params.get("name") || "Selct Consultant...";
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -72,13 +75,13 @@ export function ComboboxComponent({ data }: Props) {
           aria-expanded={open}
           className="w-[200px] rounded-lg text-gray-500 hover:none bg-transparent h-12 shadow-lg border-slate-300 border justify-between"
         >
-          {value ? capitalize(value) : "Select advisior..."}
+          {params_data && capitalize(params_data) }
           <LuChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput autoFocus={false} placeholder="Search advisior..." className="h-9" />
+          <CommandInput autoFocus={false} placeholder="Search consultant..." className="h-9" />
           <CommandList>
             <CommandEmpty>No options found.</CommandEmpty>
             <CommandGroup>
