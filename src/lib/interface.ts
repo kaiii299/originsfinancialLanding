@@ -127,7 +127,7 @@ export interface IEvents extends EntrySkeletonType {
     location: EntryFieldTypes.Symbol; 
     when: EntryFieldTypes.Date;
     featured: EntryFieldTypes.Boolean;
-    shortdescription: EntryFieldTypes.Text;
+    shortDescription: EntryFieldTypes.Text;
     description: EntryFieldTypes.RichText;
   };
 }
