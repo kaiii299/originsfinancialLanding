@@ -46,7 +46,7 @@ const EventPage: React.FC<Props> = ({ eventData }) => {
       <div className="mb-6 mx-1 mt-8">
         <Input
           type="text"
-          placeholder="Search blogs..."
+          placeholder="Search events..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full h-12 md:w-1/3"
