@@ -2,9 +2,7 @@
 import type { Entry } from "contentful";
 import type { IOurTeam } from "@/lib/interface";
 import { Image } from "astro:assets";
-import MarkdownComponent from "./markDownComponents";
-import TitleComponent from "@/components/ui/title.astro";
-import { Badge } from "./ui/badge";
+
 
 type Props = {
   membersData: Entry<IOurTeam, "WITHOUT_UNRESOLVABLE_LINKS", string>;
@@ -13,7 +11,7 @@ type Props = {
 
 const { membersData, className } = Astro.props;
 
-const { profileImage, name, description, featured, role } = membersData.fields;
+const { profileImage, name, featured, role } = membersData.fields;
 ---
 
 <div class="space-y-8">
@@ -65,7 +63,7 @@ const { profileImage, name, description, featured, role } = membersData.fields;
           </div>
           <div class="flex justify-start items-start flex-col my-3 space-y-1 flex-1">
             <h2 class="font-bold text-xl text-start">{name}</h2>
-            <span class="text-sm text-start mt-auto">{role}</span>
+            <span class="text-sm text-start mt-auto ">{role}</span>
           </div>
         </div>
       )

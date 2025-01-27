@@ -1,47 +1,49 @@
 ---
-
 import OurTeamComponent from "@/components/ourTeamComponent.astro";
 import OurTeamSheetComponent from "@/components/ourTeamSheetComponent";
 import TitleComponent from "@/components/ui/title.astro";
 import Layout from "@/layouts/Layout.astro";
 import { client } from "@/lib/contentful";
 import type { IOurTeam, ITestimonials } from "@/lib/interface";
-import { slugify, unslugify } from "@/lib/slugify";
 
 // Fetching team data from Contentful
 const ourTeamData = await client.withoutUnresolvableLinks.getEntries<IOurTeam>({
   content_type: "ourTeam",
 });
 
-const testimonialData = await client.withoutUnresolvableLinks.getEntries<ITestimonials>({
-  content_type: "testimonials", 
-});
-
+const testimonialData =
+  await client.withoutUnresolvableLinks.getEntries<ITestimonials>({
+    content_type: "testimonials",
+  });
 
 // Separate featured and non-featured members
-const featuredMembers = ourTeamData.items.filter((member) => member.fields.featured);
+// const featuredMembers = ourTeamData.items.filter((member) => member.fields.featured);
 
-const nonFeaturedMembers = ourTeamData.items.filter((member) => !member.fields.featured);
+const nonFeaturedMembers = ourTeamData.items.filter(
+  (member) => !member.fields.featured
+);
 
 // Further split non-featured members into leaders and members
-const leaders = nonFeaturedMembers.filter((member) => member.fields.group === "Leader");
-const teamMembers = nonFeaturedMembers.filter((member) => member.fields.group !== "Leader");
+const leaders = nonFeaturedMembers
+  .filter((member) => member.fields.group === "Leader")
+  .sort((a, b) => a.fields.name.localeCompare(b.fields.name));
+
+const teamMembers = nonFeaturedMembers
+  .filter((member) => member.fields.group !== "Leader")
+  .sort((a, b) => a.fields.name.localeCompare(b.fields.name));
 
 // Utility function for pluralizing titles
-const pluralizeTitle = (singular: string, plural: string, count: number) => (count === 1 ? singular : plural);
-
-// Function to get testimonials for a specific member
-const getMemberTestimonials = (name: string) => {
-  return testimonialData.items.filter(
-    (testimonial) =>
-      testimonial.fields.testimonialFor.toLowerCase() === name.toLowerCase()
-  );
-};
+const pluralizeTitle = (singular: string, plural: string, count: number) =>
+  count === 1 ? singular : plural;
 
 const canonicalUrll = new URL(Astro.url);
 ---
 
-<Layout canonicalUrl={`${canonicalUrll}`} description="Origins Financial Team" title="Our Team">
+<Layout
+  canonicalUrl={`${canonicalUrll}`}
+  description="Origins Financial Team"
+  title="Our Team"
+>
   <section class="first-section mb-32">
     <!-- <div>
       {featuredMembers.length > 0 && (
@@ -65,49 +67,75 @@ const canonicalUrll = new URL(Astro.url);
     )} -->
 
     <div>
-      {leaders.length > 0 && (
-        <TitleComponent
-          title={pluralizeTitle("Our Leader", "Our Leaders", leaders.length)}
-        />
-      )}
+      {
+        leaders.length > 0 && (
+          <TitleComponent
+            title={pluralizeTitle("Our Leader", "Our Leaders", leaders.length)}
+          />
+        )
+      }
     </div>
 
     <!-- Leaders Section -->
-    {leaders.length > 0 ? (
-      <div class="grid md:grid-cols-4 grid-cols-2 gap-8">
-        {leaders.map((member) => (
-          <div class="team-member">
-            <OurTeamSheetComponent client:only="React" ourTeamMemberData={member} testimonialData={testimonialData}>
-              <OurTeamComponent membersData={member} className="lg:h-[250] md:h-[250px] h-[230px] md:w-[200px] object-cover"  />
-            </OurTeamSheetComponent>
-          </div>
-        ))}
-      </div>
-    ) : (
-      <div></div>
-    )}
+    {
+      leaders.length > 0 ? (
+        <div class="grid md:grid-cols-4 grid-cols-2 gap-8">
+          {leaders.map((member) => (
+            <div class="team-member">
+              <OurTeamSheetComponent
+                client:only="React"
+                ourTeamMemberData={member}
+                testimonialData={testimonialData}
+              >
+                <OurTeamComponent
+                  membersData={member}
+                  className="lg:h-[250] md:h-[250px] h-[230px] md:w-[200px] object-cover"
+                />
+              </OurTeamSheetComponent>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div />
+      )
+    }
 
     <div>
-      {teamMembers.length > 0 && (
-        <TitleComponent
-          title={pluralizeTitle("Team Member", "Team Members", teamMembers.length)}
-        />
-      )}
+      {
+        teamMembers.length > 0 && (
+          <TitleComponent
+            title={pluralizeTitle(
+              "Team Member",
+              "Team Members",
+              teamMembers.length
+            )}
+          />
+        )
+      }
     </div>
 
     <!-- Members Section -->
-    {teamMembers.length > 0 ? (
-      <div class="grid md:grid-cols-4 grid-cols-2 gap-8">
-        {teamMembers.map((member) => (
-          <div class="team-member">
-            <OurTeamSheetComponent client:only="React" ourTeamMemberData={member} testimonialData={testimonialData}>
-              <OurTeamComponent membersData={member} className="lg:h-[250] md:h-[250px] h-[220px] md:w-[200px] object-cover" />
-            </OurTeamSheetComponent>
-          </div>
-        ))}
-      </div>
-    ) : (
-      <div></div>
-    )}
+    {
+      teamMembers.length > 0 ? (
+        <div class="grid md:grid-cols-4 grid-cols-2 gap-8">
+          {teamMembers.map((member) => (
+            <div class="team-member">
+              <OurTeamSheetComponent
+                client:only="React"
+                ourTeamMemberData={member}
+                testimonialData={testimonialData}
+              >
+                <OurTeamComponent
+                  membersData={member}
+                  className="lg:h-[250] md:h-[250px] h-[220px] md:w-[200px] object-cover"
+                />
+              </OurTeamSheetComponent>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div />
+      )
+    }
   </section>
 </Layout>
