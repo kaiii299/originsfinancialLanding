@@ -124,7 +124,8 @@ const EventPage: React.FC<Props> = ({ eventData }) => {
                     <Badge variant="secondary">{event.fields.location}</Badge>
                   )}
                   {event.fields.when && (
-                    <span className="text-gray-600 text-sm mx-2">
+                    <span className="text-gray-600 text-sm">
+                      {event.fields.location && <span className="mx-2">|</span>}
                       {format(new Date(event.fields.when), "dd MMM yy")}
                     </span>
                   )}
