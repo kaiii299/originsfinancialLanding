@@ -74,7 +74,7 @@ const BlogPage = ({ blogData }: Props) => {
 
       {/* Featured Blogs Section */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">Featured Blogs</h2>
+        <h2 className="text-2xl font-bold mb-4">Featured blogs</h2>
         <div>
           {featuredBlogs.length > 0 ? (
             featuredBlogs.map((blog: any) => (
@@ -125,7 +125,7 @@ const BlogPage = ({ blogData }: Props) => {
 
       {/* Unfeatured Blogs Section */}
       <div className="mt-14">
-        <h2 className="text-2xl font-bold mb-4">Other Blogs</h2>
+        <h2 className="text-2xl font-bold mb-4">Other blogs</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {unfeaturedBlogs.length > 0 ? (
             unfeaturedBlogs.map((blog: any) => (
