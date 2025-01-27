@@ -6,7 +6,6 @@ import { Input } from "./ui/input";
 import { Badge } from "./ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import LearnButton from "./ui/learnButton";
-import { format } from "date-fns";
 
 type Props = {
   productData: Entry<IProducts, "WITHOUT_UNRESOLVABLE_LINKS", string>[];

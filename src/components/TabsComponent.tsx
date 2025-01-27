@@ -8,7 +8,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export function ProductTabsComponent({ categoryData, defaultValue, children }: Props) {
+export function TabsComponent({ categoryData, defaultValue, children }: Props) {
   const [currentCategory, setCurrentCategory] = useState<string>(
     () => new URLSearchParams(window.location.search).get("category") || defaultValue || categoryData[0]
   );

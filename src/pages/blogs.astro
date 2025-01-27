@@ -1,20 +1,42 @@
 ---
+import BlogsComponent from "@/components/blogsComponent";
+import { TabsComponent } from "@/components/TabsComponent";
 import Layout from "@/layouts/Layout.astro";
-import BlogsComponent from "@/components/blogsComponent.astro";
 import { client } from "@/lib/contentful";
 import type { IBlogs } from "@/lib/interface";
+import TitleComponent from "@/components/ui/title.astro";
 
 const blogData = await client.withoutUnresolvableLinks.getEntries<IBlogs>({
-    content_type: "blogs",
-    order: "sys.createdAt" as any
-})
+  content_type: "blogs",
+  order: "sys.createdAt" as any,
+});
 
 const canonicalUrll = new URL(Astro.url);
+
+const categories = [
+  "All",
+  ...Array.from(
+    new Set(
+      blogData.items
+        .flatMap((item) => item.fields.tags.map((tag: string) => tag.trim().toLowerCase()))
+    )
+  ),
+];
+
 ---
 
-<Layout canonicalUrl={`${canonicalUrll}`} description="Our blog" title="Our Blogs">
+<Layout
+  canonicalUrl={`${canonicalUrll}`}
+  description="Our blog"
+  title="Our Blogs"
+>
   <section class="first-section mb-32">
-      <BlogsComponent blogData={blogData}/>
-  </section>
+    <div>
+      <TitleComponent title={"Our blogs"} />
+    </div>
 
+    <TabsComponent categoryData={categories} client:only="React">
+      <BlogsComponent blogData={blogData} client:only="React"/>
+    </TabsComponent>
+  </section>
 </Layout>

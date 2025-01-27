@@ -3,8 +3,8 @@ import Layout from "@/layouts/Layout.astro";
 import TitleComponent from "@/components/ui/title.astro";
 import { client } from "@/lib/contentful";
 import type { IProducts } from "@/lib/interface";
-import { ProductTabsComponent } from "@/components/productTabsComponent";
 import ProductAccordian from "@/components/productAccordian";
+import { TabsComponent } from "@/components/TabsComponent";
 
 const productData = await client.withoutUnresolvableLinks.getEntries<IProducts>(
   {
@@ -37,9 +37,9 @@ const canonicalUrll = new URL(Astro.url);
     </div>
 
     <div class="my-12 mb-20 main-section">
-      <ProductTabsComponent categoryData={categories} client:only="React" >
+      <TabsComponent categoryData={categories} client:only="React" >
         <ProductAccordian  productData={productData.items} client:only="React"/>
-      </ProductTabsComponent>
+      </TabsComponent>
     </div>
   </section>
 </Layout>
