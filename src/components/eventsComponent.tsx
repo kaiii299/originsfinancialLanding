@@ -57,7 +57,11 @@ const EventPage: React.FC<Props> = ({ eventData }) => {
       </div>
       {/* Featured Events Section */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">Featured events</h2>
+        {featuredEvents.length > 0 && (
+          <h2 className="text-2xl font-bold mb-4">
+            Featured {featuredEvents.length === 1 ? "event" : "events"}
+          </h2>
+        )}
         {featuredEvents.length > 0 ? (
           featuredEvents.map((event) => (
             <a
@@ -96,12 +100,13 @@ const EventPage: React.FC<Props> = ({ eventData }) => {
             </a>
           ))
         ) : (
-          <p>No featured events available.</p>
+          <div></div>
         )}
       </div>
-
       {/* Unfeatured Events Section */}
-      <h2 className="text-2xl font-bold mb-4">Other events</h2>
+      {unfeaturedEvents.length > 0 && (
+        <h2 className="text-2xl font-bold mb-4">Other events</h2>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {unfeaturedEvents.length > 0 ? (
           unfeaturedEvents.map((event) => (
@@ -141,7 +146,7 @@ const EventPage: React.FC<Props> = ({ eventData }) => {
             </a>
           ))
         ) : (
-          <p>No events available.</p>
+          <p>No events found.</p>
         )}
       </div>
     </div>

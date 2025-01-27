@@ -6,10 +6,8 @@ import type { IBlogs } from "@/lib/interface";
 import { Input } from "./ui/input";
 import type { Entry } from "contentful";
 
-
-
 type Props = {
-  blogData: any
+  blogData: any;
 };
 
 const BlogPage = ({ blogData }: Props) => {
@@ -25,14 +23,13 @@ const BlogPage = ({ blogData }: Props) => {
   // Filter blogs based on selected tag and search query
   const filteredBlogs = blogData.items.filter(
     (blog: Entry<IBlogs, "WITHOUT_UNRESOLVABLE_LINKS", string>) => {
-      
       // Fallback if category is undefined
-      const blogCategories = blog.fields.category || []; 
+      const blogCategories = blog.fields.category || [];
       const matchesTag =
-      selectedTag === "all" || // Match "all" to show all items
-      blogCategories.some((cat: string) =>
-        cat.toLowerCase().includes(selectedTag.toLowerCase())
-      );
+        selectedTag === "all" || // Match "all" to show all items
+        blogCategories.some((cat: string) =>
+          cat.toLowerCase().includes(selectedTag.toLowerCase())
+        );
 
       // Search keyword by title or description
       const matchesSearch =
@@ -58,7 +55,6 @@ const BlogPage = ({ blogData }: Props) => {
     setSearchQuery(initialSearchQuery);
   }, [initialTag, initialSearchQuery]);
 
-
   return (
     <div>
       {/* Search bar */}
@@ -74,7 +70,11 @@ const BlogPage = ({ blogData }: Props) => {
 
       {/* Featured Blogs Section */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">Featured blogs</h2>
+        {featuredBlogs.length > 0 && (
+          <h2 className="text-2xl font-bold mb-4">
+            Featured {featuredBlogs.length === 1 ? "blog" : "blogs"}
+          </h2>
+        )}
         <div>
           {featuredBlogs.length > 0 ? (
             featuredBlogs.map((blog: any) => (
@@ -118,14 +118,16 @@ const BlogPage = ({ blogData }: Props) => {
               </a>
             ))
           ) : (
-            <p>No featured blogs found</p>
+            <div></div>
           )}
         </div>
       </div>
 
       {/* Unfeatured Blogs Section */}
       <div className="mt-14">
-        <h2 className="text-2xl font-bold mb-4">Other blogs</h2>
+        {unfeaturedBlogs.length > 0 && (
+          <h2 className="text-2xl font-bold mb-4">Other blogs</h2>
+        )}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {unfeaturedBlogs.length > 0 ? (
             unfeaturedBlogs.map((blog: any) => (
