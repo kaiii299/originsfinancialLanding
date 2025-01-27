@@ -26,7 +26,7 @@ try {
     throw new Error(`Post with slug "${slug}" not found.`);
   }
 
-  const { title, content, description, image, tags } = data.items[0].fields;
+  const { title, content, description, image, category } = data.items[0].fields;
   
 
   post = {
@@ -34,7 +34,7 @@ try {
     content: content,
     description: description,
     image: image,
-    tags: tags,
+    tags: category,
     createdAt: data.items[0].sys.createdAt,
   };
 } catch (error) {

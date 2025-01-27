@@ -252,11 +252,11 @@ export const footerData = {
   policies: [
     {
       text: "Privacy & Cookies Policy",
-      href: "#",
+      href: "/",
     },
     {
       text: "Disclaimer",
-      href: "#",
+      href: "/",
     },
   ],
 }

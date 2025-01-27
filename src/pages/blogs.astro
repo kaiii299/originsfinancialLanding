@@ -18,7 +18,7 @@ const categories = [
   ...Array.from(
     new Set(
       blogData.items
-        .flatMap((item) => item.fields.tags.map((tag: string) => tag.trim().toLowerCase()))
+        .flatMap((item) => item.fields.category.map((tag: string) => tag.trim().toLowerCase()))
     )
   ),
 ];

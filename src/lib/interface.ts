@@ -108,7 +108,7 @@ export interface IBlogs extends EntrySkeletonType {
     slug: EntryFieldTypes.Symbol;
     title: EntryFieldTypes.Symbol;
     image: EntryFieldTypes.AssetLink;
-    tags: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
+    category: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
     featured: EntryFieldTypes.Boolean;
     description: EntryFieldTypes.Text;
     content: EntryFieldTypes.RichText;

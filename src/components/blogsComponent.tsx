@@ -4,16 +4,17 @@ import { format } from "date-fns";
 import { slugify } from "@/lib/slugify";
 import type { IBlogs } from "@/lib/interface";
 import { Input } from "./ui/input";
+import type { Entry } from "contentful";
 
-const BlogPage = ({ blogData, params }: any) => {
-  // Extract unique tags
-  const tags = [
-    "All",
-    ...new Set(blogData.items.flatMap((blog: any) => blog.fields.tags || [])),
-  ];
 
+
+type Props = {
+  blogData: any
+};
+
+const BlogPage = ({ blogData }: Props) => {
   // Parse the `query` parameter from params
-  const queryParams = new URLSearchParams(params?.query || "");
+  const queryParams = new URLSearchParams(window.location.search);
   const initialSearchQuery = queryParams.get("search") || "";
   const initialTag = queryParams.get("category") || "All";
 
@@ -22,16 +23,26 @@ const BlogPage = ({ blogData, params }: any) => {
   const [searchQuery, setSearchQuery] = useState<string>(initialSearchQuery);
 
   // Filter blogs based on selected tag and search query
-  const filteredBlogs = blogData.items.filter((blog: any) => {
-    const matchesTag =
-      selectedTag === "All" || blog.fields.tags.includes(selectedTag);
-    const matchesSearch =
-      blog.fields.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      blog.fields.description
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase());
-    return matchesTag && matchesSearch;
-  });
+  const filteredBlogs = blogData.items.filter(
+    (blog: Entry<IBlogs, "WITHOUT_UNRESOLVABLE_LINKS", string>) => {
+      
+      // Fallback if category is undefined
+      const blogCategories = blog.fields.category || []; 
+      const matchesTag =
+      selectedTag === "all" || // Match "all" to show all items
+      blogCategories.some((cat: string) =>
+        cat.toLowerCase().includes(selectedTag.toLowerCase())
+      );
+
+      // Search keyword by title or description
+      const matchesSearch =
+        blog.fields.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        blog.fields.description
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
+      return matchesTag && matchesSearch;
+    }
+  );
 
   const featuredBlogs = filteredBlogs.filter(
     (blog: IBlogs) => blog.fields.featured
@@ -47,9 +58,9 @@ const BlogPage = ({ blogData, params }: any) => {
     setSearchQuery(initialSearchQuery);
   }, [initialTag, initialSearchQuery]);
 
+
   return (
     <div>
-
       {/* Search bar */}
       <div className="mb-6 mx-1 mt-8">
         <Input
@@ -87,9 +98,9 @@ const BlogPage = ({ blogData, params }: any) => {
                 </div>
                 <div className="space-y-3">
                   <div>
-                    {blog.fields.tags?.map((tag: any) => (
-                      <Badge key={tag} variant={"secondary"}>
-                        {tag}
+                    {blog.fields.category?.map((category: any) => (
+                      <Badge key={category} variant={"secondary"}>
+                        {category}
                       </Badge>
                     ))}
                     {blog.sys.createdAt && (
@@ -138,9 +149,9 @@ const BlogPage = ({ blogData, params }: any) => {
                 </div>
                 <div className="space-y-3">
                   <div>
-                    {blog.fields.tags?.map((tag: any) => (
-                      <Badge key={tag} variant={"secondary"}>
-                        {tag}
+                    {blog.fields.category?.map((category: any) => (
+                      <Badge key={category} variant={"secondary"}>
+                        {category}
                       </Badge>
                     ))}
                     {blog.sys.createdAt && (
