@@ -11,6 +11,8 @@ import centerHeaderImage from "@/assets/images/header.webp"
 export const LogoImage = logo;
 export const CenterHeaderImage = centerHeaderImage;
 
+
+
 export const navItems = [
   { name: "Home", href: "/" },
   { name: "Solutions", href: "/solutions" },
@@ -20,6 +22,7 @@ export const navItems = [
   { name: "Blogs", href: "/blogs" },
   { name: "Events", href: "/events" },
   { name: "Contact Us", href: "/contact" },
+  { name: "Login", href: "/" },
 ];
 
 export const heroSection = {

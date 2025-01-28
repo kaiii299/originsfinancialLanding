@@ -178,5 +178,6 @@ export interface IMisc extends EntrySkeletonType {
     title: EntryFieldTypes.Symbol;
     description: EntryFieldTypes.Text;
     longDescription: EntryFieldTypes.Text;
+    login: EntryFieldTypes.Symbol;
   };
 }

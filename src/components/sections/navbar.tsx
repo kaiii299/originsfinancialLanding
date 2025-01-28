@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { LuAlignRight, LuX } from "react-icons/lu"; // Import Lucide icons
-import {  footerData ,navItems } from "@/lib/constants";
+import { footerData, navItems } from "@/lib/constants";
 
-const bgColor = "bg-[#fbfcf5]";
-const bgColorMobile = "bg-whitesmoke";
-const textColor = "text-black";
-
-const Navbar = () => {
+type Props = {
+  loginLink: string;
+};
+const Navbar = ({ loginLink }: Props) => {
+  const bgColor = "bg-[#fbfcf5]";
+  const bgColorMobile = "bg-whitesmoke";
+  const textColor = "text-black";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Get the current URL path
@@ -17,7 +19,10 @@ const Navbar = () => {
       <div className="px-4 sm:px-6 lg:px-8 py-5 w-full max-w-7xl mx-auto">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a className="flex items-center justify-center space-x-2 cursor-pointer" href="/">
+          <a
+            className="flex items-center justify-center space-x-2 cursor-pointer"
+            href="/"
+          >
             <img
               src={footerData.logo.image.src}
               title={"logo"}
@@ -34,9 +39,12 @@ const Navbar = () => {
               {navItems.map((item) => (
                 <a
                   key={item.href}
-                  href={item.href}
-                  className={`hover:bg-main px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
-                    currentPath === item.href ? "bg-main text-white" : ""
+                  target={item.name == "Login" ? "_blank" : "_self"}
+                  href={item.name == "Login" ? loginLink : item.href}
+                  className={`hover:bg-main cursor-pointer px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                    currentPath === item.href && item.name != "Login"
+                      ? "bg-main text-white"
+                      : ""
                   } ${textColor}`}
                 >
                   {item.name}
@@ -78,9 +86,10 @@ const Navbar = () => {
           {navItems.map((item) => (
             <a
               key={item.href}
-              href={item.href}
-              className={`block hover:bg-primary hover:text-white px-3 py-2 rounded-md text-base font-medium ${
-                currentPath === item.href ? "bg-main text-white" : ""
+              target={item.name == "Login" ? "_blank" : "_self"}
+              href={item.name == "Login" ? loginLink : item.href}
+              className={`block hover:bg-primary cursor-pointer hover:text-white px-3 py-2 rounded-md text-base font-medium ${
+                currentPath === item.href && item.name != "Login" ? "bg-main text-white" : ""
               } ${textColor}`}
             >
               {item.name}

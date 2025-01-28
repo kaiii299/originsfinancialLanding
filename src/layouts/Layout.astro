@@ -76,7 +76,7 @@ const imageUrl = `/src/assets/images/logo.svg`;
   </head>
 
   <body>
-    <Navbar client:only="React"/>
+    <Navbar client:only="React" loginLink={miscData.fields.login}/>
     <slot />
     <Toaster client:only="React" />
     <Footer title={title} description={miscData.fields.longDescription} />
