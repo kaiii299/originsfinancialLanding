@@ -68,7 +68,7 @@ const currentYear = new Date().getFullYear();
       {footerData.policies.map((policy) => (
         <li>
           <a 
-            href={policy.href || "/"} 
+            href={policy.href} 
             class="text-sm transition-colors duration-300"
             target={policy.href?.includes('.pdf') ? '_blank' : undefined}
             rel={policy.href?.includes('.pdf') ? 'noopener noreferrer' : undefined}

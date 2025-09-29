@@ -22,7 +22,7 @@ export const navItems = [
   // { name: "Blogs", href: "/blogs" },
   // { name: "Events", href: "/events" },
   // { name: "Contact Us", href: "/contact" },
-  { name: "Conatct us", href: "/" },
+  { name: "Contact us", href: "/" },
 ];
 
 export const heroSection = {
