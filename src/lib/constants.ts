@@ -21,8 +21,8 @@ export const navItems = [
   { name: "Our Team", href: "/our-team" },
   // { name: "Blogs", href: "/blogs" },
   // { name: "Events", href: "/events" },
-  { name: "Contact Us", href: "/contact" },
-  { name: "Login", href: "/" },
+  // { name: "Contact Us", href: "/contact" },
+  { name: "Conatct us", href: "/" },
 ];
 
 export const heroSection = {
@@ -254,12 +254,8 @@ export const footerData = {
   },
   policies: [
     {
-      text: "Privacy & Cookies Policy",
-      href: "/",
-    },
-    {
-      text: "Disclaimer",
-      href: "/",
+      text: "Terms and Conditions",
+      href: "/MM Checklist For Leaders & Consultants (1).pdf",
     },
   ],
 }

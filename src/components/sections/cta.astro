@@ -22,7 +22,7 @@ const ctaData = await client.withoutUnresolvableLinks.getEntry<ICTA>(
         {ctaData.fields.description}
       </p>
       <Button className="mt-6 bg-main">
-        <a href="/contact">
+        <a href={ctaData.fields.link || "/"} target='_blank'>
         {ctaData.fields.buttonText}
         </a>
       </Button>

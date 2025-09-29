@@ -167,6 +167,7 @@ export interface ICTA extends EntrySkeletonType {
     title: EntryFieldTypes.Symbol;
     description: EntryFieldTypes.Text;
     buttonText: EntryFieldTypes.Symbol;
+    link: EntryFieldTypes.Symbol;
   };
 }
 

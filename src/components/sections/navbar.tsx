@@ -39,13 +39,13 @@ const Navbar = ({ loginLink }: Props) => {
               {navItems.map((item) => (
                 <a
                   key={item.href}
-                  target={item.name == "Login" ? "_blank" : "_self"}
-                  href={item.name == "Login" ? loginLink : item.href}
+                  target='_blank'
+                  href={loginLink}
                   className={`hover:bg-main cursor-pointer px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
-                    currentPath === item.href && item.name != "Login"
+                    currentPath === item.href && item.name !== "Login" && item.name !== "Conatct us"
                       ? "bg-main text-white"
-                      : ""
-                  } ${textColor}`}
+                      : textColor
+                  }`}
                 >
                   {item.name}
                 </a>
@@ -88,9 +88,11 @@ const Navbar = ({ loginLink }: Props) => {
               key={item.href}
               target={item.name == "Login" ? "_blank" : "_self"}
               href={item.name == "Login" ? loginLink : item.href}
-              className={`block hover:bg-primary cursor-pointer hover:text-white px-3 py-2 rounded-md text-base font-medium ${
-                currentPath === item.href && item.name != "Login" ? "bg-main text-white" : ""
-              } ${textColor}`}
+               className={`block hover:bg-primary cursor-pointer hover:text-white px-3 py-2 rounded-md text-base font-medium ${
+                 currentPath === item.href && item.name !== "Login" && item.name !== "Conatct us"
+                   ? "bg-main text-white"
+                   : textColor
+               }`}
             >
               {item.name}
             </a>
